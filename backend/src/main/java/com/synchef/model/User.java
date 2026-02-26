@@ -35,16 +35,13 @@ public class User {
     private String username;
     
     @Column(nullable = true, length = 255)
-    private String password; // nullable for Google OAuth users
+    private String password;
     
     @Column(nullable = false, length = 200)
     private String fullName;
     
     @Column(nullable = true)
     private String profileImageUrl;
-    
-    @Column(nullable = true)
-    private String googleId; // for Google OAuth integration
     
     @Column(nullable = false)
     private Boolean emailVerified = false;
