@@ -20,7 +20,6 @@ const CookingModePage = () => {
 
   const currentStepIndex = useSelector((state: RootState) => state.ui.currentStepIndex);
   const activeTimers = useSelector((state: RootState) => state.timers.activeTimers);
-  const isFocusMode = useSelector((state: RootState) => state.ui.isFocusMode);
 
   useEffect(() => {
     if (id) {

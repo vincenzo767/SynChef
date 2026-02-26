@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setAuthResponse, setLoading, setError } from '../store/authSlice';
 import authAPI from '../services/authAPI';
+import { RootState } from '../store';
 import '../styles/Auth.css';
 
 const RegisterPage: React.FC = () => {
@@ -17,6 +18,13 @@ const RegisterPage: React.FC = () => {
   const [validationErrors, setValidationErrors] = useState<Record<string, string>>({});
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { isAuthenticated } = useSelector((state: RootState) => state.auth);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/dashboard', { replace: true });
+    }
+  }, [isAuthenticated, navigate]);
 
   const validateForm = () => {
     const errors: Record<string, string> = {};
@@ -86,9 +94,10 @@ const RegisterPage: React.FC = () => {
         }
       }));
 
-      navigate('/');
+      navigate('/dashboard');
     } catch (err: any) {
-      const message = err.response?.data?.message || 'Registration failed. Please try again.';
+      const message = err.response?.data?.message
+        || (err.request ? 'Cannot reach backend API. Start backend server on http://localhost:8080.' : 'Registration failed. Please try again.');
       setLocalError(message);
       dispatch(setError(message));
     } finally {

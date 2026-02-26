@@ -15,10 +15,6 @@ interface LoginRequest {
   password: string;
 }
 
-interface GoogleAuthRequest {
-  token: string;
-}
-
 interface AuthResponse {
   token: string;
   type: string;
@@ -36,9 +32,6 @@ const authAPI = {
 
   login: (data: LoginRequest) =>
     axios.post<AuthResponse>(`${API_BASE_URL}/auth/login`, data),
-
-  loginWithGoogle: (data: GoogleAuthRequest) =>
-    axios.post<AuthResponse>(`${API_BASE_URL}/auth/google`, data),
 
   logout: () => {
     localStorage.removeItem('token');
