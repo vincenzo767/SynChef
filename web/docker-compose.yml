@@ -24,7 +24,7 @@ services:
   # Spring Boot Backend
   backend:
     build:
-      context: ./backend
+      context: ../backend
       dockerfile: Dockerfile
     container_name: synchef-backend
     environment:
