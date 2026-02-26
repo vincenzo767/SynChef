@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="synchef_bg_top">#667EEA</color>
+    <color name="synchef_bg_bottom">#764BA2</color>
+    <color name="synchef_primary">#667EEA</color>
+    <color name="synchef_text_dark">#1F2937</color>
+    <color name="synchef_text_light">#6B7280</color>
+    <color name="white">#FFFFFF</color>
+</resources>
