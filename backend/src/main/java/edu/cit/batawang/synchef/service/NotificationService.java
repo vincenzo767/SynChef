@@ -5,6 +5,7 @@ import edu.cit.batawang.synchef.model.AppNotification;
 import edu.cit.batawang.synchef.model.SynCookRecipe;
 import edu.cit.batawang.synchef.model.User;
 import edu.cit.batawang.synchef.repository.AppNotificationRepository;
+import edu.cit.batawang.synchef.service.notification.NotificationFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,14 +16,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class NotificationService {
 
-    private static final String TYPE_SYSTEM_WELCOME = "SYSTEM_WELCOME";
-    private static final String TYPE_COMMENT = "SYNCOOK_COMMENT";
-
     private final AppNotificationRepository notificationRepository;
+    private final NotificationFactory notificationFactory;
 
     @Transactional
     public void createWelcomeNotifications(User user) {
-        long existing = notificationRepository.countByRecipientIdAndType(user.getId(), TYPE_SYSTEM_WELCOME);
+        long existing = notificationRepository.countByRecipientIdAndType(user.getId(), NotificationFactory.TYPE_SYSTEM_WELCOME);
         if (existing >= 2) {
             return;
         }
@@ -49,16 +48,13 @@ public class NotificationService {
         String actorName = safeName(actor);
         String message = actorName + " commented on your dish \"" + recipe.getTitle() + "\": " + preview(commentContent);
 
-        AppNotification notification = new AppNotification();
-        notification.setRecipientId(recipe.getOwnerId());
-        notification.setSenderId(actor.getId());
-        notification.setSenderName(actorName);
-        notification.setType(TYPE_COMMENT);
-        notification.setTitle("Chef!");
-        notification.setMessage(message);
-        notification.setReferenceRecipeId(recipe.getId());
-        notification.setIsRead(false);
-        notification.setIsSystem(false);
+        AppNotification notification = notificationFactory.createComment(
+            recipe.getOwnerId(),
+            actor.getId(),
+            actorName,
+            recipe.getId(),
+            message
+        );
         notificationRepository.save(notification);
     }
 
@@ -99,13 +95,7 @@ public class NotificationService {
     }
 
     private void saveSystemNotification(Long recipientId, String title, String message) {
-        AppNotification notification = new AppNotification();
-        notification.setRecipientId(recipientId);
-        notification.setType(TYPE_SYSTEM_WELCOME);
-        notification.setTitle(title);
-        notification.setMessage(message);
-        notification.setIsRead(false);
-        notification.setIsSystem(true);
+        AppNotification notification = notificationFactory.createSystemWelcome(recipientId, title, message);
         notificationRepository.save(notification);
     }
 

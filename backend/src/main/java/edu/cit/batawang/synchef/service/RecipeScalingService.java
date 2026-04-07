@@ -7,6 +7,8 @@ import edu.cit.batawang.synchef.model.Recipe;
 import edu.cit.batawang.synchef.model.RecipeIngredient;
 import edu.cit.batawang.synchef.model.Step;
 import edu.cit.batawang.synchef.repository.RecipeRepository;
+import edu.cit.batawang.synchef.service.scaling.IngredientRoundingStrategy;
+import edu.cit.batawang.synchef.service.scaling.TimerScalingStrategy;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -26,6 +28,8 @@ import java.util.stream.Collectors;
 public class RecipeScalingService {
     
     private final RecipeRepository recipeRepository;
+    private final IngredientRoundingStrategy ingredientRoundingStrategy;
+    private final TimerScalingStrategy timerScalingStrategy;
     
     @Transactional(readOnly = true)
     public ScaledRecipeDTO scaleRecipe(Long recipeId, Integer requestedServings) {
@@ -69,8 +73,7 @@ public class RecipeScalingService {
         BigDecimal scaledQty = originalQty.multiply(BigDecimal.valueOf(scalingFactor))
                                           .setScale(2, RoundingMode.HALF_UP);
         
-        // Smart rounding for common measurements
-        scaledQty = smartRound(scaledQty, ri.getUnit());
+        scaledQty = ingredientRoundingStrategy.round(scaledQty, ri.getUnit());
         
         ScaledIngredientDTO dto = new ScaledIngredientDTO();
         dto.setIngredientId(ri.getIngredient().getId());
@@ -90,8 +93,7 @@ public class RecipeScalingService {
         
         // Only scale timing if marked as scalable
         if (step.getScalesWithServings() != null && step.getScalesWithServings() && scaledTimer != null) {
-            // Time doesn't scale linearly - use logarithmic scaling
-            scaledTimer = (int) (scaledTimer * Math.pow(scalingFactor, 0.3));
+            scaledTimer = timerScalingStrategy.scale(scaledTimer, scalingFactor);
         }
         
         ScaledStepDTO dto = new ScaledStepDTO();
@@ -107,19 +109,6 @@ public class RecipeScalingService {
         dto.setTips(step.getTips());
         
         return dto;
-    }
-    
-    private BigDecimal smartRound(BigDecimal value, String unit) {
-        // Round to common fractions for cooking measurements
-        if (unit.toLowerCase().contains("cup") || unit.toLowerCase().contains("tbsp") 
-            || unit.toLowerCase().contains("tsp")) {
-            // Round to nearest 1/4
-            BigDecimal quarters = value.multiply(BigDecimal.valueOf(4));
-            quarters = quarters.setScale(0, RoundingMode.HALF_UP);
-            return quarters.divide(BigDecimal.valueOf(4), 2, RoundingMode.HALF_UP);
-        }
-        
-        return value.setScale(2, RoundingMode.HALF_UP);
     }
     
     private Integer calculateAdjustedTime(Recipe recipe, double scalingFactor) {
