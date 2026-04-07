@@ -4,8 +4,7 @@ import edu.cit.batawang.synchef.dto.ScaledRecipeDTO;
 import edu.cit.batawang.synchef.dto.TimerOrchestrationDTO;
 import edu.cit.batawang.synchef.model.Recipe;
 import edu.cit.batawang.synchef.repository.RecipeRepository;
-import edu.cit.batawang.synchef.service.RecipeScalingService;
-import edu.cit.batawang.synchef.service.TimerOrchestrationService;
+import edu.cit.batawang.synchef.service.RecipePreparationFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,8 +22,7 @@ import java.util.stream.Collectors;
 public class RecipeController {
     
     private final RecipeRepository recipeRepository;
-    private final RecipeScalingService scalingService;
-    private final TimerOrchestrationService timerOrchestrationService;
+    private final RecipePreparationFacade recipePreparationFacade;
     
     @GetMapping
     public ResponseEntity<List<Recipe>> getAllRecipes() {
@@ -69,12 +67,12 @@ public class RecipeController {
     public ResponseEntity<ScaledRecipeDTO> getScaledRecipe(
             @PathVariable Long id,
             @RequestParam Integer servings) {
-        return ResponseEntity.ok(scalingService.scaleRecipe(id, servings));
+        return ResponseEntity.ok(recipePreparationFacade.getScaledRecipe(id, servings));
     }
     
     @GetMapping("/{id}/timer-sequence")
     public ResponseEntity<TimerOrchestrationDTO> getTimerSequence(@PathVariable Long id) {
-        return ResponseEntity.ok(timerOrchestrationService.orchestrateTimers(id));
+        return ResponseEntity.ok(recipePreparationFacade.getTimerOrchestration(id));
     }
     
     @PostMapping
