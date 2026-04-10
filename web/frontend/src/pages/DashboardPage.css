@@ -310,6 +310,10 @@
   color: #ffc7c7;
 }
 
+.syncook-status-success {
+  color: #8ff0be;
+}
+
 .syncook-grid {
   margin-top: 14px;
   display: grid;
@@ -820,4 +824,8 @@
   background: #1e2333;
   border: 1px solid #475569;
   color: #f1f5f9;
+}
+
+:root[data-theme="dark"] .syncook-status-success {
+  color: #86efac;
 }

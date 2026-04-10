@@ -48,6 +48,7 @@ const DashboardPage = () => {
   const [myRecipes, setMyRecipes] = useState([]);
   const [synCookLoading, setSynCookLoading] = useState(true);
   const [synCookError, setSynCookError] = useState("");
+  const [synCookSuccess, setSynCookSuccess] = useState("");
 
   const [filterKeyword, setFilterKeyword] = useState("");
 
@@ -69,6 +70,7 @@ const DashboardPage = () => {
   });
 
   const defaultDishImage = "https://images.unsplash.com/photo-1547592180-85f173990554?w=1200&q=80";
+  const MAX_UPLOAD_BYTES = 5 * 1024 * 1024;
 
   const safeImageSrc = (value) => {
     const image = (value || "").trim();
@@ -203,6 +205,7 @@ const DashboardPage = () => {
   };
 
   const openRecipeDetail = async (recipeId) => {
+    setSynCookError("");
     try {
       const res = await synCookApi.getById(recipeId);
       setDetailRecipe(res.data);
@@ -213,14 +216,42 @@ const DashboardPage = () => {
 
   const submitRecipe = async (event) => {
     event.preventDefault();
+    setSynCookSuccess("");
+    const payload = mapFormToPayload();
+    if (payload.title.length < 3) {
+      setSynCookError("Dish name must be at least 3 characters.");
+      return;
+    }
+    if (payload.country.length < 2) {
+      setSynCookError("Country must be at least 2 characters.");
+      return;
+    }
+    if (!payload.ingredients.length) {
+      setSynCookError("Please add at least one ingredient.");
+      return;
+    }
+    if (!payload.procedures.length) {
+      setSynCookError("Please add at least one procedure step.");
+      return;
+    }
+    if (payload.imageUrl && !payload.imageUrl.startsWith("data:image/")) {
+      try {
+        new URL(payload.imageUrl);
+      } catch {
+        setSynCookError("Image URL must be a valid URL.");
+        return;
+      }
+    }
+
     setIsSubmitting(true);
     setSynCookError("");
     try {
-      const payload = mapFormToPayload();
       if (editingRecipeId) {
         await synCookApi.update(editingRecipeId, payload);
+        setSynCookSuccess("Recipe updated successfully.");
       } else {
         await synCookApi.create(payload);
+        setSynCookSuccess("Recipe uploaded successfully.");
       }
       setShowCreateModal(false);
       resetForm();
@@ -235,9 +266,11 @@ const DashboardPage = () => {
   const handleDelete = async (recipeId) => {
     const confirmed = globalThis.confirm("Delete this dish permanently?");
     if (!confirmed) return;
+    setSynCookSuccess("");
     try {
       await synCookApi.remove(recipeId);
       if (detailRecipe?.id === recipeId) setDetailRecipe(null);
+      setSynCookSuccess("Recipe deleted successfully.");
       await loadSynCook();
     } catch (error) {
       setSynCookError(error?.response?.data?.message || "Could not delete recipe.");
@@ -245,10 +278,22 @@ const DashboardPage = () => {
   };
 
   const submitComment = async () => {
-    if (!detailRecipe?.id || !commentDraft.trim()) return;
+    const trimmedComment = commentDraft.trim();
+    if (!detailRecipe?.id || !trimmedComment) return;
+    if (trimmedComment.length < 2) {
+      setSynCookError("Comment must be at least 2 characters.");
+      return;
+    }
+    if (trimmedComment.length > 500) {
+      setSynCookError("Comment must be 500 characters or less.");
+      return;
+    }
+
+    setSynCookSuccess("");
     try {
-      await synCookApi.addComment(detailRecipe.id, commentDraft.trim());
+      await synCookApi.addComment(detailRecipe.id, trimmedComment);
       setCommentDraft("");
+      setSynCookSuccess("Comment posted successfully.");
       await openRecipeDetail(detailRecipe.id);
       await loadSynCook();
     } catch (error) {
@@ -259,10 +304,26 @@ const DashboardPage = () => {
   const handleImageUpload = (event) => {
     const file = event.target.files?.[0];
     if (!file) return;
+    setSynCookSuccess("");
+    setSynCookError("");
+
+    if (!file.type.startsWith("image/")) {
+      setSynCookError("Only image files are allowed.");
+      event.target.value = "";
+      return;
+    }
+
+    if (file.size > MAX_UPLOAD_BYTES) {
+      setSynCookError("Image must be 5MB or smaller.");
+      event.target.value = "";
+      return;
+    }
+
     const reader = new FileReader();
     reader.onload = () => {
       const result = typeof reader.result === "string" ? reader.result : "";
       setForm((prev) => ({ ...prev, imageUrl: result }));
+      setSynCookSuccess("Image loaded. Save recipe to upload it.");
     };
     reader.readAsDataURL(file);
   };
@@ -347,6 +408,8 @@ const DashboardPage = () => {
                 type="button"
                 className="syncook-action-btn"
                 onClick={() => {
+                  setSynCookError("");
+                  setSynCookSuccess("");
                   resetForm();
                   setShowCreateModal(true);
                 }}
@@ -356,7 +419,11 @@ const DashboardPage = () => {
               <button
                 type="button"
                 className="syncook-action-btn"
-                onClick={() => setShowManageModal(true)}
+                onClick={() => {
+                  setSynCookError("");
+                  setSynCookSuccess("");
+                  setShowManageModal(true);
+                }}
               >
                 Manage
               </button>
@@ -374,6 +441,7 @@ const DashboardPage = () => {
 
           {synCookLoading && <p className="syncook-status">Loading SynCook dishes...</p>}
           {!synCookLoading && synCookError && <p className="syncook-status syncook-status-error">{synCookError}</p>}
+          {!synCookLoading && !synCookError && synCookSuccess && <p className="syncook-status syncook-status-success">{synCookSuccess}</p>}
 
           <div className="syncook-grid">
             {filteredPublicRecipes.map((recipe) => (
@@ -396,6 +464,9 @@ const DashboardPage = () => {
               </article>
             ))}
           </div>
+          {!synCookLoading && !filteredPublicRecipes.length && (
+            <p className="syncook-status">No SynCook dishes found for your search.</p>
+          )}
         </section>
       </div>
 
@@ -472,6 +543,11 @@ const DashboardPage = () => {
                 {!!synCookError && (
                   <p className="syncook-status syncook-status-error" style={{ margin: 0 }}>
                     {synCookError}
+                  </p>
+                )}
+                {!synCookError && !!synCookSuccess && (
+                  <p className="syncook-status syncook-status-success" style={{ margin: 0 }}>
+                    {synCookSuccess}
                   </p>
                 )}
 
@@ -560,7 +636,7 @@ const DashboardPage = () => {
                     onChange={(event) => setCommentDraft(event.target.value)}
                     placeholder="Leave feedback"
                   />
-                  <button type="button" onClick={submitComment}>
+                  <button type="button" onClick={submitComment} disabled={!commentDraft.trim()}>
                     <FaPaperPlane /> Send
                   </button>
                 </div>
