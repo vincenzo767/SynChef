@@ -27,4 +27,5 @@ public class AuthResponse {
     private String countryName;
     private List<Long> favoriteRecipeIds = new ArrayList<>();
     private LocalDateTime createdAt;
+    private String role;
 }

@@ -1,0 +1,178 @@
+/* ── Admin Profile Page ── */
+.ap-page {
+  min-height: 100vh;
+  background: #f8fafc;
+}
+
+/* ── Header (purple gradient) ── */
+.ap-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 2.5rem 2rem 2rem;
+  color: #fff;
+}
+
+.ap-avatar-row {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.ap-avatar {
+  width: 78px;
+  height: 78px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.22);
+  border: 2px solid rgba(255, 255, 255, 0.38);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+  letter-spacing: 1px;
+}
+
+.ap-identity {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.ap-name {
+  margin: 0;
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.ap-email {
+  margin: 0;
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+/* ── Stats row ── */
+.ap-stats-row {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.ap-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.ap-stat-val {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+}
+.ap-stat-val.green { color: #4ade80; }
+.ap-stat-val.blue  { color: #60a5fa; }
+.ap-stat-val.red   { color: #f87171; }
+
+.ap-stat-lbl {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+.ap-stat-lbl.green { color: #86efac; }
+.ap-stat-lbl.blue  { color: #93c5fd; }
+.ap-stat-lbl.red   { color: #fca5a5; }
+
+.ap-stat-sep {
+  width: 1px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* ── Activity section ── */
+.ap-activity {
+  background: #fff;
+  padding: 1.75rem 2rem;
+}
+
+.ap-activity-heading {
+  margin: 0 0 1.2rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #6b7280;
+}
+
+.ap-loading {
+  color: #9ca3af;
+  font-size: 0.9rem;
+}
+
+.ap-activity-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.ap-activity-item {
+  display: flex;
+  align-items: stretch;
+  gap: 1rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid #f3f4f6;
+}
+.ap-activity-item:last-child {
+  border-bottom: none;
+}
+
+.ap-bar {
+  width: 3px;
+  border-radius: 2px;
+  flex-shrink: 0;
+  align-self: stretch;
+  min-height: 36px;
+}
+.ap-bar.bar-orange { background: #f59e0b; }
+.ap-bar.bar-red    { background: #ef4444; }
+
+.ap-activity-body {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.ap-activity-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.ap-activity-label {
+  font-size: 0.9rem;
+  color: #374151;
+  font-weight: 500;
+}
+
+.ap-activity-ago {
+  font-size: 0.76rem;
+  color: #9ca3af;
+}
+
+.ap-activity-code {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #10b981;
+  white-space: nowrap;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .ap-header        { padding: 1.5rem; }
+  .ap-stats-row     { gap: 1.5rem; }
+  .ap-stat-val      { font-size: 1.5rem; }
+  .ap-activity      { padding: 1.25rem; }
+  .ap-avatar-row    { gap: 1rem; }
+}

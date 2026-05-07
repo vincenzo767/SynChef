@@ -5,6 +5,8 @@ import edu.cit.batawang.synchef.repository.*;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,23 +28,53 @@ public class DataSeederService {
     private final CategoryRepository categoryRepository;
     private final IngredientRepository ingredientRepository;
     private final RecipeRepository recipeRepository;
+    private final UserRepository userRepository;
+
+    private static final PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
     
     @PostConstruct
     @Transactional
     public void seedData() {
+        ensureAdminUser();
+
         if (countryRepository.count() > 0) {
             log.info("Database already seeded. Skipping...");
             return;
         }
-        
+
         log.info("Starting database seeding...");
-        
+
         seedCountries();
         seedCategories();
         seedIngredients();
         seedRecipes();
-        
+
         log.info("Database seeding completed!");
+    }
+
+    private void ensureAdminUser() {
+        final String adminEmail = "admin@synchef.com";
+        userRepository.findByEmail(adminEmail).ifPresentOrElse(
+            admin -> {
+                if (!"ADMIN".equals(admin.getRole())) {
+                    admin.setRole("ADMIN");
+                    userRepository.save(admin);
+                    log.info("Admin role granted to existing user: {}", adminEmail);
+                }
+            },
+            () -> {
+                User admin = new User();
+                admin.setEmail(adminEmail);
+                admin.setUsername("synchef_admin");
+                admin.setPassword(PASSWORD_ENCODER.encode("AdminPass@2026"));
+                admin.setFullName("SynChef Administrator");
+                admin.setEmailVerified(true);
+                admin.setActive(true);
+                admin.setRole("ADMIN");
+                userRepository.save(admin);
+                log.info("Admin user created: {}", adminEmail);
+            }
+        );
     }
     
     private void seedCountries() {

@@ -83,4 +83,7 @@ public class User {
 
     @Column(name = "country_name", length = 150)
     private String countryName;
+
+    @Column(name = "role", length = 20, nullable = false)
+    private String role = "USER"; // USER or ADMIN
 }

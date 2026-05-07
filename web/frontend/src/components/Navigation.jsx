@@ -11,7 +11,9 @@ import {
   FaUtensils,
   FaCog,
   FaTachometerAlt,
-  FaTimes
+  FaTimes,
+  FaShieldAlt,
+  FaClipboardList
 } from "react-icons/fa";
 import { logout } from "../store/authSlice";
 import { notificationApi } from "../api";
@@ -316,18 +318,42 @@ const Navigation = () => {
         <div className="auth-sidebar-overlay" />
         <div className="auth-sidebar-content">
           <div className="auth-nav-links">
-            <Link to="/" className={navLink("/")}>
-              <FaHome /><span>Home</span>
-            </Link>
-            <Link to="/profile" className={navLink("/profile")}>
-              <FaUser /><span>Profile</span>
-            </Link>
-            <Link to="/dashboard" className={navLink("/dashboard")}>
-              <FaTachometerAlt /><span>Dashboard</span>
-            </Link>
-            <Link to="/settings" className={navLink("/settings")}>
-              <FaCog /><span>Settings</span>
-            </Link>
+            {user?.role === "ADMIN" ? (
+              /* ── Admin sidebar ── */
+              <>
+                <Link to="/" className={navLink("/")}>
+                  <FaHome /><span>Home</span>
+                </Link>
+                <Link to="/admin/profile" className={navLink("/admin/profile")}>
+                  <FaUser /><span>Profile</span>
+                </Link>
+                <Link to="/admin/dashboard" className={navLink("/admin/dashboard")}>
+                  <FaTachometerAlt /><span>Dashboard</span>
+                </Link>
+                <Link to="/settings" className={navLink("/settings")}>
+                  <FaCog /><span>Settings</span>
+                </Link>
+                <Link to="/admin/reports" className={navLink("/admin/reports")}>
+                  <FaClipboardList /><span>Reports</span>
+                </Link>
+              </>
+            ) : (
+              /* ── Regular user sidebar (unchanged) ── */
+              <>
+                <Link to="/" className={navLink("/")}>
+                  <FaHome /><span>Home</span>
+                </Link>
+                <Link to="/profile" className={navLink("/profile")}>
+                  <FaUser /><span>Profile</span>
+                </Link>
+                <Link to="/dashboard" className={navLink("/dashboard")}>
+                  <FaTachometerAlt /><span>Dashboard</span>
+                </Link>
+                <Link to="/settings" className={navLink("/settings")}>
+                  <FaCog /><span>Settings</span>
+                </Link>
+              </>
+            )}
           </div>
 
           <button

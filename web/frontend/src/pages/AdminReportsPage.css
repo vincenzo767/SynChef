@@ -1,0 +1,288 @@
+/* ── Admin Reports Page ── */
+.rp-page {
+  min-height: 100vh;
+  padding: 1.5rem 1.75rem;
+  background: #f8fafc;
+}
+
+/* ── Header ── */
+.rp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.rp-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+}
+
+.rp-view-all-btn {
+  background: #1e293b;
+  color: #fff;
+  border: none;
+  padding: 0.45rem 1rem;
+  border-radius: 4px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+.rp-view-all-btn:hover { background: #334155; }
+
+/* ── Warning Banner ── */
+.rp-warning {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  background: #fffbeb;
+  border: 1px solid #fbbf24;
+  border-left: 4px solid #f59e0b;
+  padding: 0.85rem 1rem;
+  margin-bottom: 1.25rem;
+  border-radius: 2px;
+}
+
+.rp-warn-icon {
+  color: #d97706;
+  font-size: 1rem;
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+
+.rp-warn-body { flex: 1; }
+
+.rp-warn-title {
+  margin: 0 0 0.2rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #92400e;
+  text-transform: uppercase;
+}
+
+.rp-warn-msg {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #78350f;
+  line-height: 1.5;
+}
+
+/* ── Table wrapper ── */
+.rp-table-wrap {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  overflow-x: auto;
+}
+
+.rp-loading {
+  padding: 3rem;
+  text-align: center;
+  color: #6b7280;
+}
+
+/* ── Table ── */
+.rp-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 860px;
+}
+
+.rp-thead-row {
+  background: #f1f5f9;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.rp-th {
+  padding: 0.7rem 0.9rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #64748b;
+  text-align: left;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+}
+
+.rp-th-center { text-align: center; }
+
+.rp-row {
+  border-bottom: 1px solid #f1f5f9;
+  transition: background 0.12s;
+}
+.rp-row:last-child { border-bottom: none; }
+.rp-row:hover      { background: #f8fafc; }
+
+.rp-td {
+  padding: 0.75rem 0.9rem;
+  font-size: 0.85rem;
+  color: #374151;
+  vertical-align: middle;
+}
+
+.rp-td-id {
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.rp-td-center { text-align: center; }
+
+/* ── Recipe title link ── */
+.rp-recipe-link {
+  color: #2563eb;
+  font-weight: 500;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.rp-recipe-suffix {
+  color: #6b7280;
+  font-weight: 400;
+  text-decoration: none;
+}
+
+/* ── Category badges ── */
+.rp-badge {
+  display: inline-block;
+  padding: 0.22rem 0.55rem;
+  border-radius: 3px;
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+.badge-critical { background: #fee2e2; color: #dc2626; }
+.badge-medium   { background: #fef3c7; color: #d97706; }
+
+.rp-cat-plain {
+  font-size: 0.85rem;
+  color: #374151;
+}
+
+/* ── Reason cell ── */
+.rp-td-reason {
+  max-width: 200px;
+}
+
+/* ── Date cell ── */
+.rp-td-date {
+  white-space: nowrap;
+}
+
+/* ── Eye / View button ── */
+.rp-eye-btn {
+  background: transparent;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  width: 30px;
+  height: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.15s;
+  margin: 0 auto;
+}
+.rp-eye-btn:hover,
+.rp-eye-btn.active {
+  border-color: #3b82f6;
+  color: #2563eb;
+  background: #eff6ff;
+}
+
+/* ── Action group ── */
+.rp-actions {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  position: relative;
+}
+
+.rp-notice-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: #ef4444;
+  color: #fff;
+  border: none;
+  padding: 0.42rem 0.7rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 3px 0 0 3px;
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+.rp-notice-btn:hover { background: #dc2626; }
+
+.rp-flag-icon { font-size: 0.7rem; }
+
+/* ── Dropdown toggle ── */
+.rp-dd-wrap { position: relative; }
+
+.rp-dd-toggle {
+  background: #dc2626;
+  color: #fff;
+  border: none;
+  border-left: 1px solid rgba(255, 255, 255, 0.28);
+  padding: 0.42rem 0.48rem;
+  cursor: pointer;
+  border-radius: 0 3px 3px 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+}
+.rp-dd-toggle:hover { background: #b91c1c; }
+
+.rp-chevron {
+  font-size: 0.72rem;
+  transition: transform 0.2s;
+}
+.rp-chevron.flipped { transform: rotate(180deg); }
+
+/* ── Dropdown menu ── */
+.rp-dd-menu {
+  position: absolute;
+  top: calc(100% + 3px);
+  right: 0;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  z-index: 100;
+  min-width: 190px;
+  overflow: hidden;
+}
+
+.rp-dd-item {
+  display: block;
+  width: 100%;
+  padding: 0.6rem 0.9rem;
+  background: none;
+  border: none;
+  border-bottom: 1px solid #f1f5f9;
+  text-align: left;
+  font-size: 0.82rem;
+  color: #374151;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+.rp-dd-item:last-child { border-bottom: none; }
+.rp-dd-item:hover {
+  background: #f8fafc;
+  color: #1e293b;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .rp-page {
+    padding: 1rem;
+  }
+  .rp-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+}

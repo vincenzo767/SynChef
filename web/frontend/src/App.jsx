@@ -13,8 +13,12 @@ import RegisterPage from "./pages/RegisterPage";
 import DashboardPage from "./pages/DashboardPage";
 import ProfilePage from "./pages/ProfilePage";
 import SettingsPage from "./pages/SettingsPage";
+import AdminDashboardPage from "./pages/AdminDashboardPage";
+import AdminProfilePage from "./pages/AdminProfilePage";
+import AdminReportsPage from "./pages/AdminReportsPage";
 import Navigation from "./components/Navigation";
 import PrivateRoute from "./components/PrivateRoute";
+import RoleBasedRoute from "./components/RoleBasedRoute";
 import "./App.css";
 
 const App = () => {
@@ -62,6 +66,11 @@ const App = () => {
               <Route path="/dashboard" element={<PrivateRoute><DashboardPage /></PrivateRoute>} />
               <Route path="/profile" element={<PrivateRoute><ProfilePage /></PrivateRoute>} />
               <Route path="/settings" element={<PrivateRoute><SettingsPage /></PrivateRoute>} />
+              
+              {/* Admin Routes - Restricted to ADMIN role */}
+              <Route path="/admin/dashboard" element={<RoleBasedRoute roles={["ADMIN"]}><AdminDashboardPage /></RoleBasedRoute>} />
+              <Route path="/admin/profile" element={<RoleBasedRoute roles={["ADMIN"]}><AdminProfilePage /></RoleBasedRoute>} />
+              <Route path="/admin/reports" element={<RoleBasedRoute roles={["ADMIN"]}><AdminReportsPage /></RoleBasedRoute>} />
             </Routes>
           </div>
         </AnimatePresence>

@@ -14,7 +14,7 @@ const LoginPage = () => {
   const [localInfo, setLocalInfo] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { isAuthenticated, isLoading } = useSelector((state) => state.auth);
+  const { isAuthenticated, isLoading, user } = useSelector((state) => state.auth);
 
   useEffect(() => {
     const rememberedEmail = localStorage.getItem("rememberedLoginEmail");
@@ -26,9 +26,10 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate("/dashboard", { replace: true });
+      const destination = user?.role === "ADMIN" ? "/admin/dashboard" : "/dashboard";
+      navigate(destination, { replace: true });
     }
-  }, [isAuthenticated, navigate]);
+  }, [isAuthenticated, navigate, user]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -42,6 +43,7 @@ const LoginPage = () => {
         localStorage.removeItem("rememberedLoginEmail");
       }
       const response = await authAPI.login({ emailOrUsername, password });
+      const role = response.data.role || "USER";
       dispatch(setAuthResponse({
         token: response.data.token,
         user: {
@@ -53,10 +55,11 @@ const LoginPage = () => {
           emailVerified: response.data.emailVerified,
           countryCode: response.data.countryCode || null,
           countryName: response.data.countryName || null,
+          role,
           favoriteRecipeIds: response.data.favoriteRecipeIds || []
         }
       }));
-      navigate("/dashboard");
+      navigate(role === "ADMIN" ? "/admin/dashboard" : "/dashboard");
     } catch (err) {
       const message = err.response?.data?.message
         || (err.request

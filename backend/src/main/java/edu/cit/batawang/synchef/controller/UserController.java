@@ -81,6 +81,7 @@ public class UserController {
         r.setFavoriteRecipeIds(user.getFavoriteRecipeIds() != null
                 ? user.getFavoriteRecipeIds() : new ArrayList<>());
         r.setCreatedAt(user.getCreatedAt());
+        r.setRole(user.getRole() != null ? user.getRole() : "USER");
         return r;
     }
 

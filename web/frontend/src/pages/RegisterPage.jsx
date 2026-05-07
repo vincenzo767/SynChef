@@ -146,6 +146,7 @@ const RegisterPage = () => {
           emailVerified: response.data.emailVerified,
           countryCode: response.data.countryCode || countryCode,
           countryName: response.data.countryName || selectedCountry?.name || countryCode,
+          role: response.data.role || "USER",
           favoriteRecipeIds: response.data.favoriteRecipeIds || []
         }
       }));

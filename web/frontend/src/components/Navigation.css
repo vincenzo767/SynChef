@@ -483,6 +483,45 @@
   font-size: 0.7rem;
 }
 
+/* Admin Menu Styles */
+.sidebar-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 1rem 0;
+}
+
+.admin-menu-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.admin-menu-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #f8cb46;
+  padding: 0.5rem 1rem;
+  letter-spacing: 0.05em;
+}
+
+.admin-menu-section .nav-link {
+  background: rgba(248, 203, 70, 0.1);
+  border-left: 3px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.admin-menu-section .nav-link:hover {
+  background: rgba(248, 203, 70, 0.2);
+  border-left-color: #f8cb46;
+}
+
+.admin-menu-section .nav-link.active {
+  background: rgba(248, 203, 70, 0.25);
+  border-left-color: #f8cb46;
+  box-shadow: inset 0 0 12px rgba(248, 203, 70, 0.15);
+}
+
 @media (min-width: 769px) {
   .notification-panel.sidebar-open {
     right: 16px;

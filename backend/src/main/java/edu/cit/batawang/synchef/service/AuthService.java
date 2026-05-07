@@ -148,6 +148,7 @@ public class AuthService {
             user.getFavoriteRecipeIds() != null ? user.getFavoriteRecipeIds() : new java.util.ArrayList<>()
         );
         response.setCreatedAt(user.getCreatedAt());
+        response.setRole(user.getRole() != null ? user.getRole() : "USER");
 
         return response;
     }
