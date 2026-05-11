@@ -3,114 +3,82 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
 import { FaEye, FaChevronDown, FaFlag, FaExclamationTriangle } from "react-icons/fa";
+import { Client } from "@stomp/stompjs";
+import SockJS from "sockjs-client";
+import { reportApi } from "../api";
 import "./AdminReportsPage.css";
 
-const MOCK_REPORTS = [
-  {
-    id: 191,
-    reporter: "Jaram",
-    recipeTitle: "Stamfunwate Recipe",
-    recipeSuffix: "(recipe)",
-    category: "Critical",
-    reason: "Contamination risk (non-food item)",
-    reportDate: "07/11/2023",
-  },
-  {
-    id: 192,
-    reporter: "Marramw",
-    recipeTitle: "Month Westernins",
-    recipeSuffix: "(recipes)",
-    category: "Recipe",
-    reason: "Inaccurate/Harmful measurements",
-    reportDate: "07/11/2023",
-  },
-  {
-    id: 193,
-    reporter: "Kein",
-    recipeTitle: "Chicken Bowden",
-    recipeSuffix: "(recipe)",
-    category: "Recipe",
-    reason: "Inaccurate cooking temperature",
-    reportDate: "07/11/2023",
-  },
-  {
-    id: 794,
-    reporter: "Robiala",
-    recipeTitle: "Martle Cinning",
-    recipeSuffix: "(recipe)",
-    category: "Recipe",
-    reason: "Intellectual Property infringement",
-    reportDate: "07/11/2023",
-  },
-  {
-    id: 795,
-    reporter: "Aymy",
-    recipeTitle: "The Green Bosted Pack",
-    recipeSuffix: "(recipe)",
-    category: "Medium",
-    reason: "Misleading nutritional info",
-    reportDate: "07/11/2023",
-  },
-  {
-    id: 796,
-    reporter: "Raman",
-    recipeTitle: "Vanlic Powller feuch",
-    recipeSuffix: "(recipe)",
-    category: "Recipe",
-    reason: "Inappropriate language in description",
-    reportDate: "07/11/2023",
-  },
-  {
-    id: 797,
-    reporter: "Kerna",
-    recipeTitle: "Marmutsfi Recipe",
-    recipeSuffix: "(recipes)",
-    category: "Recipe",
-    reason: "Inappropriate language in description",
-    reportDate: "07/11/2023",
-  },
-  {
-    id: 298,
-    reporter: "Habern",
-    recipeTitle: "Stewmarie Cooking",
-    recipeSuffix: "(recipe)",
-    category: "Recipe",
-    reason: "Intellectual Property infringement",
-    reportDate: "07/11/2023",
-  },
-  {
-    id: 299,
-    reporter: "Berchalt",
-    recipeTitle: "Camera Rooinn",
-    recipeSuffix: "(recipe1)",
-    category: "Medium",
-    reason: "Inaccurate/Harmful measurements",
-    reportDate: "07/11/2023",
-  },
-];
+const POLL_INTERVAL = 30000; // fallback poll — WebSocket handles real-time
+const WS_URL = "http://localhost:8080/ws";
+
+function formatDate(isoString) {
+  if (!isoString) return "—";
+  const d = new Date(isoString);
+  const mm = String(d.getMonth() + 1).padStart(2, "0");
+  const dd = String(d.getDate()).padStart(2, "0");
+  const yy = String(d.getFullYear()).slice(-2);
+  return `${mm}/${dd}/${yy}`;
+}
 
 const AdminReportsPage = () => {
   const navigate = useNavigate();
   const { user, isAuthenticated } = useSelector((state) => state.auth);
   const [reports, setReports] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [openDropdownId, setOpenDropdownId] = useState(null);
   const [viewingId, setViewingId] = useState(null);
+  const [filingId, setFilingId] = useState(null);
   const containerRef = useRef(null);
+  const pollRef = useRef(null);
+  const stompRef = useRef(null);
 
   useEffect(() => {
     if (!isAuthenticated) navigate("/login");
     else if (user?.role !== "ADMIN") navigate("/dashboard");
   }, [isAuthenticated, user, navigate]);
 
-  useEffect(() => {
-    setIsLoading(true);
-    const t = setTimeout(() => {
-      setReports(MOCK_REPORTS);
-      setIsLoading(false);
-    }, 450);
-    return () => clearTimeout(t);
+  const fetchReports = useCallback(async (silent = false) => {
+    if (!silent) setIsLoading(true);
+    try {
+      const res = await reportApi.getAll();
+      setReports(res.data || []);
+    } catch {
+      // silently fail on poll errors
+    } finally {
+      if (!silent) setIsLoading(false);
+    }
   }, []);
+
+  useEffect(() => {
+    fetchReports();
+    pollRef.current = setInterval(() => fetchReports(true), POLL_INTERVAL);
+
+    const stomp = new Client({
+      webSocketFactory: () => new SockJS(WS_URL),
+      reconnectDelay: 5000,
+      onConnect: () => {
+        stomp.subscribe("/topic/admin/reports", (msg) => {
+          const newReport = JSON.parse(msg.body);
+          setReports((prev) =>
+            prev.some((r) => r.id === newReport.id) ? prev : [newReport, ...prev]
+          );
+        });
+        stomp.subscribe("/topic/admin/reports/update", (msg) => {
+          const updated = JSON.parse(msg.body);
+          setReports((prev) =>
+            prev.map((r) => (r.id === updated.id ? updated : r))
+          );
+        });
+      },
+    });
+    stomp.activate();
+    stompRef.current = stomp;
+
+    return () => {
+      clearInterval(pollRef.current);
+      stomp.deactivate();
+    };
+  }, [fetchReports]);
 
   /* Close dropdown when clicking outside */
   useEffect(() => {
@@ -127,10 +95,22 @@ const AdminReportsPage = () => {
     setOpenDropdownId((prev) => (prev === id ? null : id));
   }, []);
 
+  const handleFileNotice = useCallback(async (reportId) => {
+    setFilingId(reportId);
+    try {
+      await reportApi.fileNotice(reportId);
+      await fetchReports(true);
+    } catch {
+      // ignore
+    } finally {
+      setFilingId(null);
+    }
+  }, [fetchReports]);
+
   const handleAction = useCallback((action, reportId) => {
-    console.log(`[Admin Reports] action="${action}" reportId=${reportId}`);
     setOpenDropdownId(null);
-  }, []);
+    if (action === "file-notice") handleFileNotice(reportId);
+  }, [handleFileNotice]);
 
   const getCategoryClass = (cat) => {
     if (cat === "Critical") return "rp-badge badge-critical";
@@ -189,6 +169,8 @@ const AdminReportsPage = () => {
                 const catClass = getCategoryClass(report.category);
                 const ddOpen   = openDropdownId === report.id;
                 const viewing  = viewingId === report.id;
+                const filing   = filingId === report.id;
+                const filed    = report.status === "FILED";
 
                 return (
                   <motion.tr
@@ -202,14 +184,11 @@ const AdminReportsPage = () => {
                     <td className="rp-td rp-td-id">{report.id}</td>
 
                     {/* Reporter */}
-                    <td className="rp-td">{report.reporter}</td>
+                    <td className="rp-td">{report.reporterName}</td>
 
                     {/* Recipe Title */}
                     <td className="rp-td">
-                      <span className="rp-recipe-link">
-                        {report.recipeTitle}&nbsp;
-                        <span className="rp-recipe-suffix">{report.recipeSuffix}</span>
-                      </span>
+                      <span className="rp-recipe-link">{report.recipeTitle}</span>
                     </td>
 
                     {/* Category */}
@@ -223,7 +202,7 @@ const AdminReportsPage = () => {
                     <td className="rp-td rp-td-reason">{report.reason}</td>
 
                     {/* Report Date */}
-                    <td className="rp-td rp-td-date">{report.reportDate}</td>
+                    <td className="rp-td rp-td-date">{formatDate(report.reportDate)}</td>
 
                     {/* View Recipe */}
                     <td className="rp-td rp-td-center">
@@ -241,10 +220,11 @@ const AdminReportsPage = () => {
                       <div className="rp-actions">
                         <button
                           className="rp-notice-btn"
-                          onClick={() => handleAction("file-notice", report.id)}
+                          disabled={filing || filed}
+                          onClick={() => handleFileNotice(report.id)}
                         >
                           <FaFlag className="rp-flag-icon" />
-                          File for Notice
+                          {filing ? "Filing…" : filed ? "Filed" : "File for Notice"}
                         </button>
 
                         <div className="rp-dd-wrap">

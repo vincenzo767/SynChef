@@ -6,6 +6,7 @@ import {
   FaCheckCircle,
   FaClock,
   FaEdit,
+  FaFlag,
   FaGlobe,
   FaPaperPlane,
   FaPlus,
@@ -14,6 +15,7 @@ import {
 } from "react-icons/fa";
 import { synCookApi } from "../api";
 import { ALL_RECIPES } from "../data/recipes";
+import RecipeReportModal from "../components/RecipeReportModal";
 import "./DashboardPage.css";
 
 // localStorage fallback for sessions before Redux rehydrates country from backend
@@ -59,6 +61,8 @@ const DashboardPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [commentDraft, setCommentDraft] = useState("");
   const [editingRecipeId, setEditingRecipeId] = useState(null);
+  const [showReportModal, setShowReportModal] = useState(false);
+  const [reportingRecipe, setReportingRecipe] = useState(null);
 
   const [form, setForm] = useState({
     title: "",
@@ -592,7 +596,22 @@ const DashboardPage = () => {
 
           {detailRecipe && (
             <div className="syncook-modal">
-              <h3>{detailRecipe.title}</h3>
+              <div className="syncook-detail-header">
+                <h3>{detailRecipe.title}</h3>
+                {userId && detailRecipe.ownerId !== userId && (
+                  <button
+                    type="button"
+                    className="syncook-report-btn"
+                    title="Report this recipe"
+                    onClick={() => {
+                      setReportingRecipe(detailRecipe);
+                      setShowReportModal(true);
+                    }}
+                  >
+                    <FaFlag />
+                  </button>
+                )}
+              </div>
               <p className="syncook-detail-meta">
                 {detailRecipe.country} • by {detailRecipe.ownerName}
               </p>
@@ -659,6 +678,17 @@ const DashboardPage = () => {
             </div>
           )}
         </div>
+      )}
+
+      {showReportModal && reportingRecipe && (
+        <RecipeReportModal
+          recipeId={reportingRecipe.id}
+          recipeTitle={reportingRecipe.title}
+          onClose={() => {
+            setShowReportModal(false);
+            setReportingRecipe(null);
+          }}
+        />
       )}
     </div>
   );

@@ -64,6 +64,18 @@ export const notificationApi = {
   markAllAsRead: () => apiClient.post("/users/me/notifications/read-all")
 };
 
+export const reportApi = {
+  /** POST /api/reports — submit a report on a SynCook recipe */
+  create: (recipeId, category, reason) =>
+    apiClient.post("/reports", { recipeId, category, reason }),
+
+  /** GET /api/admin/reports — admin: get all reports */
+  getAll: () => apiClient.get("/admin/reports"),
+
+  /** POST /api/admin/reports/:id/file-notice — admin: file a formal notice */
+  fileNotice: (reportId) => apiClient.post(`/admin/reports/${reportId}/file-notice`),
+};
+
 export const aiApi = {
   getSubstitutions: (ingredientName, userRegion, allergies) =>
     apiClient.post("/ai/substitutions", { ingredientName, userRegion, allergies }),

@@ -1,0 +1,202 @@
+/* ── RecipeReportModal ── */
+.rrm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.72);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9000;
+  padding: 1rem;
+}
+
+.rrm-modal {
+  background: #242526;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 440px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh;
+}
+
+/* Header */
+.rrm-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid #3a3b3c;
+}
+
+.rrm-title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #e4e6eb;
+}
+
+.rrm-close-btn {
+  background: #3a3b3c;
+  border: none;
+  color: #e4e6eb;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background 0.15s;
+}
+.rrm-close-btn:hover { background: #4e4f50; }
+
+/* Subtitle block */
+.rrm-subtitle-block {
+  padding: 1rem 1.25rem 0.5rem;
+}
+
+.rrm-subtitle {
+  margin: 0 0 0.35rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #e4e6eb;
+}
+
+.rrm-hint {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #b0b3b8;
+  line-height: 1.4;
+}
+
+/* Category list */
+.rrm-category-list {
+  overflow-y: auto;
+  flex: 1;
+  padding: 0.25rem 0;
+}
+
+.rrm-category-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.85rem 1.25rem;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #3a3b3c;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.12s;
+  gap: 0.75rem;
+}
+.rrm-category-row:last-child { border-bottom: none; }
+.rrm-category-row:hover    { background: #3a3b3c; }
+.rrm-category-row.selected { background: rgba(102, 126, 234, 0.15); }
+
+.rrm-category-label {
+  font-size: 0.88rem;
+  color: #e4e6eb;
+  flex: 1;
+  line-height: 1.3;
+}
+
+.rrm-category-arrow {
+  color: #b0b3b8;
+  font-size: 0.7rem;
+  flex-shrink: 0;
+}
+
+.rrm-category-row.selected .rrm-category-arrow {
+  color: #667eea;
+}
+
+/* Error */
+.rrm-error {
+  margin: 0;
+  padding: 0.5rem 1.25rem;
+  font-size: 0.82rem;
+  color: #ef4444;
+}
+
+/* Footer */
+.rrm-footer {
+  display: flex;
+  gap: 0.75rem;
+  padding: 0.9rem 1.25rem;
+  border-top: 1px solid #3a3b3c;
+  justify-content: flex-end;
+}
+
+.rrm-cancel-btn {
+  background: #3a3b3c;
+  color: #e4e6eb;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.rrm-cancel-btn:hover { background: #4e4f50; }
+
+.rrm-submit-btn {
+  background: #ef4444;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1.1rem;
+  border-radius: 6px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.rrm-submit-btn:hover:not(:disabled)  { background: #dc2626; }
+.rrm-submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* Success state */
+.rrm-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2.5rem 1.5rem;
+  gap: 0.75rem;
+  text-align: center;
+}
+
+.rrm-success-icon {
+  font-size: 3rem;
+  color: #10b981;
+}
+
+.rrm-success-title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #e4e6eb;
+}
+
+.rrm-success-msg {
+  margin: 0;
+  font-size: 0.88rem;
+  color: #b0b3b8;
+  line-height: 1.5;
+}
+
+.rrm-done-btn {
+  margin-top: 0.5rem;
+  background: #667eea;
+  color: #fff;
+  border: none;
+  padding: 0.55rem 1.5rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.rrm-done-btn:hover { background: #5a6fd6; }

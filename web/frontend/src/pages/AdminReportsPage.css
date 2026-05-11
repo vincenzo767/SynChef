@@ -214,7 +214,8 @@
   transition: background 0.15s;
   white-space: nowrap;
 }
-.rp-notice-btn:hover { background: #dc2626; }
+.rp-notice-btn:hover:not(:disabled) { background: #dc2626; }
+.rp-notice-btn:disabled { opacity: 0.55; cursor: not-allowed; }
 
 .rp-flag-icon { font-size: 0.7rem; }
 

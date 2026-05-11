@@ -2,6 +2,7 @@ package edu.cit.batawang.synchef.service;
 
 import edu.cit.batawang.synchef.dto.NotificationResponse;
 import edu.cit.batawang.synchef.model.AppNotification;
+import edu.cit.batawang.synchef.model.RecipeReport;
 import edu.cit.batawang.synchef.model.SynCookRecipe;
 import edu.cit.batawang.synchef.model.User;
 import edu.cit.batawang.synchef.repository.AppNotificationRepository;
@@ -92,6 +93,35 @@ public class NotificationService {
         unread.forEach(notification -> notification.setIsRead(true));
         notificationRepository.saveAll(unread);
         return unread.size();
+    }
+
+    /** Called when a user files a report — notifies every admin. */
+    @Transactional
+    public void notifyAdminsOfReport(RecipeReport report, List<User> admins) {
+        for (User admin : admins) {
+            AppNotification n = notificationFactory.createAdminReport(
+                admin.getId(),
+                report.getReporterId(),
+                report.getReporterName(),
+                report.getRecipeTitle(),
+                report.getRecipeId(),
+                report.getReason()
+            );
+            notificationRepository.save(n);
+        }
+    }
+
+    /** Called when admin clicks "File for Notice" — notifies the recipe owner. */
+    @Transactional
+    public void notifyOwnerOfNotice(RecipeReport report) {
+        if (report.getRecipeOwnerId() == null) return;
+        AppNotification n = notificationFactory.createFileNotice(
+            report.getRecipeOwnerId(),
+            report.getRecipeTitle(),
+            report.getRecipeId(),
+            report.getReason()
+        );
+        notificationRepository.save(n);
     }
 
     private void saveSystemNotification(Long recipientId, String title, String message) {

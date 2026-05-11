@@ -2,6 +2,9 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 var vite_config_default = defineConfig({
   plugins: [react()],
+  define: {
+    global: "globalThis",
+  },
   server: {
     port: 3e3,
     proxy: {

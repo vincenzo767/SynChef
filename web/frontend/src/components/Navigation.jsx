@@ -17,6 +17,7 @@ import {
 } from "react-icons/fa";
 import { logout } from "../store/authSlice";
 import { notificationApi } from "../api";
+import ReportNoticeModal from "./ReportNoticeModal";
 import "./Navigation.css";
 
 const Navigation = () => {
@@ -30,6 +31,7 @@ const Navigation = () => {
   const [activeNotificationTab, setActiveNotificationTab] = useState("all");
   const [notifications, setNotifications] = useState([]);
   const [isNotificationLoading, setIsNotificationLoading] = useState(false);
+  const [reportNoticeNotification, setReportNoticeNotification] = useState(null);
 
   const panelRef = useRef(null);
   const bellRef = useRef(null);
@@ -94,9 +96,17 @@ const Navigation = () => {
     if (!notification.isRead) {
       await markAsRead(notification.id);
     }
+    setIsNotificationOpen(false);
+    if (notification.type === "REPORT_FILED") {
+      setReportNoticeNotification(notification);
+      return;
+    }
+    if (notification.type === "ADMIN_REPORT") {
+      navigate("/admin/reports");
+      return;
+    }
     if (notification.referenceRecipeId) {
       navigate("/dashboard");
-      setIsNotificationOpen(false);
     }
   };
 
@@ -312,6 +322,13 @@ const Navigation = () => {
             ))}
           </div>
         </section>
+      )}
+
+      {reportNoticeNotification && (
+        <ReportNoticeModal
+          notification={reportNoticeNotification}
+          onClose={() => setReportNoticeNotification(null)}
+        />
       )}
 
       <aside className={`auth-sidebar${isSidebarOpen ? " open" : " closed"}`}>

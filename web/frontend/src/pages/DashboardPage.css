@@ -494,8 +494,41 @@
   gap: 8px;
 }
 
+.syncook-detail-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0;
+}
+
+.syncook-detail-header h3 {
+  margin: 0;
+  flex: 1;
+}
+
+.syncook-report-btn {
+  background: none;
+  border: none;
+  color: #b0b3b8;
+  cursor: pointer;
+  padding: 0.25rem;
+  font-size: 0.95rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  transition: color 0.15s, background 0.15s;
+}
+.syncook-report-btn:hover {
+  color: #dc2626;
+}
+
 .syncook-detail-meta {
-  margin: -4px 0 10px;
+  margin: 4px 0 10px;
   color: #52608e;
 }
 
