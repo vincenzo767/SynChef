@@ -13,7 +13,9 @@ import {
   FaTachometerAlt,
   FaTimes,
   FaShieldAlt,
-  FaClipboardList
+  FaClipboardList,
+  FaUsers,
+  FaChartBar
 } from "react-icons/fa";
 import { logout } from "../store/authSlice";
 import { notificationApi } from "../api";
@@ -341,17 +343,23 @@ const Navigation = () => {
                 <Link to="/" className={navLink("/")}>
                   <FaHome /><span>Home</span>
                 </Link>
-                <Link to="/admin/profile" className={navLink("/admin/profile")}>
-                  <FaUser /><span>Profile</span>
-                </Link>
                 <Link to="/admin/dashboard" className={navLink("/admin/dashboard")}>
                   <FaTachometerAlt /><span>Dashboard</span>
                 </Link>
-                <Link to="/settings" className={navLink("/settings")}>
-                  <FaCog /><span>Settings</span>
-                </Link>
                 <Link to="/admin/reports" className={navLink("/admin/reports")}>
                   <FaClipboardList /><span>Reports</span>
+                </Link>
+                <Link to="/admin/users" className={navLink("/admin/users")}>
+                  <FaUsers /><span>User Management</span>
+                </Link>
+                <Link to="/admin/analytics" className={navLink("/admin/analytics")}>
+                  <FaChartBar /><span>Analytics</span>
+                </Link>
+                <Link to="/admin/moderation" className={navLink("/admin/moderation")}>
+                  <FaShieldAlt /><span>Content Moderation</span>
+                </Link>
+                <Link to="/settings" className={navLink("/settings")}>
+                  <FaCog /><span>Settings</span>
                 </Link>
               </>
             ) : (
