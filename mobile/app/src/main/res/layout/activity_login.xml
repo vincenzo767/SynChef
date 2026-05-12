@@ -1,170 +1,232 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/bg_gradient"
-    android:fillViewport="true">
+    android:layout_height="match_parent">
 
-    <LinearLayout
+    <!-- Hero background photo -->
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:padding="24dp">
+        android:layout_height="match_parent"
+        android:src="@drawable/hero_chef_mobile"
+        android:scaleType="centerCrop"
+        android:contentDescription="@null" />
+
+    <!-- Dark gradient overlay -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_hero_overlay" />
+
+    <!-- Scrollable content sits below status bar -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:fillViewport="true"
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_card"
             android:orientation="vertical"
-            android:padding="22dp">
+            android:gravity="center"
+            android:paddingHorizontal="24dp"
+            android:paddingTop="48dp"
+            android:paddingBottom="40dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="Recipe Discovery"
-                android:textColor="@color/synchef_text_dark"
-                android:textSize="32sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="8dp"
-                android:text="Explore Global Culinary Traditions"
-                android:textColor="@color/synchef_text_light"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/tvError"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:background="#FEE2E2"
-                android:padding="10dp"
-                android:textColor="#B91C1C"
-                android:visibility="gone" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
-                android:text="Email Address"
-                android:textColor="@color/synchef_text_dark"
-                android:textSize="12sp" />
-
-            <EditText
-                android:id="@+id/etEmailOrUsername"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/bg_input"
-                android:hint="you@example.com"
-                android:paddingHorizontal="12dp"
-                android:singleLine="true" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
-                android:text="Password"
-                android:textColor="@color/synchef_text_dark"
-                android:textSize="12sp" />
-
-            <EditText
-                android:id="@+id/etPassword"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/bg_input"
-                android:hint="••••••••"
-                android:inputType="textPassword"
-                android:paddingHorizontal="12dp"
-                android:singleLine="true" />
-
+            <!-- ── Auth Card ─────────────────────────────────────────── -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:background="@drawable/bg_auth_card"
+                android:orientation="vertical"
+                android:padding="24dp">
 
-                <CheckBox
-                    android:id="@+id/cbRememberMe"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Remember me"
-                    android:textColor="@color/synchef_text_light"
-                    android:textSize="12sp" />
-
+                <!-- Title -->
                 <TextView
-                    android:id="@+id/tvForgotPassword"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Forgot password?"
-                    android:textColor="@color/synchef_primary"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Recipe Discovery"
+                    android:textColor="#FFFFFF"
+                    android:textSize="28sp"
+                    android:textStyle="bold" />
+
+                <!-- Subtitle -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="6dp"
+                    android:text="Explore Global Culinary Traditions"
+                    android:textColor="#CCF5F5F5"
+                    android:textSize="13sp" />
+
+                <!-- Error banner -->
+                <TextView
+                    android:id="@+id/tvError"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:background="#33EF4444"
+                    android:padding="10dp"
+                    android:textColor="#FCA5A5"
+                    android:textSize="13sp"
+                    android:visibility="gone" />
+
+                <!-- Email label -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="22dp"
+                    android:text="Email Address"
+                    android:textColor="#F0F0F0"
                     android:textSize="12sp"
                     android:textStyle="bold" />
 
-            </LinearLayout>
+                <!-- Email input -->
+                <EditText
+                    android:id="@+id/etEmailOrUsername"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="6dp"
+                    android:background="@drawable/bg_auth_input"
+                    android:hint="you@example.com"
+                    android:inputType="textEmailAddress"
+                    android:paddingHorizontal="14dp"
+                    android:singleLine="true"
+                    android:textColor="#1F2937"
+                    android:textColorHint="#9CA3AF"
+                    android:textSize="14sp" />
 
-            <Button
-                android:id="@+id/btnLogin"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/bg_button_primary"
-                android:text="Sign In"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                <!-- Password label -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Password"
+                    android:textColor="#F0F0F0"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/tvGoToRegister"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="18dp"
-                android:text="Don't have an account? Sign up"
-                android:textColor="@color/synchef_bg_top"
-                android:textStyle="bold"
-                android:textSize="13sp" />
+                <!-- Password input -->
+                <EditText
+                    android:id="@+id/etPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="6dp"
+                    android:background="@drawable/bg_auth_input"
+                    android:hint="Enter your password"
+                    android:inputType="textPassword"
+                    android:paddingHorizontal="14dp"
+                    android:singleLine="true"
+                    android:textColor="#1F2937"
+                    android:textColorHint="#9CA3AF"
+                    android:textSize="14sp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
-                android:orientation="horizontal">
+                <!-- Remember me + Forgot password row -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
+                    <CheckBox
+                        android:id="@+id/cbRememberMe"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="#A78BFA"
+                        android:text="Remember me"
+                        android:textColor="#CCF5F5F5"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tvForgotPassword"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Forgot password?"
+                        android:textColor="@color/synchef_link"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!-- Sign In button -->
                 <Button
-                    android:id="@+id/btnGoogle"
-                    android:layout_width="0dp"
-                    android:layout_height="42dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_input"
-                    android:text="Google"
+                    android:id="@+id/btnLogin"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="22dp"
+                    android:background="@drawable/bg_btn_violet"
+                    android:stateListAnimator="@null"
+                    android:text="Sign In"
                     android:textAllCaps="false"
-                    android:textColor="@color/synchef_text_dark"
-                    android:textSize="12sp" />
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-                <Button
-                    android:id="@+id/btnFacebook"
-                    android:layout_width="0dp"
-                    android:layout_height="42dp"
-                    android:layout_weight="1"
-                    android:layout_marginStart="8dp"
-                    android:background="@drawable/bg_input"
-                    android:text="Facebook"
-                    android:textAllCaps="false"
-                    android:textColor="@color/synchef_text_dark"
-                    android:textSize="12sp" />
+                <!-- Go to Register -->
+                <TextView
+                    android:id="@+id/tvGoToRegister"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="18dp"
+                    android:text="Don't have an account?  Sign up"
+                    android:textColor="@color/synchef_link"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <!-- Social divider hint -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginBottom="12dp"
+                    android:text="or continue with"
+                    android:textColor="#80F5F5F5"
+                    android:textSize="11sp" />
+
+                <!-- Social buttons row -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <Button
+                        android:id="@+id/btnGoogle"
+                        android:layout_width="0dp"
+                        android:layout_height="42dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_btn_social"
+                        android:stateListAnimator="@null"
+                        android:text="G  Google"
+                        android:textAllCaps="false"
+                        android:textColor="#FFFFFF"
+                        android:textSize="13sp" />
+
+                    <View
+                        android:layout_width="10dp"
+                        android:layout_height="0dp" />
+
+                    <Button
+                        android:id="@+id/btnFacebook"
+                        android:layout_width="0dp"
+                        android:layout_height="42dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_btn_social"
+                        android:stateListAnimator="@null"
+                        android:text="f  Facebook"
+                        android:textAllCaps="false"
+                        android:textColor="#FFFFFF"
+                        android:textSize="13sp" />
+                </LinearLayout>
 
             </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-</ScrollView>
+    </ScrollView>
+
+</FrameLayout>

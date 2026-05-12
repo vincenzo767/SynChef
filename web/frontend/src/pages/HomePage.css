@@ -83,6 +83,75 @@
   padding: 0 24px;
 }
 
+/* ── Mobile full-screen hero (hidden on desktop) ──────────────── */
+.hp-hero {
+  display: none;
+  position: relative;
+  height: 100vh;
+  min-height: 580px;
+  background: url('/hero-chef-mobile.jpg') center top / cover no-repeat;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.hp-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    170deg,
+    rgba(0,0,0,0.04) 0%,
+    rgba(0,0,0,0.10) 38%,
+    rgba(0,0,0,0.58) 72%,
+    rgba(0,0,0,0.84) 100%
+  );
+  pointer-events: none;
+}
+
+.hp-hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 0 28px 80px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.hp-hero-title {
+  display: flex;
+  flex-direction: column;
+  font-size: clamp(3.6rem, 14vw, 6.5rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.02;
+  margin: 0;
+}
+
+.hp-word-white { color: #ffffff; }
+.hp-word-gold  { color: #fdcb58; }
+
+.hp-hero-sub {
+  color: rgba(255,255,255,0.80);
+  font-size: 0.87rem;
+  line-height: 1.55;
+  max-width: 290px;
+  margin: 0;
+}
+
+.hp-hero-signin {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 8px 0;
+  margin-top: 6px;
+  transition: gap 0.2s ease;
+}
+.hp-hero-signin:hover { gap: 14px; }
+
 /* ── Hero ─────────────────────────────────────────────────────── */
 .home-hero {
   text-align: center;
@@ -1052,7 +1121,10 @@
 }
 
 @media (max-width: 768px) {
-  .home-hero { padding-top: 96px; }
+  /* swap heroes: show mobile photo hero, hide desktop text hero */
+  .hp-hero { display: flex; }
+  .home-hero { display: none; }
+
   .home-features, .recipe-grid { grid-template-columns: 1fr; }
   .hp-search-row { flex-direction: column; }
   .hp-country-dropdown { width: 100%; }
@@ -1063,4 +1135,9 @@
   .hp-ck-step-card { padding: 20px 18px 16px; }
   .hp-ck-instruction { font-size: 1rem; }
   .recipe-meta-row { flex-direction: column; gap: 4px; }
+
+  /* gradient section starts right below the hero on mobile — give it
+     just enough top padding to clear the fixed nav when hero is absent
+     (hero is present so this mainly affects scroll-past appearance) */
+  .synchef-gradient-bg { padding-top: 0; }
 }

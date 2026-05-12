@@ -490,6 +490,37 @@ const HomePage = () => {
 
   return (
     <div className="home-page">
+
+      {/* ── MOBILE HERO: full-screen kitchen photo ─────────────────── */}
+      <section className="hp-hero" aria-hidden="false">
+        <div className="hp-hero-overlay" />
+        <motion.div
+          className="hp-hero-content"
+          initial={{ opacity: 0, y: 36 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.75, ease: "easeOut" }}
+        >
+          <h1 className="hp-hero-title">
+            <span className="hp-word-white">Discover</span>
+            <span className="hp-word-gold">Global</span>
+            <span className="hp-word-white">Flavors</span>
+          </h1>
+          <p className="hp-hero-sub">
+            Explore authentic recipes from around the world, powered by AI-driven
+            recommendations tailored to your taste.
+          </p>
+          <motion.a
+            href={isAuthenticated ? "/flavor-map" : "/login"}
+            className="hp-hero-signin"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.55 }}
+          >
+            {isAuthenticated ? "Explore Map" : "Sign In"}&nbsp;&nbsp;→
+          </motion.a>
+        </motion.div>
+      </section>
+
       <div className="synchef-gradient-bg">
         <div className="container">
           {/* Hero */}

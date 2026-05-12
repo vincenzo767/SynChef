@@ -17,4 +17,6 @@
     <color name="synchef_favorite">#EF4444</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
+    <color name="synchef_violet">#7C3AED</color>
+    <color name="synchef_link">#A78BFA</color>
 </resources>

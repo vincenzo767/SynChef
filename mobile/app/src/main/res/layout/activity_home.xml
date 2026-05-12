@@ -1,94 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/bg_gradient"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:layout_height="match_parent">
 
-    <LinearLayout
+    <!-- Full-screen hero background photo -->
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:src="@drawable/hero_chef_mobile"
+        android:scaleType="centerCrop"
+        android:contentDescription="@null" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="⚜"
-            android:textColor="@color/synchef_orange"
-            android:textSize="34sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="SynChef"
-            android:textColor="@color/white"
-            android:textSize="38sp"
-            android:textStyle="bold" />
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="38dp"
-        android:text="Welcome!"
-        android:textColor="@color/white"
-        android:textSize="44sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/tvHeroTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="78dp"
-        android:gravity="center"
-        android:lineSpacingExtra="-6dp"
-        android:text="Discover Global Flavors"
-        android:textColor="@color/white"
-        android:textSize="60sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:gravity="center"
-        android:text="Explore authentic recipes from around the world, powered by AI-driven recommendations tailored to your taste"
-        android:textColor="#D1D5DB"
-        android:textSize="19sp" />
-
+    <!-- Dark gradient overlay: transparent top → dark bottom -->
     <View
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_hero_overlay" />
 
-    <Button
-        android:id="@+id/btnLogin"
+    <!-- Content layer (fits system windows so it starts below status bar) -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="54dp"
-        android:layout_marginHorizontal="50dp"
-        android:background="@drawable/bg_button_explore"
-        android:text="Log In"
-        android:textAllCaps="false"
-        android:textColor="@color/synchef_primary_dark"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:fitsSystemWindows="true">
 
-    <Button
-        android:id="@+id/btnSignUp"
-        android:layout_width="match_parent"
-        android:layout_height="54dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginHorizontal="50dp"
-        android:background="@drawable/bg_button_explore"
-        android:text="Sign Up"
-        android:textAllCaps="false"
-        android:textColor="@color/synchef_primary_dark"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        <!-- ── Top bar: brand + Sign Up ─────────────────────────────── -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="20dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:gravity="center_vertical">
 
-</LinearLayout>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="SynChef"
+                android:textColor="#FFFFFF"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.01" />
+
+            <Button
+                android:id="@+id/btnSignUp"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:background="@drawable/bg_btn_signup_pill"
+                android:text="Sign Up"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:paddingHorizontal="20dp"
+                android:stateListAnimator="@null" />
+        </LinearLayout>
+
+        <!-- Spacer: pushes hero text to bottom half -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <!-- ── Bottom hero content ──────────────────────────────────── -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="28dp"
+            android:paddingBottom="72dp">
+
+            <!-- Stacked large title -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Discover"
+                android:textColor="#FFFFFF"
+                android:textSize="68sp"
+                android:textStyle="bold"
+                android:lineSpacingExtra="-4dp"
+                android:includeFontPadding="false" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Global"
+                android:textColor="#FDCB58"
+                android:textSize="68sp"
+                android:textStyle="bold"
+                android:lineSpacingExtra="-4dp"
+                android:includeFontPadding="false" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Flavors"
+                android:textColor="#FFFFFF"
+                android:textSize="68sp"
+                android:textStyle="bold"
+                android:lineSpacingExtra="-4dp"
+                android:includeFontPadding="false" />
+
+            <!-- Subtitle -->
+            <TextView
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Explore authentic recipes from around the world, powered by AI-driven recommendations tailored to your taste."
+                android:textColor="#CCF5F5F5"
+                android:textSize="13sp"
+                android:lineSpacingExtra="2dp" />
+
+            <!-- Sign In → CTA -->
+            <TextView
+                android:id="@+id/tvSignIn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Sign In  →"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:clickable="true"
+                android:focusable="true" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>
