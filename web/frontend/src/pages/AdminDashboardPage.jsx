@@ -1,22 +1,53 @@
-import { useEffect } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
 import { FaChartBar, FaClipboardList, FaUsers, FaShieldAlt } from "react-icons/fa";
+import { Client } from "@stomp/stompjs";
+import SockJS from "sockjs-client";
+import { adminApi } from "../api";
 import "./AdminDashboardPage.css";
+
+const WS_URL = "http://localhost:8080/ws";
 
 const AdminDashboardPage = () => {
   const navigate = useNavigate();
   const { user, isAuthenticated } = useSelector((state) => state.auth);
+  const [stats, setStats] = useState({
+    totalUsers: 0, activeUsers: 0, totalSynCookRecipes: 0,
+    pendingReports: 0, totalReports: 0, totalComments: 0,
+  });
+  const stompRef = useRef(null);
 
-  // Check if user is admin
   useEffect(() => {
-    if (!isAuthenticated) {
-      navigate("/login");
-    } else if (user?.role !== "ADMIN") {
-      navigate("/dashboard");
-    }
+    if (!isAuthenticated) navigate("/login");
+    else if (user?.role !== "ADMIN") navigate("/dashboard");
   }, [isAuthenticated, user, navigate]);
+
+  const fetchStats = useCallback(async () => {
+    try {
+      const res = await adminApi.getStats();
+      setStats(res.data);
+    } catch { /* ignore */ }
+  }, []);
+
+  useEffect(() => {
+    fetchStats();
+
+    const stomp = new Client({
+      webSocketFactory: () => new SockJS(WS_URL),
+      reconnectDelay: 5000,
+      onConnect: () => {
+        stomp.subscribe("/topic/admin/stats", (msg) => {
+          setStats(JSON.parse(msg.body));
+        });
+      },
+    });
+    stomp.activate();
+    stompRef.current = stomp;
+
+    return () => stomp.deactivate();
+  }, [fetchStats]);
 
   const adminMenuItems = [
     {
@@ -25,8 +56,8 @@ const AdminDashboardPage = () => {
       title: "Recipe Reports",
       description: "Review and manage pending recipe reports",
       path: "/admin/reports",
-      count: 12,
-      color: "#ef4444"
+      count: stats.pendingReports,
+      color: "#ef4444",
     },
     {
       id: 2,
@@ -34,8 +65,8 @@ const AdminDashboardPage = () => {
       title: "User Management",
       description: "Manage user accounts and permissions",
       path: "/admin/users",
-      count: 287,
-      color: "#10b981"
+      count: stats.totalUsers,
+      color: "#10b981",
     },
     {
       id: 3,
@@ -43,8 +74,8 @@ const AdminDashboardPage = () => {
       title: "Analytics",
       description: "View detailed analytics and statistics",
       path: "/admin/analytics",
-      count: 542,
-      color: "#3b82f6"
+      count: stats.totalSynCookRecipes,
+      color: "#3b82f6",
     },
     {
       id: 4,
@@ -52,9 +83,9 @@ const AdminDashboardPage = () => {
       title: "Content Moderation",
       description: "Flag and manage inappropriate content",
       path: "/admin/moderation",
-      count: 38,
-      color: "#f59e0b"
-    }
+      count: stats.totalComments,
+      color: "#f59e0b",
+    },
   ];
 
   return (
@@ -90,20 +121,20 @@ const AdminDashboardPage = () => {
           transition={{ delay: 0.1 }}
         >
           <div className="stat-item">
-            <span className="stat-value">542</span>
+            <span className="stat-value">{stats.totalSynCookRecipes}</span>
             <span className="stat-label">Total Recipes</span>
           </div>
           <div className="stat-item">
-            <span className="stat-value">287</span>
+            <span className="stat-value">{stats.activeUsers}</span>
             <span className="stat-label">Active Users</span>
           </div>
           <div className="stat-item">
-            <span className="stat-value">12</span>
+            <span className="stat-value">{stats.pendingReports}</span>
             <span className="stat-label">Pending Reports</span>
           </div>
           <div className="stat-item">
-            <span className="stat-value">38</span>
-            <span className="stat-label">Flagged Comments</span>
+            <span className="stat-value">{stats.totalComments}</span>
+            <span className="stat-label">Total Comments</span>
           </div>
         </motion.div>
 

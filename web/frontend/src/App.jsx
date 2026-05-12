@@ -16,6 +16,9 @@ import SettingsPage from "./pages/SettingsPage";
 import AdminDashboardPage from "./pages/AdminDashboardPage";
 import AdminProfilePage from "./pages/AdminProfilePage";
 import AdminReportsPage from "./pages/AdminReportsPage";
+import AdminUserManagementPage from "./pages/AdminUserManagementPage";
+import AdminAnalyticsPage from "./pages/AdminAnalyticsPage";
+import AdminModerationPage from "./pages/AdminModerationPage";
 import Navigation from "./components/Navigation";
 import PrivateRoute from "./components/PrivateRoute";
 import RoleBasedRoute from "./components/RoleBasedRoute";
@@ -71,6 +74,9 @@ const App = () => {
               <Route path="/admin/dashboard" element={<RoleBasedRoute roles={["ADMIN"]}><AdminDashboardPage /></RoleBasedRoute>} />
               <Route path="/admin/profile" element={<RoleBasedRoute roles={["ADMIN"]}><AdminProfilePage /></RoleBasedRoute>} />
               <Route path="/admin/reports" element={<RoleBasedRoute roles={["ADMIN"]}><AdminReportsPage /></RoleBasedRoute>} />
+              <Route path="/admin/users" element={<RoleBasedRoute roles={["ADMIN"]}><AdminUserManagementPage /></RoleBasedRoute>} />
+              <Route path="/admin/analytics" element={<RoleBasedRoute roles={["ADMIN"]}><AdminAnalyticsPage /></RoleBasedRoute>} />
+              <Route path="/admin/moderation" element={<RoleBasedRoute roles={["ADMIN"]}><AdminModerationPage /></RoleBasedRoute>} />
             </Routes>
           </div>
         </AnimatePresence>

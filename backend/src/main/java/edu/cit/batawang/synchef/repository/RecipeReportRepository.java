@@ -10,4 +10,5 @@ import java.util.List;
 public interface RecipeReportRepository extends JpaRepository<RecipeReport, Long> {
     List<RecipeReport> findAllByOrderByReportDateDesc();
     boolean existsByReporterIdAndRecipeId(Long reporterId, Long recipeId);
+    long countByStatus(String status);
 }

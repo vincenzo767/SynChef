@@ -26,6 +26,7 @@ public class RecipeReportService {
     private final UserRepository userRepository;
     private final NotificationService notificationService;
     private final SimpMessagingTemplate messagingTemplate;
+    private final AdminService adminService;
 
     @Transactional
     public RecipeReportResponse createReport(Long reporterId, RecipeReportRequest request) {
@@ -64,6 +65,7 @@ public class RecipeReportService {
 
         RecipeReportResponse response = toResponse(report);
         messagingTemplate.convertAndSend("/topic/admin/reports", response);
+        adminService.broadcastStats();
 
         log.info("Recipe report created: reportId={} recipeId={} by userId={}", report.getId(), report.getRecipeId(), reporterId);
         return response;
@@ -89,6 +91,7 @@ public class RecipeReportService {
 
         RecipeReportResponse response = toResponse(report);
         messagingTemplate.convertAndSend("/topic/admin/reports/update", response);
+        adminService.broadcastStats();
 
         log.info("Notice filed for reportId={} recipeId={} ownerId={}", report.getId(), report.getRecipeId(), report.getRecipeOwnerId());
         return response;

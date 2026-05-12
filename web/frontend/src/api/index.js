@@ -76,6 +76,32 @@ export const reportApi = {
   fileNotice: (reportId) => apiClient.post(`/admin/reports/${reportId}/file-notice`),
 };
 
+export const adminApi = {
+  /** GET /api/admin/stats — live counts for dashboard */
+  getStats: () => apiClient.get("/admin/stats"),
+
+  /** GET /api/admin/analytics — full analytics payload */
+  getAnalytics: () => apiClient.get("/admin/analytics"),
+
+  /** GET /api/admin/users — all users */
+  getUsers: () => apiClient.get("/admin/users"),
+
+  /** PATCH /api/admin/users/:id/status — toggle active / banned */
+  toggleUserStatus: (id) => apiClient.patch(`/admin/users/${id}/status`),
+
+  /** PATCH /api/admin/users/:id/role — change role */
+  changeUserRole: (id, role) => apiClient.patch(`/admin/users/${id}/role`, { role }),
+
+  /** DELETE /api/admin/users/:id — delete user */
+  deleteUser: (id) => apiClient.delete(`/admin/users/${id}`),
+
+  /** GET /api/admin/comments — all comments for moderation */
+  getComments: () => apiClient.get("/admin/comments"),
+
+  /** DELETE /api/admin/comments/:id — delete comment */
+  deleteComment: (id) => apiClient.delete(`/admin/comments/${id}`),
+};
+
 export const aiApi = {
   getSubstitutions: (ingredientName, userRegion, allergies) =>
     apiClient.post("/ai/substitutions", { ingredientName, userRegion, allergies }),

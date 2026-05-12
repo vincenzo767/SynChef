@@ -9,4 +9,6 @@ public interface SynCookRecipeRepository extends JpaRepository<SynCookRecipe, Lo
     List<SynCookRecipe> findByPrivacyOrderByCreatedAtDesc(String privacy);
 
     List<SynCookRecipe> findByOwnerIdOrderByUpdatedAtDesc(Long ownerId);
+
+    long countByPrivacy(String privacy);
 }

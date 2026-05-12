@@ -40,7 +40,7 @@ public class SecurityConfig {
                 .requestMatchers("/api/syncook/**").authenticated()
                 .requestMatchers("/api/notifications/**").authenticated()
                 .requestMatchers("/api/reports/**").authenticated()
-                .requestMatchers("/api/admin/reports/**").authenticated()
+                .requestMatchers("/api/admin/**").authenticated()
                 .anyRequest().permitAll()
             )
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);

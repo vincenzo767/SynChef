@@ -1,0 +1,358 @@
+/* ── Page shell ─────────────────────────────────────────────────── */
+.um-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 2rem;
+}
+
+.um-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* ── Header ─────────────────────────────────────────────────────── */
+.um-back-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255,255,255,0.15);
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: background 0.2s;
+  width: fit-content;
+  backdrop-filter: blur(8px);
+}
+.um-back-btn:hover { background: rgba(255,255,255,0.25); }
+
+.um-header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.um-title-block {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  color: white;
+}
+
+.um-title-icon {
+  font-size: 2.5rem;
+  opacity: 0.9;
+}
+
+.um-title {
+  margin: 0;
+  font-size: 2.2rem;
+  font-weight: 800;
+}
+
+.um-subtitle {
+  margin: 0.25rem 0 0;
+  opacity: 0.85;
+  font-size: 1rem;
+}
+
+/* ── Summary cards ───────────────────────────────────────────────── */
+.um-summary {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.um-summary-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+  border-top: 4px solid transparent;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.um-summary-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(0,0,0,0.18); }
+
+.um-summary-total  { border-top-color: #667eea; }
+.um-summary-active { border-top-color: #10b981; }
+.um-summary-banned { border-top-color: #ef4444; }
+.um-summary-admin  { border-top-color: #8b5cf6; }
+
+.um-summary-num {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #1f2937;
+}
+.um-summary-lbl {
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+/* ── Search ─────────────────────────────────────────────────────── */
+.um-search-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.um-search-icon {
+  position: absolute;
+  left: 1rem;
+  color: #9ca3af;
+  font-size: 1rem;
+}
+
+.um-search {
+  width: 100%;
+  padding: 0.8rem 1rem 0.8rem 2.8rem;
+  border-radius: 12px;
+  border: none;
+  font-size: 0.95rem;
+  background: white;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+  outline: none;
+  transition: box-shadow 0.2s;
+}
+.um-search:focus { box-shadow: 0 4px 20px rgba(102,126,234,0.35); }
+
+.um-search-clear {
+  position: absolute;
+  right: 1rem;
+  background: none;
+  border: none;
+  color: #9ca3af;
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+}
+.um-search-clear:hover { color: #374151; }
+
+/* ── Error / loading / empty ─────────────────────────────────────── */
+.um-error   { background: #fef2f2; color: #dc2626; padding: 0.75rem 1rem; border-radius: 8px; font-size: 0.9rem; }
+.um-loading { color: rgba(255,255,255,0.85); font-size: 1rem; text-align: center; padding: 2rem; }
+.um-empty   { color: rgba(255,255,255,0.75); font-size: 1rem; text-align: center; padding: 2rem; }
+
+/* ── Table ──────────────────────────────────────────────────────── */
+.um-table-wrap {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  overflow-x: auto;
+}
+
+.um-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.um-thead-row {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.um-th {
+  padding: 1rem 1.25rem;
+  text-align: left;
+  color: white;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.um-th-center { text-align: center; }
+
+.um-row {
+  border-bottom: 1px solid #f3f4f6;
+  transition: background 0.15s;
+}
+.um-row:hover { background: #f9fafb; }
+.um-row:last-child { border-bottom: none; }
+
+.um-td {
+  padding: 1rem 1.25rem;
+  color: #374151;
+  font-size: 0.9rem;
+  vertical-align: middle;
+}
+
+.um-td-user {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  min-width: 180px;
+}
+
+.um-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  font-weight: 700;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.um-name     { font-weight: 600; color: #111827; }
+.um-username { font-size: 0.8rem; color: #9ca3af; }
+
+.um-td-email   { color: #6b7280; font-size: 0.85rem; max-width: 220px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.um-td-country { color: #6b7280; font-size: 0.85rem; white-space: nowrap; }
+.um-td-date    { color: #6b7280; font-size: 0.85rem; white-space: nowrap; }
+
+/* ── Role select ────────────────────────────────────────────────── */
+.um-role-select {
+  padding: 0.35rem 0.65rem;
+  border-radius: 20px;
+  border: 2px solid;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  outline: none;
+  transition: opacity 0.2s;
+  letter-spacing: 0.03em;
+}
+.um-role-select:disabled { opacity: 0.55; cursor: not-allowed; }
+
+.role-admin { border-color: #8b5cf6; color: #7c3aed; background: #f5f3ff; }
+.role-user  { border-color: #9ca3af; color: #374151; background: #f9fafb; }
+
+/* ── Status badge ───────────────────────────────────────────────── */
+.um-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.status-active { background: #d1fae5; color: #065f46; }
+.status-banned { background: #fee2e2; color: #991b1b; }
+
+/* ── Action buttons ─────────────────────────────────────────────── */
+.um-td-actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  min-width: 160px;
+}
+
+.um-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: 8px;
+  border: none;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.15s;
+  white-space: nowrap;
+}
+.um-action-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.um-action-btn:not(:disabled):hover { opacity: 0.85; transform: translateY(-1px); }
+
+.btn-ban      { background: #fee2e2; color: #dc2626; }
+.btn-activate { background: #d1fae5; color: #059669; }
+.btn-delete   { background: #fef2f2; color: #ef4444; border: 1px solid #fca5a5; }
+
+/* ── Delete confirm modal ───────────────────────────────────────── */
+.um-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  backdrop-filter: blur(4px);
+}
+
+.um-modal {
+  background: white;
+  border-radius: 20px;
+  padding: 2.5rem;
+  max-width: 420px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+
+.um-modal-icon {
+  font-size: 2.5rem;
+  color: #ef4444;
+  margin-bottom: 1rem;
+}
+
+.um-modal h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.4rem;
+  color: #111827;
+}
+
+.um-modal p {
+  color: #6b7280;
+  line-height: 1.6;
+  margin: 0 0 2rem;
+}
+
+.um-modal-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.um-modal-cancel {
+  padding: 0.65rem 1.5rem;
+  border-radius: 10px;
+  border: 2px solid #e5e7eb;
+  background: white;
+  color: #374151;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: border-color 0.2s;
+}
+.um-modal-cancel:hover { border-color: #9ca3af; }
+
+.um-modal-confirm {
+  padding: 0.65rem 1.5rem;
+  border-radius: 10px;
+  border: none;
+  background: #ef4444;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background 0.2s;
+}
+.um-modal-confirm:hover { background: #dc2626; }
+
+/* ── Responsive ─────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .um-summary { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .um-page { padding: 1rem; }
+  .um-title { font-size: 1.6rem; }
+  .um-summary { grid-template-columns: 1fr 1fr; }
+}

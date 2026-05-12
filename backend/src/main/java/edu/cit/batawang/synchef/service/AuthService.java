@@ -25,6 +25,7 @@ public class AuthService {
     private final UserRepository userRepository;
     private final JwtTokenProvider tokenProvider;
     private final NotificationService notificationService;
+    private final AdminService adminService;
     private static final PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
     
     /**
@@ -75,6 +76,7 @@ public class AuthService {
         
         user = userRepository.save(user);
         notificationService.createWelcomeNotifications(user);
+        adminService.broadcastStats();
 
         log.info("User registered: {}", user.getEmail());
 
