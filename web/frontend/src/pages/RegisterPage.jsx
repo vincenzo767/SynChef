@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
@@ -80,6 +81,8 @@ const RegisterPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [countryCode, setCountryCode] = useState("");
   const [agreedToTerms, setAgreedToTerms] = useState(false);
   const [localError, setLocalError] = useState("");
@@ -222,22 +225,52 @@ const RegisterPage = () => {
 
             <div className="register-field">
               <label htmlFor="password">Password</label>
-              <input
-                id="password" type="password" placeholder="At least 8 characters" value={password}
-                onChange={(e) => { setPassword(e.target.value); clearFieldError("password"); }}
-                autoComplete="new-password" minLength={8} required
-              />
+              <div className="password-input-wrapper">
+                <input
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="At least 8 characters"
+                  value={password}
+                  onChange={(e) => { setPassword(e.target.value); clearFieldError("password"); }}
+                  autoComplete="new-password"
+                  minLength={8}
+                  required
+                />
+                <button
+                  type="button"
+                  className="password-toggle"
+                  onClick={() => setShowPassword((s) => !s)}
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                >
+                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                </button>
+              </div>
               <p className="password-hint">Must be at least 8 characters long</p>
               {validationErrors.password && <span className="field-error">{validationErrors.password}</span>}
             </div>
 
             <div className="register-field">
               <label htmlFor="confirmPassword">Confirm Password</label>
-              <input
-                id="confirmPassword" type="password" placeholder="Confirm your password" value={confirmPassword}
-                onChange={(e) => { setConfirmPassword(e.target.value); clearFieldError("confirmPassword"); }}
-                autoComplete="new-password" minLength={8} required
-              />
+              <div className="password-input-wrapper">
+                <input
+                  id="confirmPassword"
+                  type={showConfirmPassword ? "text" : "password"}
+                  placeholder="Confirm your password"
+                  value={confirmPassword}
+                  onChange={(e) => { setConfirmPassword(e.target.value); clearFieldError("confirmPassword"); }}
+                  autoComplete="new-password"
+                  minLength={8}
+                  required
+                />
+                <button
+                  type="button"
+                  className="password-toggle"
+                  onClick={() => setShowConfirmPassword((s) => !s)}
+                  aria-label={showConfirmPassword ? "Hide password" : "Show password"}
+                >
+                  {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+                </button>
+              </div>
               {validationErrors.confirmPassword && <span className="field-error">{validationErrors.confirmPassword}</span>}
             </div>
 

@@ -3,8 +3,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  /* use the same hero background image with a dark overlay */
+  background:
+    linear-gradient(180deg, rgba(6,4,26,0.56), rgba(6,4,26,0.86)),
+    url('/web-bg.png') center/cover no-repeat;
   padding: 20px;
+  color: #fff;
 }
 
 .auth-card {
