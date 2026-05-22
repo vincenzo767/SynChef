@@ -1,6 +1,7 @@
 package edu.cit.batawang.synchef.controller;
 
 import edu.cit.batawang.synchef.dto.AuthResponse;
+import edu.cit.batawang.synchef.dto.GoogleLoginRequest;
 import edu.cit.batawang.synchef.dto.LoginRequest;
 import edu.cit.batawang.synchef.dto.RegisterRequest;
 import edu.cit.batawang.synchef.service.AuthService;
@@ -45,6 +46,21 @@ public class AuthController {
     public ResponseEntity<Object> login(@RequestBody LoginRequest request) {
         try {
             AuthResponse response = authService.login(request);
+            return ResponseEntity.ok(response);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(Map.of(MESSAGE_KEY, e.getMessage()));
+        }
+    }
+
+    /**
+     * Login user with Google ID token
+     * POST /api/auth/google
+     */
+    @PostMapping("/google")
+    public ResponseEntity<Object> googleLogin(@RequestBody GoogleLoginRequest request) {
+        try {
+            AuthResponse response = authService.loginWithGoogle(request);
             return ResponseEntity.ok(response);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)

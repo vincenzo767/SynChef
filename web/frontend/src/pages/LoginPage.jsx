@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -7,6 +7,28 @@ import { setAuthResponse, setLoading, setError } from "../store/authSlice";
 import authAPI from "../services/authAPI";
 import "./LoginPage.css";
 
+const waitForGoogleIdentity = (timeoutMs = 5000) =>
+  new Promise((resolve, reject) => {
+    if (globalThis.google?.accounts?.id) {
+      resolve(globalThis.google);
+      return;
+    }
+
+    const startedAt = Date.now();
+    const intervalId = setInterval(() => {
+      if (globalThis.google?.accounts?.id) {
+        clearInterval(intervalId);
+        resolve(globalThis.google);
+        return;
+      }
+
+      if (Date.now() - startedAt >= timeoutMs) {
+        clearInterval(intervalId);
+        reject(new Error("Google script unavailable"));
+      }
+    }, 100);
+  });
+
 const LoginPage = () => {
   const [emailOrUsername, setEmailOrUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -14,9 +36,11 @@ const LoginPage = () => {
   const [rememberMe, setRememberMe] = useState(false);
   const [localError, setLocalError] = useState("");
   const [localInfo, setLocalInfo] = useState("");
+  const googleButtonRef = useRef(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { isAuthenticated, isLoading, user } = useSelector((state) => state.auth);
+  const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 
   useEffect(() => {
     const rememberedEmail = localStorage.getItem("rememberedLoginEmail");
@@ -32,6 +56,51 @@ const LoginPage = () => {
       navigate(destination, { replace: true });
     }
   }, [isAuthenticated, navigate, user]);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const renderGoogleButton = async () => {
+      if (!googleClientId || !googleButtonRef.current) {
+        return;
+      }
+
+      try {
+        await waitForGoogleIdentity();
+        if (cancelled || !googleButtonRef.current) {
+          return;
+        }
+
+        globalThis.google.accounts.id.initialize({
+          client_id: googleClientId,
+          callback: handleGoogleCredential,
+        });
+
+        globalThis.google.accounts.id.renderButton(googleButtonRef.current, {
+          type: "standard",
+          theme: "outline",
+          size: "large",
+          shape: "rectangular",
+          text: "signin_with",
+          width: 160,
+          locale: "en"
+        });
+      } catch {
+        if (!cancelled) {
+          setLocalInfo("Google sign-in is taking longer than usual. Please refresh and try again.");
+        }
+      }
+    };
+
+    renderGoogleButton();
+
+    return () => {
+      cancelled = true;
+      if (googleButtonRef.current) {
+        googleButtonRef.current.innerHTML = "";
+      }
+    };
+  }, [googleClientId]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -77,6 +146,47 @@ const LoginPage = () => {
   const handleForgotPassword = () => {
     setLocalError("");
     setLocalInfo("Forgot password is not available yet. Please contact support.");
+  };
+
+  const handleGoogleCredential = async (credentialResponse) => {
+    if (!credentialResponse?.credential) {
+      setLocalError("Google did not return a valid credential.");
+      return;
+    }
+
+    dispatch(setLoading(true));
+    setLocalError("");
+    setLocalInfo("");
+
+    try {
+      const response = await authAPI.googleLogin({ idToken: credentialResponse.credential });
+      const role = response.data.role || "USER";
+      dispatch(setAuthResponse({
+        token: response.data.token,
+        user: {
+          id: response.data.id,
+          email: response.data.email,
+          username: response.data.username,
+          fullName: response.data.fullName,
+          profileImageUrl: response.data.profileImageUrl,
+          emailVerified: response.data.emailVerified,
+          countryCode: response.data.countryCode || null,
+          countryName: response.data.countryName || null,
+          role,
+          favoriteRecipeIds: response.data.favoriteRecipeIds || []
+        }
+      }));
+      navigate(role === "ADMIN" ? "/admin/dashboard" : "/dashboard");
+    } catch (err) {
+      const message = err.response?.data?.message
+        || (err.request
+          ? "Cannot reach backend API. Start backend server on http://localhost:8080."
+          : "Google login failed. Please try again.");
+      setLocalError(message);
+      dispatch(setError(message));
+    } finally {
+      dispatch(setLoading(false));
+    }
   };
 
   const handleSocialLoginClick = (provider) => {
@@ -178,15 +288,7 @@ const LoginPage = () => {
           </div>
 
           <div className="social-login-grid">
-            <button type="button" className="social-btn" onClick={() => handleSocialLoginClick("Google")}>
-              <svg className="social-icon" viewBox="0 0 24 24" aria-hidden="true">
-                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a6.99 6.99 0 0 1-2.21 3.31v2.77h3.57a11.95 11.95 0 0 0 3.28-8.09z" />
-                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77a6.56 6.56 0 0 1-3.71 1.06c-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11.99 11.99 0 0 0 12 23z" />
-                <path fill="#FBBC05" d="M5.84 14.09a7.03 7.03 0 0 1 0-4.18V7.07H2.18A11.99 11.99 0 0 0 1 12c0 1.78.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
-                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15A11.95 11.95 0 0 0 12 1 11.99 11.99 0 0 0 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
-              </svg>
-              <span>Google</span>
-            </button>
+            <div className="google-button-shell" ref={googleButtonRef} aria-label="Google sign-in button" />
             <button type="button" className="social-btn" onClick={() => handleSocialLoginClick("Facebook")}>
               <svg className="social-icon" fill="#1877F2" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M24 12.073C24 5.446 18.627.073 12 .073S0 5.446 0 12.073c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />

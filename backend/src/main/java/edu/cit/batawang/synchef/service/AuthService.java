@@ -1,6 +1,11 @@
 package edu.cit.batawang.synchef.service;
 
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
+import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
+import com.google.api.client.json.gson.GsonFactory;
 import edu.cit.batawang.synchef.dto.AuthResponse;
+import edu.cit.batawang.synchef.dto.GoogleLoginRequest;
 import edu.cit.batawang.synchef.dto.LoginRequest;
 import edu.cit.batawang.synchef.dto.RegisterRequest;
 import edu.cit.batawang.synchef.model.User;
@@ -8,10 +13,15 @@ import edu.cit.batawang.synchef.repository.UserRepository;
 import edu.cit.batawang.synchef.security.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.security.GeneralSecurityException;
+import java.util.Collections;
+import java.util.Locale;
 import java.util.Optional;
 
 /**
@@ -27,6 +37,9 @@ public class AuthService {
     private final NotificationService notificationService;
     private final AdminService adminService;
     private static final PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
+
+    @Value("${app.google.client-id:}")
+    private String googleClientId;
     
     /**
      * Register a new user
@@ -128,6 +141,34 @@ public class AuthService {
         
         return buildAuthResponse(user);
     }
+
+    /**
+     * Login or register user with Google Sign-In ID token.
+     */
+    public AuthResponse loginWithGoogle(GoogleLoginRequest request) {
+        GoogleIdToken.Payload payload = verifyGoogleToken(request);
+        String email = normalize(payload.getEmail());
+        if (isBlank(email)) {
+            throw new IllegalArgumentException("Google account does not provide an email");
+        }
+        if (!Boolean.TRUE.equals(payload.getEmailVerified())) {
+            throw new IllegalArgumentException("Google email is not verified");
+        }
+
+        String fullName = extractGoogleName(payload, email);
+        String profileImageUrl = normalize((String) payload.get("picture"));
+
+        Optional<User> existing = userRepository.findByEmail(email);
+        User user;
+        if (existing.isPresent()) {
+            user = updateExistingGoogleUser(existing.get(), fullName, profileImageUrl);
+        } else {
+            user = createGoogleUser(email, fullName, profileImageUrl);
+        }
+
+        log.info("User logged in with Google: {}", user.getEmail());
+        return buildAuthResponse(user);
+    }
     
     /**
      * Build AuthResponse from User entity
@@ -161,6 +202,104 @@ public class AuthService {
 
     private boolean isBlank(String value) {
         return value == null || value.trim().isEmpty();
+    }
+
+    private GoogleIdToken.Payload verifyGoogleToken(GoogleLoginRequest request) {
+        if (isBlank(googleClientId)) {
+            throw new IllegalArgumentException("Google login is not configured on the server");
+        }
+
+        if (request == null || isBlank(request.getIdToken())) {
+            throw new IllegalArgumentException("Google token is required");
+        }
+
+        try {
+            GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(
+                    GoogleNetHttpTransport.newTrustedTransport(),
+                        GsonFactory.getDefaultInstance()
+            )
+                    .setAudience(Collections.singletonList(googleClientId))
+                    .build();
+
+            GoogleIdToken idToken = verifier.verify(request.getIdToken());
+            if (idToken == null) {
+                throw new IllegalArgumentException("Invalid Google token");
+            }
+
+            return idToken.getPayload();
+        } catch (GeneralSecurityException | IOException e) {
+            log.error("Failed to verify Google ID token", e);
+            throw new IllegalArgumentException("Unable to validate Google token");
+        }
+    }
+
+    private String generateUniqueUsername(String email, String fullName) {
+        String source = !isBlank(fullName) ? fullName : email.substring(0, email.indexOf('@'));
+        String base = source
+                .toLowerCase(Locale.ROOT)
+                .replaceAll("[^a-z0-9]+", "_")
+            .replaceAll("(^_+)|(_+$)", "");
+
+        if (isBlank(base)) {
+            base = "user";
+        }
+
+        String candidate = base;
+        int suffix = 1;
+        while (userRepository.findByUsername(candidate).isPresent()) {
+            candidate = base + suffix;
+            suffix++;
+        }
+
+        return candidate;
+    }
+
+    private User updateExistingGoogleUser(User user, String fullName, String profileImageUrl) {
+        if (!Boolean.TRUE.equals(user.getActive())) {
+            throw new IllegalArgumentException("Account is inactive");
+        }
+
+        boolean changed = false;
+        if (!Boolean.TRUE.equals(user.getEmailVerified())) {
+            user.setEmailVerified(true);
+            changed = true;
+        }
+
+        if (!isBlank(fullName) && isBlank(user.getFullName())) {
+            user.setFullName(fullName);
+            changed = true;
+        }
+
+        if (!isBlank(profileImageUrl) && isBlank(user.getProfileImageUrl())) {
+            user.setProfileImageUrl(profileImageUrl);
+            changed = true;
+        }
+
+        return changed ? userRepository.save(user) : user;
+    }
+
+    private User createGoogleUser(String email, String fullName, String profileImageUrl) {
+        User user = new User();
+        user.setEmail(email);
+        user.setUsername(generateUniqueUsername(email, fullName));
+        user.setPassword(null);
+        user.setFullName(fullName);
+        user.setProfileImageUrl(profileImageUrl);
+        user.setEmailVerified(true);
+        user.setActive(true);
+
+        user = userRepository.save(user);
+        notificationService.createWelcomeNotifications(user);
+        adminService.broadcastStats();
+        return user;
+    }
+
+    private String extractGoogleName(GoogleIdToken.Payload payload, String email) {
+        String fullName = normalize((String) payload.get("name"));
+        if (!isBlank(fullName)) {
+            return fullName;
+        }
+        return email.substring(0, email.indexOf('@'));
     }
 
 }
