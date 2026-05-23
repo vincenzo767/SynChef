@@ -1,9 +1,13 @@
 .flavor-map-page {
   padding: 40px 20px;
+  /* Base linear gradient matching the homepage, with subtle radial accents
+     so the Flavor Map feels consistent with the home hero while keeping
+     the globe card contrast readable. */
   background:
-    radial-gradient(circle at 20% 10%, rgba(14, 165, 233, 0.18), transparent 34%),
-    radial-gradient(circle at 80% 0%, rgba(236, 72, 153, 0.12), transparent 36%),
-    linear-gradient(150deg, rgba(15, 23, 42, 0.06), rgba(148, 163, 184, 0.12));
+    linear-gradient(160deg, #0C0C0C 0%, #06041A 50%, #351000 100%),
+    radial-gradient(circle at 20% 10%, rgba(99, 102, 241, 0.14), transparent 34%),
+    radial-gradient(circle at 80% 0%, rgba(126, 34, 206, 0.10), transparent 36%);
+  color: #ffffff;
   min-height: calc(100vh - 80px);
 }
 
@@ -11,7 +15,7 @@
   text-align: center;
   font-size: 36px;
   margin: 0 0 30px 0;
-  color: #333;
+  color: #F5C842;
   font-weight: 700;
 }
 
@@ -255,7 +259,7 @@
   margin: 0;
   font-size: 18px;
   font-weight: 700;
-  color: #1e293b;
+  color: #F5C842;
 }
 
 .country-finder-subtitle {
@@ -345,7 +349,7 @@
   gap: 12px;
   margin: 0 0 20px 0;
   font-size: 20px;
-  color: #333;
+  color: #F5C842;
 }
 
 .countries-toolbar {
