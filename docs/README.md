@@ -1,10 +1,10 @@
-# SynChef - AI-Powered Real-Time Global Cooking Assistant
+# SynChef - Collaborative Real-Time Global Cooking Platform
 
 ![SynChef](https://img.shields.io/badge/Status-In%20Development-yellow)
 ![Stack](https://img.shields.io/badge/Stack-Full--Stack-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
-SynChef is a revolutionary cooking application that transforms the home cooking experience with real-time execution, AI-powered assistance, and global gastronomy exploration.
+SynChef is a revolutionary cooking application that transforms the home cooking experience with real-time execution, peer-to-peer collaboration, and global gastronomy exploration.
 
 ## 🌟 Key Features
 
