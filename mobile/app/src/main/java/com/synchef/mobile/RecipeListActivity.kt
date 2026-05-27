@@ -21,6 +21,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class RecipeListActivity : Activity() {
 
@@ -94,9 +95,13 @@ class RecipeListActivity : Activity() {
         swipeRefresh.isRefreshing = false
 
         uiScope.launch {
-            val result = repository.getAllRecipes()
+            val result = withContext(Dispatchers.IO) {
+                repository.getAllRecipes()
+            }
             result.onSuccess { recipes ->
-                allRecipes = repository.getMergedRecipesWithWebFallback(recipes)
+                allRecipes = withContext(Dispatchers.Default) {
+                    repository.getMergedRecipesWithWebFallback(recipes)
+                }
                 val filtered = allRecipes.filter { recipe ->
                     val regionOk = regionFilter == null || recipe.country?.continent?.equals(regionFilter, ignoreCase = true) == true
                     val countryOk = countryCodeFilter == null || recipe.country?.code?.equals(countryCodeFilter, ignoreCase = true) == true
@@ -110,7 +115,9 @@ class RecipeListActivity : Activity() {
                 }
                 adapter.updateRecipes(filtered)
             }.onFailure { err ->
-                allRecipes = repository.getMergedRecipesWithWebFallback(emptyList())
+                allRecipes = withContext(Dispatchers.Default) {
+                    repository.getMergedRecipesWithWebFallback(emptyList())
+                }
                 val filtered = allRecipes.filter { recipe ->
                     val regionOk = regionFilter == null || recipe.country?.continent?.equals(regionFilter, ignoreCase = true) == true
                     val countryOk = countryCodeFilter == null || recipe.country?.code?.equals(countryCodeFilter, ignoreCase = true) == true
@@ -143,13 +150,15 @@ class RecipeListActivity : Activity() {
         tvStatus.text = "Searching..."
 
         uiScope.launch {
-            val local = allRecipes.filter { r ->
-                val regionOk = regionFilter == null || r.country?.continent?.equals(regionFilter, ignoreCase = true) == true
-                val countryOk = countryCodeFilter == null || r.country?.code?.equals(countryCodeFilter, ignoreCase = true) == true
-                val keywordOk = r.name.contains(keyword, ignoreCase = true) ||
-                    r.country?.name?.contains(keyword, ignoreCase = true) == true ||
-                    r.categories?.any { c -> c.name?.contains(keyword, ignoreCase = true) == true } == true
-                regionOk && countryOk && keywordOk
+            val local = withContext(Dispatchers.Default) {
+                allRecipes.filter { r ->
+                    val regionOk = regionFilter == null || r.country?.continent?.equals(regionFilter, ignoreCase = true) == true
+                    val countryOk = countryCodeFilter == null || r.country?.code?.equals(countryCodeFilter, ignoreCase = true) == true
+                    val keywordOk = r.name.contains(keyword, ignoreCase = true) ||
+                        r.country?.name?.contains(keyword, ignoreCase = true) == true ||
+                        r.categories?.any { c -> c.name?.contains(keyword, ignoreCase = true) == true } == true
+                    regionOk && countryOk && keywordOk
+                }
             }
 
             if (local.isEmpty()) {

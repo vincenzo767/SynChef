@@ -20,6 +20,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.withContext
 
 class DashboardActivity : Activity() {
 
@@ -107,22 +109,24 @@ class DashboardActivity : Activity() {
     private fun refreshUserDataFromBackend() {
         android.util.Log.d("DashboardActivity", "refreshUserDataFromBackend() called")
         uiScope.launch {
-            // Fetch fresh user profile (loads country, usernames, etc.)
-            repository.getUserProfile().onSuccess { profile ->
-                android.util.Log.d("DashboardActivity", "Profile refreshed: ${profile.email}")
-                sessionManager.updateUserProfile(profile)
-            }.onFailure { err ->
-                android.util.Log.e("DashboardActivity", "Failed to refresh user profile: ${err.message}")
-            }
-
-            // Fetch fresh favorites list from backend
-            repository.getFavorites().onSuccess { favoriteIds ->
-                android.util.Log.d("DashboardActivity", "Favorites refreshed: $favoriteIds")
-                sessionManager.updateUser {
-                    it.copy(favoriteRecipeIds = favoriteIds)
+            withContext(Dispatchers.IO) {
+                // Fetch fresh user profile (loads country, usernames, etc.)
+                repository.getUserProfile().onSuccess { profile ->
+                    android.util.Log.d("DashboardActivity", "Profile refreshed: ${profile.email}")
+                    sessionManager.updateUserProfile(profile)
+                }.onFailure { err ->
+                    android.util.Log.e("DashboardActivity", "Failed to refresh user profile: ${err.message}")
                 }
-            }.onFailure { err ->
-                android.util.Log.e("DashboardActivity", "Failed to refresh favorites: ${err.message}")
+
+                // Fetch fresh favorites list from backend
+                repository.getFavorites().onSuccess { favoriteIds ->
+                    android.util.Log.d("DashboardActivity", "Favorites refreshed: $favoriteIds")
+                    sessionManager.updateUser {
+                        it.copy(favoriteRecipeIds = favoriteIds)
+                    }
+                }.onFailure { err ->
+                    android.util.Log.e("DashboardActivity", "Failed to refresh favorites: ${err.message}")
+                }
             }
         }
     }
@@ -154,12 +158,14 @@ class DashboardActivity : Activity() {
 
         android.util.Log.d("DashboardActivity", "Starting polling every 3 seconds")
         // Start new polling job
-        pollJob = uiScope.launch {
-            while (true) {
+        pollJob = uiScope.launch(Dispatchers.IO) {
+            while (isActive) {
                 delay(3000)
                 android.util.Log.d("DashboardActivity", "Polling tick at ${System.currentTimeMillis()}")
                 refreshUserDataFromBackend()
-                refreshNotificationBadge()
+                withContext(Dispatchers.Main) {
+                    refreshNotificationBadge()
+                }
             }
         }
     }
@@ -177,12 +183,18 @@ class DashboardActivity : Activity() {
         tvStatus.text = "Loading recipes..."
 
         uiScope.launch {
-            val result = repository.getAllRecipes()
+            val result = withContext(Dispatchers.IO) {
+                repository.getAllRecipes()
+            }
             result.onSuccess { recipes ->
-                allRecipes = repository.getMergedRecipesWithWebFallback(recipes)
+                allRecipes = withContext(Dispatchers.Default) {
+                    repository.getMergedRecipesWithWebFallback(recipes)
+                }
                 applyFiltersAndRender()
             }.onFailure { err ->
-                allRecipes = repository.getMergedRecipesWithWebFallback(emptyList())
+                allRecipes = withContext(Dispatchers.Default) {
+                    repository.getMergedRecipesWithWebFallback(emptyList())
+                }
                 if (allRecipes.isEmpty()) {
                     tvStatus.text = "Could not load recipes: ${err.message}"
                     tvStatus.visibility = View.VISIBLE
@@ -257,7 +269,10 @@ class DashboardActivity : Activity() {
     private fun refreshNotificationBadge() {
         val badge = findViewById<TextView>(R.id.tvNotificationBadge)
         uiScope.launch {
-            repository.getUnreadNotificationCount()
+            val result = withContext(Dispatchers.IO) {
+                repository.getUnreadNotificationCount()
+            }
+            result
                 .onSuccess { unreadCount ->
                     if (unreadCount > 0) {
                         badge.visibility = View.VISIBLE

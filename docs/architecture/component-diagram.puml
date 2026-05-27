@@ -1,99 +1,99 @@
 @startuml
 skinparam componentStyle rectangle
 
-' SynChef Component Diagram - System Architecture (PlantUML)
-' Generated to reflect current workspace: Java Spring Boot backend, Vite/React frontend, Android mobile, Docker, PostgreSQL
+' SynChef Component Diagram - current implementation
+' React/Vite web client, Kotlin Android client, Spring Boot backend, PostgreSQL, WebSocket sync, local uploads, and external country/auth services
 
 package "Clients" {
-  component "Web Frontend\n(Vite / React)" as Web
-  component "Android Mobile App\n(Android 7+)" as Mobile
+  component "Web Frontend\n(React / Vite)" as Web
+  component "Android Mobile App\n(Kotlin / XML)" as Mobile
 }
 
-package "Edge / Network" {
-  component "Reverse Proxy / Static Server\n(Nginx / Vite dev)" as Proxy
+package "Web Frontend Runtime" {
+  component "Local Recipe Dataset\n(ALL_RECIPES)" as LocalRecipes
+  component "REST Client Layer\n(api/index.js + apiClient)" as FrontendApi
+  component "Auth / UI State\n(Redux slices)" as FrontendState
 }
 
-package "Backend Services (Spring Boot)" {
-  component "API Controller Layer\n(REST Controllers)" as API
-  component "Auth Service\n(JWT, Password Hashing)" as Auth
-  component "Recipe Service\n(Recipe CRUD, Search)" as Recipe
-  component "Timer Engine\n(Parallel Timer Orchestration)" as Timer
-  component "Scaling Service\n(Ingredient & Time Scaling)" as Scale
-  component "Substitution Service\n(Rule-based MVP)" as Subst
-  component "Focus Mode Controller\n(Progression + UI Sync)" as Focus
-  component "Notification Service\n(WebSocket / Push)" as Notify
-  component "Scheduler / Worker\n(Background jobs)" as Worker
-  component "Persistence Layer\n(JPA Repositories)" as Repo
+package "Backend API (Spring Boot)" {
+  component "Security + Auth\n(SecurityConfig, JwtTokenProvider, AuthService)" as Auth
+  component "Recipe API\n(RecipeController, RecipeScalingService, TimerOrchestrationService)" as Recipe
+  component "Country API\n(CountryController)" as Country
+  component "User API\n(UserController, ProfileImageStorageService, NotificationService)" as User
+  component "SynCook Community\n(SynCookController)" as SynCook
+  component "AI Assistant API\n(AIController, AIAssistantService)" as AI
+  component "Report + Admin API\n(RecipeReportController, AdminController, AdminService)" as Admin
+  component "Timer Sync\n(TimerWebSocketController, WebSocketConfig)" as TimerWS
+  component "JPA Persistence Layer\n(Repositories / Entities)" as Repo
+  component "Static Upload Mapping\n(WebConfig / uploads)" as Uploads
 }
 
 database "PostgreSQL" as DB
 
-cloud "Container Platform\n(Docker / Docker Compose / K8s)" as Docker
+cloud "External Services" {
+  component "REST Countries API" as RestCountries
+  component "Google OAuth / Identity" as Google
+}
 
-' Client interactions
-Web --> Proxy : HTTP/HTTPS (static + API)
-Mobile --> API : HTTPS (mobile client)
-Proxy --> API : HTTPS / REST
+cloud "Local Storage" {
+  component "Profile Image Files\n/uploads" as FileStore
+}
 
-' API responsibilities and internal flows
-API --> Auth : Authenticate / validate JWT
-API --> Recipe : CRUD / search endpoints
-API --> Timer : Start / stop / query timers
-API --> Scale : Request scaled ingredients & durations
-API --> Subst : Query substitutions
-API --> Focus : Enter/exit Focus Mode
+' Client-to-client and frontend-to-external flows
+Web --> FrontendApi : HTTP/HTTPS requests
+Web --> LocalRecipes : instant local recipe browsing
+Web --> RestCountries : country metadata for Flavor Map
+Mobile --> FrontendApi : Retrofit / HTTP
 
-' Services to persistence
-Auth --> Repo : users, sessions
-Recipe --> Repo : recipes, steps, ingredients, countries
-Subst --> Repo : substitution mappings
-Timer --> Repo : timer states, logs
-Focus --> Repo : user progress
-Worker --> Repo : background job records
+FrontendApi --> Auth : /api/auth/*
+FrontendApi --> Recipe : /api/recipes/*
+FrontendApi --> Country : /api/countries/*
+FrontendApi --> User : /api/users/me/*
+FrontendApi --> SynCook : /api/syncook/*
+FrontendApi --> AI : /api/ai/*
+FrontendApi --> Admin : /api/admin/*, /api/reports
 
-' Persistence to DB
-Repo --> DB : SQL (Postgres)
+' Backend internal flow
+Auth --> Google : verify Google login token
+Auth --> Repo : users, roles, sessions
+Recipe --> Repo : recipes, ingredients, steps, countries
+Country --> Repo : countries, traditional ingredients
+User --> Repo : profile, favorites, notifications
+SynCook --> Repo : shared recipes, comments
+AI --> Repo : recipe and ingredient context
+Admin --> Repo : stats, moderation, analytics
+TimerWS --> Repo : timer session events
+Recipe --> TimerWS : timer-sequence sync
+SynCook --> User : comment notifications
+Admin --> User : report / moderation notifications
 
-' Timer / notification loop
-Timer --> Worker : schedule overlapping steps
-Worker --> Notify : emit timer events
-Notify --> Web : WebSocket / SSE
-Notify --> Mobile : Push / FCM
+' Persistence and storage
+Repo --> DB : JPA / SQL
+User --> Uploads : profile image upload path
+Uploads --> FileStore : stored files served as static resources
 
-' Scaling and substitution linkage
-Scale --> Recipe : uses recipe step metadata
-Subst --> Recipe : ingredient metadata
+' Real-time timer updates
+TimerWS --> Web : STOMP / WebSocket updates
+TimerWS --> Mobile : STOMP / WebSocket updates
 
-' Containerization
-Docker ..> API : container image
-Docker ..> Web : container image
-Docker ..> Worker : container image
-Docker ..> DB : managed service / container
-
-' Optional components (extendable)
-component "Cache (Redis)" as Cache <<optional>>
-API --> Cache : read/write caching
-Timer --> Cache : shared state for timers
-
-note right of API
-  Exposed REST endpoints (examples):
-  - POST /api/auth/login
-  - GET /api/recipes
-  - POST /api/recipes/scale
-  - GET /api/recipes/{id}/steps
-  - POST /api/timers/start
+note right of FrontendApi
+  Proof of implementation in the web app:
+  - Login/register and JWT refresh
+  - Recipe browsing, scaling, and cooking mode
+  - SynCook dashboard, reports, admin screens
+  - Profile, favorites, notifications
 end note
 
-note left of Timer
-  Timer Engine responsibilities:
-  - Accept recipe timer-sequence
-  - Schedule parallel timers
-  - Resolve overlaps and notify clients
+note left of Recipe
+  The recipe flow is layered:
+  controller -> service -> repository -> PostgreSQL
+  with timer sequences and scaled servings returned to the UI.
 end note
 
 note bottom of DB
-  PostgreSQL stores canonical recipe data,
-  substitution mappings, user profiles, saved recipes.
+  PostgreSQL stores the canonical backend data:
+  users, recipes, countries, SynCook posts, comments, reports,
+  favorites, and notifications.
 end note
 
 @enduml
