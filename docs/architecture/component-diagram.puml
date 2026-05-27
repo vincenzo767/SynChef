@@ -1,0 +1,99 @@
+@startuml
+skinparam componentStyle rectangle
+
+' SynChef Component Diagram - System Architecture (PlantUML)
+' Generated to reflect current workspace: Java Spring Boot backend, Vite/React frontend, Android mobile, Docker, PostgreSQL
+
+package "Clients" {
+  component "Web Frontend\n(Vite / React)" as Web
+  component "Android Mobile App\n(Android 7+)" as Mobile
+}
+
+package "Edge / Network" {
+  component "Reverse Proxy / Static Server\n(Nginx / Vite dev)" as Proxy
+}
+
+package "Backend Services (Spring Boot)" {
+  component "API Controller Layer\n(REST Controllers)" as API
+  component "Auth Service\n(JWT, Password Hashing)" as Auth
+  component "Recipe Service\n(Recipe CRUD, Search)" as Recipe
+  component "Timer Engine\n(Parallel Timer Orchestration)" as Timer
+  component "Scaling Service\n(Ingredient & Time Scaling)" as Scale
+  component "Substitution Service\n(Rule-based MVP)" as Subst
+  component "Focus Mode Controller\n(Progression + UI Sync)" as Focus
+  component "Notification Service\n(WebSocket / Push)" as Notify
+  component "Scheduler / Worker\n(Background jobs)" as Worker
+  component "Persistence Layer\n(JPA Repositories)" as Repo
+}
+
+database "PostgreSQL" as DB
+
+cloud "Container Platform\n(Docker / Docker Compose / K8s)" as Docker
+
+' Client interactions
+Web --> Proxy : HTTP/HTTPS (static + API)
+Mobile --> API : HTTPS (mobile client)
+Proxy --> API : HTTPS / REST
+
+' API responsibilities and internal flows
+API --> Auth : Authenticate / validate JWT
+API --> Recipe : CRUD / search endpoints
+API --> Timer : Start / stop / query timers
+API --> Scale : Request scaled ingredients & durations
+API --> Subst : Query substitutions
+API --> Focus : Enter/exit Focus Mode
+
+' Services to persistence
+Auth --> Repo : users, sessions
+Recipe --> Repo : recipes, steps, ingredients, countries
+Subst --> Repo : substitution mappings
+Timer --> Repo : timer states, logs
+Focus --> Repo : user progress
+Worker --> Repo : background job records
+
+' Persistence to DB
+Repo --> DB : SQL (Postgres)
+
+' Timer / notification loop
+Timer --> Worker : schedule overlapping steps
+Worker --> Notify : emit timer events
+Notify --> Web : WebSocket / SSE
+Notify --> Mobile : Push / FCM
+
+' Scaling and substitution linkage
+Scale --> Recipe : uses recipe step metadata
+Subst --> Recipe : ingredient metadata
+
+' Containerization
+Docker ..> API : container image
+Docker ..> Web : container image
+Docker ..> Worker : container image
+Docker ..> DB : managed service / container
+
+' Optional components (extendable)
+component "Cache (Redis)" as Cache <<optional>>
+API --> Cache : read/write caching
+Timer --> Cache : shared state for timers
+
+note right of API
+  Exposed REST endpoints (examples):
+  - POST /api/auth/login
+  - GET /api/recipes
+  - POST /api/recipes/scale
+  - GET /api/recipes/{id}/steps
+  - POST /api/timers/start
+end note
+
+note left of Timer
+  Timer Engine responsibilities:
+  - Accept recipe timer-sequence
+  - Schedule parallel timers
+  - Resolve overlaps and notify clients
+end note
+
+note bottom of DB
+  PostgreSQL stores canonical recipe data,
+  substitution mappings, user profiles, saved recipes.
+end note
+
+@enduml
