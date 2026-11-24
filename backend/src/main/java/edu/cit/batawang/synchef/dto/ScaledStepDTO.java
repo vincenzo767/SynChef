@@ -18,4 +18,5 @@ public class ScaledStepDTO {
     private Boolean isParallel;
     private Integer parallelGroup;
     private String tips;
+    private String temperature;
 }

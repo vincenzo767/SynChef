@@ -28,7 +28,7 @@ public class TimerOrchestrationService {
     @Transactional(readOnly = true)
     public TimerOrchestrationDTO orchestrateTimers(Long recipeId) {
         Recipe recipe = recipeRepository.findById(recipeId)
-            .orElseThrow(() -> new RuntimeException("Recipe not found with id: " + recipeId));
+            .orElseThrow(() -> edu.cit.batawang.synchef.exception.ApiException.notFound("Recipe not found"));
         
         List<Step> timerSteps = stepRepository.findTimerStepsByRecipeId(recipeId);
         

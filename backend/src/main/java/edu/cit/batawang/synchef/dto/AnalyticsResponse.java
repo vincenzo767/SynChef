@@ -10,4 +10,5 @@ public class AnalyticsResponse {
     private long platformRecipes;
     private List<Map<String, Object>> userRegistrationsLast30Days;
     private List<Map<String, Object>> reportsLast30Days;
+    private List<Map<String, Object>> cookingSessionsLast30Days;
 }

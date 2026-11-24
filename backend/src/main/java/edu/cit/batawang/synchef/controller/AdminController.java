@@ -1,70 +1,72 @@
 package edu.cit.batawang.synchef.controller;
 
-import edu.cit.batawang.synchef.dto.*;
+import edu.cit.batawang.synchef.dto.AdminStatsResponse;
+import edu.cit.batawang.synchef.dto.AdminUserResponse;
+import edu.cit.batawang.synchef.dto.AnalyticsResponse;
+import edu.cit.batawang.synchef.dto.ModerationCommentResponse;
+import edu.cit.batawang.synchef.security.AuthenticatedUser;
 import edu.cit.batawang.synchef.service.AdminService;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
+/**
+ * Administration API — every route requires ROLE_ADMIN (SecurityConfig).
+ */
 @RestController
+@RequestMapping("/api/admin")
 @RequiredArgsConstructor
-@CrossOrigin(originPatterns = {"http://localhost:*", "http://127.0.0.1:*"})
 public class AdminController {
 
     private final AdminService adminService;
 
-    /** GET /api/admin/stats — live dashboard counts */
-    @GetMapping("/api/admin/stats")
-    public ResponseEntity<AdminStatsResponse> getStats() {
-        return ResponseEntity.ok(adminService.computeStats());
+    public record RoleRequest(@NotBlank @Pattern(regexp = "^(USER|ADMIN)$", message = "Role must be USER or ADMIN") String role) {
     }
 
-    /** GET /api/admin/analytics — full analytics payload */
-    @GetMapping("/api/admin/analytics")
-    public ResponseEntity<AnalyticsResponse> getAnalytics() {
-        return ResponseEntity.ok(adminService.getAnalytics());
+    @GetMapping("/stats")
+    public AdminStatsResponse getStats() {
+        return adminService.computeStats();
     }
 
-    /** GET /api/admin/users — list all users */
-    @GetMapping("/api/admin/users")
-    public ResponseEntity<List<AdminUserResponse>> getAllUsers() {
-        return ResponseEntity.ok(adminService.getAllUsers());
+    @GetMapping("/analytics")
+    public AnalyticsResponse getAnalytics() {
+        return adminService.getAnalytics();
     }
 
-    /** PATCH /api/admin/users/{id}/status — toggle active / banned */
-    @PatchMapping("/api/admin/users/{id}/status")
-    public ResponseEntity<AdminUserResponse> toggleStatus(@PathVariable Long id) {
-        return ResponseEntity.ok(adminService.toggleUserStatus(id));
+    @GetMapping("/users")
+    public List<AdminUserResponse> getAllUsers() {
+        return adminService.getAllUsers();
     }
 
-    /** PATCH /api/admin/users/{id}/role — change role (USER | ADMIN) */
-    @PatchMapping("/api/admin/users/{id}/role")
-    public ResponseEntity<AdminUserResponse> changeRole(
-            @PathVariable Long id,
-            @RequestBody Map<String, String> body) {
-        String role = body.get("role");
-        if (role == null) return ResponseEntity.badRequest().build();
-        return ResponseEntity.ok(adminService.changeUserRole(id, role));
+    @PatchMapping("/users/{id}/status")
+    public AdminUserResponse toggleStatus(@AuthenticationPrincipal AuthenticatedUser admin, @PathVariable Long id) {
+        return adminService.toggleUserStatus(admin.id(), id);
     }
 
-    /** DELETE /api/admin/users/{id} — permanently delete a user */
-    @DeleteMapping("/api/admin/users/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
-        adminService.deleteUser(id);
+    @PatchMapping("/users/{id}/role")
+    public AdminUserResponse changeRole(@AuthenticationPrincipal AuthenticatedUser admin, @PathVariable Long id,
+                                        @Valid @RequestBody RoleRequest body) {
+        return adminService.changeUserRole(admin.id(), id, body.role());
+    }
+
+    @DeleteMapping("/users/{id}")
+    public ResponseEntity<Void> deleteUser(@AuthenticationPrincipal AuthenticatedUser admin, @PathVariable Long id) {
+        adminService.deleteUser(admin.id(), id);
         return ResponseEntity.noContent().build();
     }
 
-    /** GET /api/admin/comments — list all comments for moderation */
-    @GetMapping("/api/admin/comments")
-    public ResponseEntity<List<ModerationCommentResponse>> getAllComments() {
-        return ResponseEntity.ok(adminService.getAllComments());
+    @GetMapping("/comments")
+    public List<ModerationCommentResponse> getAllComments() {
+        return adminService.getAllComments();
     }
 
-    /** DELETE /api/admin/comments/{id} — remove a comment */
-    @DeleteMapping("/api/admin/comments/{id}")
+    @DeleteMapping("/comments/{id}")
     public ResponseEntity<Void> deleteComment(@PathVariable Long id) {
         adminService.deleteComment(id);
         return ResponseEntity.noContent().build();

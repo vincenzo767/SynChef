@@ -1,295 +1,90 @@
 package edu.cit.batawang.synchef.controller;
 
-import edu.cit.batawang.synchef.dto.SynCookCommentRequest;
 import edu.cit.batawang.synchef.dto.SynCookCommentResponse;
-import edu.cit.batawang.synchef.dto.SynCookRecipeRequest;
+import edu.cit.batawang.synchef.dto.SynCookDtos.CommentRequest;
+import edu.cit.batawang.synchef.dto.SynCookDtos.ImageUploadResponse;
+import edu.cit.batawang.synchef.dto.SynCookDtos.SynCookRecipeRequest;
 import edu.cit.batawang.synchef.dto.SynCookRecipeResponse;
-import edu.cit.batawang.synchef.model.SynCookComment;
-import edu.cit.batawang.synchef.model.SynCookRecipe;
-import edu.cit.batawang.synchef.model.User;
-import edu.cit.batawang.synchef.repository.SynCookCommentRepository;
-import edu.cit.batawang.synchef.repository.SynCookRecipeRepository;
-import edu.cit.batawang.synchef.repository.UserRepository;
-import edu.cit.batawang.synchef.service.NotificationService;
+import edu.cit.batawang.synchef.security.AuthenticatedUser;
+import edu.cit.batawang.synchef.security.RateLimiter;
+import edu.cit.batawang.synchef.service.SynCookService;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Size;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
-import java.util.stream.Collectors;
 
+/**
+ * Community dishes. Ownership and privacy are enforced in {@link SynCookService}.
+ */
 @RestController
 @RequestMapping("/api/syncook")
 @RequiredArgsConstructor
-@CrossOrigin(originPatterns = {"http://localhost:*", "http://127.0.0.1:*"})
+@Validated
 public class SynCookController {
 
-    private final SynCookRecipeRepository recipeRepository;
-    private final SynCookCommentRepository commentRepository;
-    private final UserRepository userRepository;
-    private final NotificationService notificationService;
+    private final SynCookService synCookService;
+    private final RateLimiter rateLimiter;
 
     @GetMapping("/public")
-    public ResponseEntity<List<SynCookRecipeResponse>> getPublicRecipes() {
-        User user = getCurrentUser();
-        List<SynCookRecipeResponse> data = recipeRepository.findByPrivacyOrderByCreatedAtDesc("PUBLIC")
-            .stream()
-            .map(recipe -> toRecipeResponse(recipe, user.getId(), false))
-            .toList();
-        return ResponseEntity.ok(data);
+    public List<SynCookRecipeResponse> publicFeed(@AuthenticationPrincipal AuthenticatedUser user,
+                                                  @RequestParam(required = false) @Size(max = 120) String country) {
+        return synCookService.publicFeed(user.id(), country);
     }
 
     @GetMapping("/mine")
-    public ResponseEntity<List<SynCookRecipeResponse>> getMyRecipes() {
-        User user = getCurrentUser();
-        List<SynCookRecipeResponse> data = recipeRepository.findByOwnerIdOrderByUpdatedAtDesc(user.getId())
-            .stream()
-            .map(recipe -> toRecipeResponse(recipe, user.getId(), true))
-            .toList();
-        return ResponseEntity.ok(data);
+    public List<SynCookRecipeResponse> mine(@AuthenticationPrincipal AuthenticatedUser user) {
+        return synCookService.mine(user.id());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<SynCookRecipeResponse> getById(@PathVariable Long id) {
-        User user = getCurrentUser();
-        SynCookRecipe recipe = recipeRepository.findById(id)
-            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Recipe not found"));
-        enforceCanRead(recipe, user.getId());
-        return ResponseEntity.ok(toRecipeResponse(recipe, user.getId(), true));
+    public SynCookRecipeResponse get(@AuthenticationPrincipal AuthenticatedUser user, @PathVariable Long id) {
+        return synCookService.get(id, user.id());
     }
 
     @PostMapping
-    @Transactional
-    public ResponseEntity<SynCookRecipeResponse> create(@RequestBody SynCookRecipeRequest request) {
-        User user = getCurrentUser();
-        validateRecipeRequest(request);
-
-        SynCookRecipe recipe = new SynCookRecipe();
-        recipe.setTitle(request.getTitle().trim());
-        recipe.setCountry(request.getCountry().trim());
-        recipe.setIngredients(cleanLines(request.getIngredients()));
-        recipe.setProcedures(cleanLines(request.getProcedures()));
-        recipe.setImageUrl(normalizeOptional(request.getImageUrl()));
-        recipe.setPrivacy(normalizePrivacy(request.getPrivacy()));
-        recipe.setOwnerId(user.getId());
-        recipe.setOwnerName(resolveDisplayName(user));
-
-        SynCookRecipe saved = recipeRepository.save(recipe);
-        return ResponseEntity.status(HttpStatus.CREATED).body(toRecipeResponse(saved, user.getId(), true));
+    public ResponseEntity<SynCookRecipeResponse> create(@AuthenticationPrincipal AuthenticatedUser user,
+                                                        @Valid @RequestBody SynCookRecipeRequest request) {
+        rateLimiter.check("syncook-create:" + user.id(), 30);
+        return ResponseEntity.status(HttpStatus.CREATED).body(synCookService.create(request, user.id()));
     }
 
     @PutMapping("/{id}")
-    @Transactional
-    public ResponseEntity<SynCookRecipeResponse> update(
-        @PathVariable Long id,
-        @RequestBody SynCookRecipeRequest request
-    ) {
-        User user = getCurrentUser();
-        validateRecipeRequest(request);
-
-        SynCookRecipe recipe = recipeRepository.findById(id)
-            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Recipe not found"));
-        enforceOwner(recipe, user.getId());
-
-        recipe.setTitle(request.getTitle().trim());
-        recipe.setCountry(request.getCountry().trim());
-        recipe.setIngredients(cleanLines(request.getIngredients()));
-        recipe.setProcedures(cleanLines(request.getProcedures()));
-        // Preserve existing image URL if new one is blank/null (prevents image loss on edit)
-        String newImageUrl = normalizeOptional(request.getImageUrl());
-        if (newImageUrl != null) {
-            recipe.setImageUrl(newImageUrl);
-        }
-        recipe.setPrivacy(normalizePrivacy(request.getPrivacy()));
-
-        SynCookRecipe saved = recipeRepository.save(recipe);
-        return ResponseEntity.ok(toRecipeResponse(saved, user.getId(), true));
+    public SynCookRecipeResponse update(@AuthenticationPrincipal AuthenticatedUser user, @PathVariable Long id,
+                                        @Valid @RequestBody SynCookRecipeRequest request) {
+        return synCookService.update(id, request, user.id());
     }
 
     @DeleteMapping("/{id}")
-    @Transactional
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-        User user = getCurrentUser();
-        SynCookRecipe recipe = recipeRepository.findById(id)
-            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Recipe not found"));
-        enforceOwner(recipe, user.getId());
-        commentRepository.deleteByRecipeId(recipe.getId());
-        recipeRepository.delete(recipe);
+    public ResponseEntity<Void> delete(@AuthenticationPrincipal AuthenticatedUser user, @PathVariable Long id) {
+        synCookService.delete(id, user.id());
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/{id}/comments")
-    public ResponseEntity<List<SynCookCommentResponse>> getComments(@PathVariable Long id) {
-        User user = getCurrentUser();
-        SynCookRecipe recipe = recipeRepository.findById(id)
-            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Recipe not found"));
-        enforceCanRead(recipe, user.getId());
-
-        List<SynCookCommentResponse> comments = commentRepository.findByRecipeIdOrderByCreatedAtAsc(id)
-            .stream()
-            .map(this::toCommentResponse)
-            .toList();
-        return ResponseEntity.ok(comments);
+    public List<SynCookCommentResponse> comments(@AuthenticationPrincipal AuthenticatedUser user, @PathVariable Long id) {
+        return synCookService.getComments(id, user.id());
     }
 
     @PostMapping("/{id}/comments")
-    @Transactional
-    public ResponseEntity<SynCookCommentResponse> addComment(
-        @PathVariable Long id,
-        @RequestBody SynCookCommentRequest request
-    ) {
-        User user = getCurrentUser();
-        String content = normalizeOptional(request.getContent());
-        if (content == null || content.length() < 2) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Comment is required");
-        }
-
-        SynCookRecipe recipe = recipeRepository.findById(id)
-            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Recipe not found"));
-        enforceCanRead(recipe, user.getId());
-
-        SynCookComment comment = new SynCookComment();
-        comment.setRecipe(recipe);
-        comment.setAuthorId(user.getId());
-        comment.setAuthorName(resolveDisplayName(user));
-        comment.setContent(content);
-
-        SynCookComment saved = commentRepository.save(comment);
-        notificationService.createCommentNotification(recipe, user, content);
-        return ResponseEntity.status(HttpStatus.CREATED).body(toCommentResponse(saved));
+    public ResponseEntity<SynCookCommentResponse> addComment(@AuthenticationPrincipal AuthenticatedUser user,
+                                                             @PathVariable Long id,
+                                                             @Valid @RequestBody CommentRequest request) {
+        rateLimiter.check("comment:" + user.id(), 60);
+        return ResponseEntity.status(HttpStatus.CREATED).body(synCookService.addComment(id, request, user.id()));
     }
 
-    private SynCookRecipeResponse toRecipeResponse(SynCookRecipe recipe, Long requesterId, boolean includeComments) {
-        List<SynCookCommentResponse> comments = includeComments
-            ? commentRepository.findByRecipeIdOrderByCreatedAtAsc(recipe.getId())
-                .stream()
-                .map(this::toCommentResponse)
-                .toList()
-            : List.of();
-
-        return new SynCookRecipeResponse(
-            recipe.getId(),
-            recipe.getTitle(),
-            recipe.getCountry(),
-            recipe.getIngredients() == null ? List.of() : recipe.getIngredients(),
-            recipe.getProcedures() == null ? List.of() : recipe.getProcedures(),
-            recipe.getImageUrl(),
-            recipe.getPrivacy(),
-            recipe.getOwnerId(),
-            recipe.getOwnerName(),
-            recipe.getOwnerId().equals(requesterId),
-            recipe.getCreatedAt(),
-            recipe.getUpdatedAt(),
-            commentRepository.countByRecipeId(recipe.getId()),
-            comments
-        );
-    }
-
-    private SynCookCommentResponse toCommentResponse(SynCookComment comment) {
-        return new SynCookCommentResponse(
-            comment.getId(),
-            comment.getAuthorId(),
-            comment.getAuthorName(),
-            comment.getContent(),
-            comment.getCreatedAt()
-        );
-    }
-
-    private void validateRecipeRequest(SynCookRecipeRequest request) {
-        if (normalizeOptional(request.getTitle()) == null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Title is required");
-        }
-        if (normalizeOptional(request.getCountry()) == null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Country is required");
-        }
-
-        List<String> ingredients = cleanLines(request.getIngredients());
-        if (ingredients.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "At least one ingredient is required");
-        }
-
-        List<String> procedures = cleanLines(request.getProcedures());
-        if (procedures.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "At least one procedure is required");
-        }
-    }
-
-    private List<String> cleanLines(List<String> values) {
-        if (values == null) return new ArrayList<>();
-        return values.stream()
-            .map(this::normalizeOptional)
-            .filter(value -> value != null)
-            .collect(Collectors.toCollection(ArrayList::new));
-    }
-
-    private String normalizeOptional(String value) {
-        if (value == null) return null;
-        String cleaned = value.trim();
-        return cleaned.isEmpty() ? null : cleaned;
-    }
-
-    private String normalizePrivacy(String privacy) {
-        String normalized = normalizeOptional(privacy);
-        if (normalized == null) return "PUBLIC";
-        String upper = normalized.toUpperCase(Locale.ROOT);
-        return upper.equals("PRIVATE") ? "PRIVATE" : "PUBLIC";
-    }
-
-    private void enforceCanRead(SynCookRecipe recipe, Long requesterId) {
-        if (recipe.getOwnerId().equals(requesterId)) return;
-        if ("PUBLIC".equalsIgnoreCase(recipe.getPrivacy())) return;
-        throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Private recipe");
-    }
-
-    private void enforceOwner(SynCookRecipe recipe, Long requesterId) {
-        if (!recipe.getOwnerId().equals(requesterId)) {
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "You cannot modify other users' recipes");
-        }
-    }
-
-    private String resolveDisplayName(User user) {
-        String fullName = normalizeOptional(user.getFullName());
-        if (fullName != null) return fullName;
-        String username = normalizeOptional(user.getUsername());
-        if (username != null) return username;
-        return user.getEmail();
-    }
-
-    private User getCurrentUser() {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth == null) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Not authenticated");
-        }
-
-        Object principal = auth.getPrincipal();
-        Long userId = null;
-
-        if (principal instanceof Number numberPrincipal) {
-            userId = numberPrincipal.longValue();
-        } else if (principal instanceof String stringPrincipal) {
-            if (!"anonymousUser".equalsIgnoreCase(stringPrincipal)) {
-                try {
-                    userId = Long.parseLong(stringPrincipal);
-                } catch (NumberFormatException ignored) {
-                    userId = null;
-                }
-            }
-        } else if (principal instanceof User userPrincipal) {
-            userId = userPrincipal.getId();
-        }
-
-        if (userId == null) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Not authenticated");
-        }
-
-        return userRepository.findById(userId)
-            .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "User not found"));
+    @PostMapping(value = "/images", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ImageUploadResponse uploadImage(@AuthenticationPrincipal AuthenticatedUser user,
+                                           @RequestParam("file") MultipartFile file) {
+        rateLimiter.check("upload:" + user.id(), 20);
+        return new ImageUploadResponse(synCookService.uploadImage(file, user.id()));
     }
 }

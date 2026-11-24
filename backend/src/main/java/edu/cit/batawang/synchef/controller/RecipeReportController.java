@@ -1,59 +1,64 @@
 package edu.cit.batawang.synchef.controller;
 
-import edu.cit.batawang.synchef.dto.RecipeReportRequest;
 import edu.cit.batawang.synchef.dto.RecipeReportResponse;
+import edu.cit.batawang.synchef.dto.SynCookDtos.AppealRequest;
+import edu.cit.batawang.synchef.dto.SynCookDtos.ReportRequest;
+import edu.cit.batawang.synchef.security.AuthenticatedUser;
+import edu.cit.batawang.synchef.security.RateLimiter;
 import edu.cit.batawang.synchef.service.RecipeReportService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Map;
 
+/**
+ * Report workflow. {@code /api/admin/**} routes are restricted to ROLE_ADMIN in SecurityConfig.
+ */
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin(originPatterns = {"http://localhost:*", "http://127.0.0.1:*"})
 public class RecipeReportController {
 
     private final RecipeReportService reportService;
+    private final RateLimiter rateLimiter;
 
-    private Long currentUserId() {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth == null) return null;
-        Object principal = auth.getPrincipal();
-        if (principal instanceof Number n) return n.longValue();
-        if (principal instanceof String s && !"anonymousUser".equalsIgnoreCase(s)) {
-            try { return Long.parseLong(s); } catch (NumberFormatException ignored) { /* fall through */ }
-        }
-        return null;
-    }
-
-    /** POST /api/reports — authenticated user files a report on a SynCook recipe. */
     @PostMapping("/api/reports")
-    public ResponseEntity<RecipeReportResponse> createReport(@RequestBody RecipeReportRequest request) {
-        Long userId = currentUserId();
-        if (userId == null) return ResponseEntity.status(401).build();
-        return ResponseEntity.ok(reportService.createReport(userId, request));
+    public ResponseEntity<RecipeReportResponse> createReport(@AuthenticationPrincipal AuthenticatedUser user,
+                                                             @Valid @RequestBody ReportRequest request) {
+        rateLimiter.check("report:" + user.id(), 20);
+        return ResponseEntity.status(HttpStatus.CREATED).body(reportService.createReport(user.id(), request));
     }
 
-    /** GET /api/admin/reports — admin retrieves all reports (newest first). */
+    @PostMapping("/api/reports/{id}/appeal")
+    public RecipeReportResponse appeal(@AuthenticationPrincipal AuthenticatedUser user, @PathVariable Long id,
+                                       @Valid @RequestBody AppealRequest request) {
+        return reportService.appeal(id, user.id(), request);
+    }
+
     @GetMapping("/api/admin/reports")
-    public ResponseEntity<List<RecipeReportResponse>> getAllReports() {
-        return ResponseEntity.ok(reportService.getAllReports());
+    public List<RecipeReportResponse> getAllReports() {
+        return reportService.getAllReports();
     }
 
-    /** POST /api/admin/reports/{id}/file-notice — admin files a formal notice. */
     @PostMapping("/api/admin/reports/{id}/file-notice")
-    public ResponseEntity<RecipeReportResponse> fileNotice(@PathVariable Long id) {
-        return ResponseEntity.ok(reportService.fileNotice(id));
+    public RecipeReportResponse fileNotice(@PathVariable Long id) {
+        return reportService.fileNotice(id);
     }
 
-    /** POST /api/admin/reports/{id}/resolve — mark report resolved. */
     @PostMapping("/api/admin/reports/{id}/resolve")
-    public ResponseEntity<Map<String, String>> resolveReport(@PathVariable Long id) {
-        reportService.fileNotice(id); // reuse same flow; status update is sufficient for now
-        return ResponseEntity.ok(Map.of("status", "RESOLVED"));
+    public RecipeReportResponse resolve(@PathVariable Long id) {
+        return reportService.close(id, true);
+    }
+
+    @PostMapping("/api/admin/reports/{id}/dismiss")
+    public RecipeReportResponse dismiss(@PathVariable Long id) {
+        return reportService.close(id, false);
     }
 }

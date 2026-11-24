@@ -1,7 +1,18 @@
-# Environment Variables
+# Dependencies & build output
+node_modules/
+dist/
+target/
+coverage/
+
+# Environment / secrets (see backend/.env.example and frontend/.env.example)
 .env
 .env.local
 .env.*.local
+
+# Runtime data
+backend/uploads/
+db-backups/
+*.dump
 
 # IDE
 .vscode/
@@ -15,17 +26,12 @@
 .DS_Store
 Thumbs.db
 
-# Logs
+# Logs & temp
 *.log
 logs/
-
-# Temporary files
 *.tmp
 *.temp
 
-# Database
+# Local databases
 *.db
 *.sqlite
-
-# Documentation build
-docs/_build/

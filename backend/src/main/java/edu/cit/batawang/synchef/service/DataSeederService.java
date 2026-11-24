@@ -2,10 +2,9 @@ package edu.cit.batawang.synchef.service;
 
 import edu.cit.batawang.synchef.model.*;
 import edu.cit.batawang.synchef.repository.*;
-import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Service to populate database with sample recipes from different countries
@@ -29,50 +29,68 @@ public class DataSeederService {
     private final IngredientRepository ingredientRepository;
     private final RecipeRepository recipeRepository;
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    private static final PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
-    
-    @PostConstruct
+    @Value("${app.admin.email:}")
+    private String adminEmail;
+
+    @Value("${app.admin.password:}")
+    private String adminPassword;
+
+    /**
+     * Seeds the original reference data into an empty database. Invoked by the startup
+     * initializer through the Spring proxy so the transaction applies (the former
+     * {@code @PostConstruct} variant silently ran without one).
+     */
     @Transactional
-    public void seedData() {
-        ensureAdminUser();
-
+    public void seedReferenceData() {
         if (countryRepository.count() > 0) {
-            log.info("Database already seeded. Skipping...");
+            log.info("Reference data already present. Skipping base seed.");
             return;
         }
-
-        log.info("Starting database seeding...");
-
+        log.info("Seeding reference data...");
         seedCountries();
         seedCategories();
         seedIngredients();
         seedRecipes();
-
-        log.info("Database seeding completed!");
     }
 
-    private void ensureAdminUser() {
-        final String adminEmail = "admin@synchef.com";
-        userRepository.findByEmail(adminEmail).ifPresentOrElse(
+    /**
+     * Optional administrator bootstrap from the environment (APP_ADMIN_EMAIL / APP_ADMIN_PASSWORD).
+     * No credentials are hard-coded.
+     */
+    @Transactional
+    public void ensureAdminUser() {
+        if (adminEmail == null || adminEmail.isBlank()) {
+            if (userRepository.countByRole("ADMIN") == 0) {
+                log.warn("No administrator exists. Set APP_ADMIN_EMAIL and APP_ADMIN_PASSWORD to bootstrap one.");
+            }
+            return;
+        }
+        String email = adminEmail.trim().toLowerCase(Locale.ROOT);
+        userRepository.findByEmail(email).ifPresentOrElse(
             admin -> {
                 if (!"ADMIN".equals(admin.getRole())) {
                     admin.setRole("ADMIN");
                     userRepository.save(admin);
-                    log.info("Admin role granted to existing user: {}", adminEmail);
+                    log.info("Admin role granted to the configured administrator account");
                 }
             },
             () -> {
+                if (adminPassword == null || adminPassword.length() < 12) {
+                    log.warn("APP_ADMIN_PASSWORD must be at least 12 characters; administrator not created.");
+                    return;
+                }
                 User admin = new User();
-                admin.setEmail(adminEmail);
+                admin.setEmail(email);
                 admin.setUsername("synchef_admin");
-                admin.setPassword(PASSWORD_ENCODER.encode("AdminPass@2026"));
+                admin.setPassword(passwordEncoder.encode(adminPassword));
                 admin.setFullName("SynChef Administrator");
                 admin.setEmailVerified(true);
                 admin.setActive(true);
                 admin.setRole("ADMIN");
                 userRepository.save(admin);
-                log.info("Admin user created: {}", adminEmail);
+                log.info("Administrator account created from environment configuration");
             }
         );
     }

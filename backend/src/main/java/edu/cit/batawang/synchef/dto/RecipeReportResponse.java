@@ -17,4 +17,6 @@ public class RecipeReportResponse {
     private String reason;
     private String status;
     private LocalDateTime reportDate;
+    private String appealMessage;
+    private LocalDateTime resolvedAt;
 }

@@ -1,0 +1,464 @@
+.page {
+  padding-block: var(--sp-6) var(--sp-16);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  flex-wrap: wrap;
+  margin-bottom: var(--sp-5);
+}
+
+.title {
+  font-size: var(--fs-2xl);
+}
+
+.subtitle {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  flex-wrap: wrap;
+  margin-top: var(--sp-1);
+  color: var(--text-muted);
+  font-size: var(--fs-sm);
+}
+
+.progressTrack {
+  height: 8px;
+  border-radius: var(--radius-pill);
+  background: var(--surface-sunken);
+  overflow: hidden;
+  margin-bottom: var(--sp-6);
+}
+
+.progressBar {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--herb), var(--brand));
+  transition: width var(--dur-slow) var(--ease-out);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: var(--sp-6);
+  align-items: start;
+}
+
+@media (max-width: 1023px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ── Step focus card ────────────────────────────────────────────────────── */
+.focus {
+  position: relative;
+  padding: clamp(var(--sp-6), 4vw, var(--sp-10));
+  border-radius: var(--radius-xl);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  touch-action: pan-y;
+}
+
+.focus::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent), var(--herb));
+}
+
+.stepMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  flex-wrap: wrap;
+  margin-bottom: var(--sp-5);
+}
+
+.stepIndex {
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  color: var(--accent-text);
+  font-weight: var(--fw-semibold);
+}
+
+.instruction {
+  font-size: clamp(1.25rem, 1rem + 1.1vw, 1.75rem);
+  line-height: 1.45;
+  font-weight: var(--fw-medium);
+  max-width: 46ch;
+}
+
+.widgets {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: var(--sp-4);
+  margin-top: var(--sp-6);
+}
+
+.widget {
+  display: flex;
+  gap: var(--sp-3);
+  align-items: flex-start;
+  padding: var(--sp-4);
+  border-radius: var(--radius-lg);
+  background: var(--surface-muted);
+  font-size: var(--fs-sm);
+}
+
+.widget svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.widgetTip {
+  background: var(--accent-soft);
+}
+
+.widgetTip svg {
+  color: var(--accent-text);
+}
+
+.widgetTemp {
+  background: var(--earth-soft);
+}
+
+.widgetTemp svg {
+  color: var(--earth);
+}
+
+.widgetLabel {
+  font-weight: var(--fw-semibold);
+  display: block;
+  margin-bottom: 2px;
+}
+
+/* ── Timer widget ───────────────────────────────────────────────────────── */
+.timer {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-6);
+  margin-top: var(--sp-6);
+  padding: var(--sp-5);
+  border-radius: var(--radius-lg);
+  background: var(--brand-soft);
+  flex-wrap: wrap;
+}
+
+.timerClock {
+  font-family: var(--font-display);
+  font-size: 1.9rem;
+  font-weight: var(--fw-semibold);
+  font-variant-numeric: tabular-nums;
+}
+
+.timerState {
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.timerInfo {
+  flex: 1;
+  min-width: 160px;
+}
+
+.timerLabel {
+  font-weight: var(--fw-semibold);
+  font-size: var(--fs-lg);
+}
+
+.timerDone {
+  animation: done-pulse 1.2s var(--ease-in-out) infinite;
+}
+
+@keyframes done-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 50%, transparent);
+  }
+  50% {
+    box-shadow: 0 0 0 10px transparent;
+  }
+}
+
+/* ── Navigation row ─────────────────────────────────────────────────────── */
+.navRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  margin-top: var(--sp-8);
+  flex-wrap: wrap;
+}
+
+.navRow > :last-child {
+  margin-left: auto;
+}
+
+.dots {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  background: var(--border-strong);
+  transition: transform var(--dur-fast), background var(--dur-fast), width var(--dur-base);
+}
+
+.dot[data-done="true"] {
+  background: var(--herb);
+}
+
+.dot[aria-current="step"] {
+  width: 26px;
+  border-radius: var(--radius-pill);
+  background: var(--brand);
+}
+
+/* ── Side panels ────────────────────────────────────────────────────────── */
+.side {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+  position: sticky;
+  top: calc(var(--topbar-h) + var(--sp-4));
+}
+
+@media (max-width: 1023px) {
+  .side {
+    position: static;
+  }
+}
+
+.panelTitle {
+  font-size: var(--fs-lg);
+  margin-bottom: var(--sp-3);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-2);
+}
+
+.participants {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.participant {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.presence {
+  position: relative;
+}
+
+.presence::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  border: 2px solid var(--surface);
+  background: var(--text-subtle);
+}
+
+.presence[data-online="true"]::after {
+  background: var(--success);
+}
+
+.stepList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.stepItem {
+  display: flex;
+  gap: var(--sp-3);
+  align-items: flex-start;
+  width: 100%;
+  padding: var(--sp-2) var(--sp-3);
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  text-align: left;
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+}
+
+.stepItem:hover {
+  background: var(--surface-muted);
+}
+
+.stepItem[aria-current="step"] {
+  background: var(--brand-soft);
+  color: var(--text);
+  font-weight: var(--fw-semibold);
+}
+
+.stepItemNum {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--surface-sunken);
+  font-size: var(--fs-xs);
+  flex-shrink: 0;
+}
+
+.stepItem[data-done="true"] .stepItemNum {
+  background: var(--herb);
+  color: #fff;
+}
+
+.stepItemText {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.timerDock {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.dockItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  padding: var(--sp-2) var(--sp-3);
+  border-radius: var(--radius-md);
+  background: var(--surface-muted);
+  font-size: var(--fs-sm);
+}
+
+.dockClock {
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--fw-bold);
+}
+
+.activity {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.activity li {
+  animation: page-in var(--dur-base) var(--ease-out) both;
+}
+
+/* ── Share dialog / join ────────────────────────────────────────────────── */
+.code {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin: var(--sp-4) 0;
+}
+
+.code span {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 56px;
+  border-radius: var(--radius-md);
+  background: var(--surface-muted);
+  border: 1px solid var(--border);
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: var(--fw-bold);
+}
+
+.codeInput {
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+  text-align: center;
+  font-size: 1.4rem !important;
+  font-weight: var(--fw-bold);
+}
+
+.celebrate {
+  text-align: center;
+  padding: var(--sp-12) var(--sp-6);
+  border-radius: var(--radius-xl);
+  background: radial-gradient(circle at 50% 0%, var(--accent-soft), transparent 60%), var(--surface);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-4);
+}
+
+.celebrate h2 {
+  font-size: var(--fs-3xl);
+}
+
+.celebrateEmoji {
+  font-size: 3.5rem;
+  animation: bounce-in 700ms var(--ease-out) both;
+}
+
+@keyframes bounce-in {
+  0% { transform: scale(0.3); opacity: 0; }
+  60% { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+.ingredientsMini {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: var(--fs-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 260px;
+  overflow-y: auto;
+}
+
+.ingredientsMini strong {
+  color: var(--brand-text);
+  margin-right: 6px;
+}

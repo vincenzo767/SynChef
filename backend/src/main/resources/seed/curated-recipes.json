@@ -1,0 +1,3202 @@
+[
+  {
+    "catalogNumber": 1,
+    "name": "Italian Carbonara",
+    "description": "A rich and creamy Roman pasta dish made with eggs, Pecorino Romano, guanciale, and black pepper.",
+    "culturalContext": "Carbonara originated in Rome and central Italy. Despite popular belief, the dish has no cream — the creaminess comes entirely from emulsified egg yolks and cheese. It is considered one of Italy's most beloved pasta preparations.",
+    "countryCode": "IT",
+    "region": "Europe",
+    "cuisine": "Italian",
+    "totalTimeMinutes": 30,
+    "difficulty": "MEDIUM",
+    "defaultServings": 4,
+    "imageUrl": "https://images.unsplash.com/photo-1612874742237-6526221588e3?w=800&q=80",
+    "ingredients": [
+      {
+        "amount": "400g",
+        "item": "spaghetti or rigatoni",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "200g",
+        "item": "guanciale or pancetta",
+        "preparation": "diced",
+        "optional": false
+      },
+      {
+        "amount": "4",
+        "item": "large egg yolks",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1",
+        "item": "whole egg",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "80g",
+        "item": "Pecorino Romano",
+        "preparation": "finely grated",
+        "optional": false
+      },
+      {
+        "amount": "40g",
+        "item": "Parmesan",
+        "preparation": "finely grated",
+        "optional": true
+      },
+      {
+        "amount": "1 tsp",
+        "item": "black pepper",
+        "preparation": "freshly cracked",
+        "optional": false
+      },
+      {
+        "amount": "1 tsp",
+        "item": "salt",
+        "preparation": null,
+        "optional": false
+      }
+    ],
+    "steps": [
+      {
+        "instruction": "Bring a large pot of heavily salted water to a boil.",
+        "timerSeconds": 600,
+        "timerLabel": "Boil Water",
+        "tip": null
+      },
+      {
+        "instruction": "In a bowl, whisk together egg yolks, whole egg, grated Pecorino Romano, Parmesan, and a generous amount of black pepper until a thick paste forms. Set aside.",
+        "timerSeconds": null,
+        "timerLabel": null,
+        "tip": "Room-temperature eggs emulsify better."
+      },
+      {
+        "instruction": "Cook guanciale in a cold skillet over medium heat until golden and crispy, about 7 minutes. Keep the rendered fat in the pan.",
+        "timerSeconds": 420,
+        "timerLabel": "Render Guanciale",
+        "tip": null
+      },
+      {
+        "instruction": "Cook pasta in boiling water until al dente per package instructions. Reserve 1 cup of pasta water before draining.",
+        "timerSeconds": 480,
+        "timerLabel": "Cook Pasta",
+        "tip": null
+      },
+      {
+        "instruction": "Remove guanciale pan from heat. Add drained hot pasta and 3–4 tablespoons of reserved pasta water. Toss vigorously for 30 seconds.",
+        "timerSeconds": null,
+        "timerLabel": null,
+        "tip": "The pan must be off the heat before adding eggs to prevent scrambling."
+      },
+      {
+        "instruction": "Quickly pour the egg-cheese mixture over the pasta, tossing rapidly and adding more pasta water a splash at a time until you get a silky, coating sauce. Serve immediately with extra Pecorino and black pepper.",
+        "timerSeconds": null,
+        "timerLabel": null,
+        "tip": null
+      }
+    ]
+  },
+  {
+    "catalogNumber": 2,
+    "name": "Thai Pad Thai",
+    "description": "Thailand's most iconic stir-fried rice noodle dish with shrimp, tofu, bean sprouts, and tangy tamarind sauce.",
+    "culturalContext": "Pad Thai was promoted in the 1930s–40s as Thailand's national dish to reduce rice consumption during a shortage. The dish reflects the balance of four flavors central to Thai cuisine: sweet, sour, salty, and spicy.",
+    "countryCode": "TH",
+    "region": "Asia",
+    "cuisine": "Thai",
+    "totalTimeMinutes": 25,
+    "difficulty": "EASY",
+    "defaultServings": 2,
+    "imageUrl": "https://images.unsplash.com/photo-1559314809-0d155014e29e?w=800&q=80",
+    "ingredients": [
+      {
+        "amount": "200g",
+        "item": "rice noodles (sen lek)",
+        "preparation": "soaked 30 min",
+        "optional": false
+      },
+      {
+        "amount": "150g",
+        "item": "medium shrimp",
+        "preparation": "peeled, deveined",
+        "optional": false
+      },
+      {
+        "amount": "100g",
+        "item": "firm tofu",
+        "preparation": "cubed and pressed",
+        "optional": false
+      },
+      {
+        "amount": "2 tbsp",
+        "item": "tamarind paste",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "2 tbsp",
+        "item": "fish sauce",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1 tbsp",
+        "item": "palm sugar or brown sugar",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "2",
+        "item": "eggs",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1 cup",
+        "item": "bean sprouts",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "3",
+        "item": "spring onions",
+        "preparation": "cut into 1-inch pieces",
+        "optional": false
+      },
+      {
+        "amount": "3 tbsp",
+        "item": "vegetable oil",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "2 tbsp",
+        "item": "crushed roasted peanuts",
+        "preparation": "for serving",
+        "optional": false
+      },
+      {
+        "amount": "1",
+        "item": "lime",
+        "preparation": "cut into wedges",
+        "optional": false
+      }
+    ],
+    "steps": [
+      {
+        "instruction": "Mix tamarind paste, fish sauce, and palm sugar in a bowl to make the Pad Thai sauce. Taste and adjust — it should be sour, salty, and slightly sweet.",
+        "timerSeconds": null,
+        "timerLabel": null,
+        "tip": null
+      },
+      {
+        "instruction": "Heat 2 tbsp oil in a wok over very high heat until smoking. Stir-fry tofu until golden, about 3 minutes. Push to the side.",
+        "timerSeconds": 180,
+        "timerLabel": "Fry Tofu",
+        "tip": null
+      },
+      {
+        "instruction": "Add shrimp and cook until pink, about 2 minutes. Push everything to the side of the wok.",
+        "timerSeconds": 120,
+        "timerLabel": "Cook Shrimp",
+        "tip": null
+      },
+      {
+        "instruction": "Add drained noodles and sauce to the wok. Toss everything together over high heat for 2 minutes.",
+        "timerSeconds": 120,
+        "timerLabel": "Toss Noodles",
+        "tip": "Add a splash of water if noodles stick."
+      },
+      {
+        "instruction": "Push noodles to the side, crack eggs into the empty space, and scramble until just set, then fold into noodles.",
+        "timerSeconds": null,
+        "timerLabel": null,
+        "tip": null
+      },
+      {
+        "instruction": "Add bean sprouts and spring onions, toss for 30 seconds. Serve topped with crushed peanuts, lime wedges, and dried chili flakes.",
+        "timerSeconds": null,
+        "timerLabel": null,
+        "tip": null
+      }
+    ]
+  },
+  {
+    "catalogNumber": 3,
+    "name": "Mexican Street Tacos",
+    "description": "Authentic Mexican street tacos with seasoned carne asada, charred onion, cilantro, and fresh lime.",
+    "culturalContext": "Street tacos are the soul of Mexican food culture, sold from taquerías and food carts throughout the country. Corn tortillas — not flour — are the authentic vessel, and toppings are kept minimal to let the meat shine.",
+    "countryCode": "MX",
+    "region": "North America",
+    "cuisine": "Mexican",
+    "totalTimeMinutes": 20,
+    "difficulty": "EASY",
+    "defaultServings": 4,
+    "imageUrl": "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=800&q=80",
+    "ingredients": [
+      {
+        "amount": "500g",
+        "item": "skirt steak or flank steak",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "12",
+        "item": "small corn tortillas",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1 tsp",
+        "item": "cumin",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1 tsp",
+        "item": "chili powder",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1 tsp",
+        "item": "garlic powder",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1 tsp",
+        "item": "smoked paprika",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1",
+        "item": "white onion",
+        "preparation": "finely diced",
+        "optional": false
+      },
+      {
+        "amount": "1 bunch",
+        "item": "fresh cilantro",
+        "preparation": "roughly chopped",
+        "optional": false
+      },
+      {
+        "amount": "2",
+        "item": "limes",
+        "preparation": "cut into wedges",
+        "optional": false
+      },
+      {
+        "amount": "2",
+        "item": "jalapeños",
+        "preparation": "sliced",
+        "optional": true
+      }
+    ],
+    "steps": [
+      {
+        "instruction": "Mix cumin, chili powder, garlic powder, smoked paprika, salt, and pepper. Pat the steak dry and rub all over with spice mix. Let rest 10 minutes.",
+        "timerSeconds": 600,
+        "timerLabel": "Marinate Steak",
+        "tip": null
+      },
+      {
+        "instruction": "Heat a cast-iron skillet or grill pan over very high heat until nearly smoking. Cook steak 3–4 minutes per side for medium-rare.",
+        "timerSeconds": 240,
+        "timerLabel": "Sear Steak",
+        "tip": "Do not move the steak — let it crust."
+      },
+      {
+        "instruction": "Rest the steak on a board for 5 minutes, then slice thinly against the grain.",
+        "timerSeconds": 300,
+        "timerLabel": "Rest Steak",
+        "tip": null
+      },
+      {
+        "instruction": "Warm tortillas directly over a gas flame or in a dry skillet for 20–30 seconds per side until lightly charred.",
+        "timerSeconds": 120,
+        "timerLabel": "Warm Tortillas",
+        "tip": null
+      },
+      {
+        "instruction": "Layer each tortilla with steak slices, diced onion, cilantro, and a squeeze of lime. Serve with jalapeño slices.",
+        "timerSeconds": null,
+        "timerLabel": null,
+        "tip": null
+      }
+    ]
+  },
+  {
+    "catalogNumber": 4,
+    "name": "Japanese Tonkotsu Ramen",
+    "description": "Rich, milky pork bone broth ramen with chashu pork, soft-boiled egg, nori, and bamboo shoots.",
+    "culturalContext": "Tonkotsu ramen originated in Fukuoka, Japan, in the 1940s. The creamy white broth results from boiling pork bones at a rolling boil for hours, emulsifying the collagen and fat into a complex, deeply savory soup.",
+    "countryCode": "JP",
+    "region": "Asia",
+    "cuisine": "Japanese",
+    "totalTimeMinutes": 45,
+    "difficulty": "HARD",
+    "defaultServings": 2,
+    "imageUrl": "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=800&q=80",
+    "ingredients": [
+      {
+        "amount": "2 portions",
+        "item": "fresh ramen noodles",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1 liter",
+        "item": "tonkotsu broth (store-bought or homemade)",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "2 tbsp",
+        "item": "soy sauce",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1 tbsp",
+        "item": "miso paste",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "200g",
+        "item": "chashu pork belly",
+        "preparation": "sliced",
+        "optional": false
+      },
+      {
+        "amount": "2",
+        "item": "soft-boiled eggs (ajitsuke tamago)",
+        "preparation": "halved",
+        "optional": false
+      },
+      {
+        "amount": "4 sheets",
+        "item": "nori",
+        "preparation": "halved",
+        "optional": false
+      },
+      {
+        "amount": "50g",
+        "item": "bamboo shoots (menma)",
+        "preparation": "rinsed",
+        "optional": false
+      },
+      {
+        "amount": "2",
+        "item": "spring onions",
+        "preparation": "thinly sliced",
+        "optional": false
+      },
+      {
+        "amount": "1 tsp",
+        "item": "sesame oil",
+        "preparation": null,
+        "optional": false
+      }
+    ],
+    "steps": [
+      {
+        "instruction": "In a pot, heat tonkotsu broth over medium-high heat. Stir in soy sauce and miso paste. Simmer gently for 10 minutes.",
+        "timerSeconds": 600,
+        "timerLabel": "Simmer Broth",
+        "tip": null
+      },
+      {
+        "instruction": "Bring a separate pot of water to a boil. Prepare the soft-boiled eggs: lower eggs into boiling water and cook for exactly 6 minutes 30 seconds, then transfer to ice water.",
+        "timerSeconds": 390,
+        "timerLabel": "Soft-Boil Eggs",
+        "tip": "Peel gently — the yolk should be jammy."
+      },
+      {
+        "instruction": "Cook ramen noodles in the boiling water for 1–2 minutes until tender. Drain well.",
+        "timerSeconds": 90,
+        "timerLabel": "Cook Noodles",
+        "tip": null
+      },
+      {
+        "instruction": "Warm chashu pork slices in the broth for 1 minute or briefly in a hot pan.",
+        "timerSeconds": 60,
+        "timerLabel": "Warm Chashu",
+        "tip": null
+      },
+      {
+        "instruction": "Divide noodles into two deep bowls. Ladle hot broth over noodles. Arrange chashu, halved egg, bamboo shoots, nori, and spring onions. Drizzle with sesame oil. Serve immediately.",
+        "timerSeconds": null,
+        "timerLabel": null,
+        "tip": null
+      }
+    ]
+  },
+  {
+    "catalogNumber": 5,
+    "name": "Indian Butter Chicken",
+    "description": "Tender chicken tikka simmered in a fragrant tomato-cream sauce with aromatic spices and butter.",
+    "culturalContext": "Butter chicken (murgh makhani) was invented in 1948 at Moti Mahal restaurant in Delhi by Kundan Lal Gujral. It was created to use leftover tandoori chicken and has since become one of India's most internationally recognized dishes.",
+    "countryCode": "IN",
+    "region": "Asia",
+    "cuisine": "Indian",
+    "totalTimeMinutes": 60,
+    "difficulty": "MEDIUM",
+    "defaultServings": 4,
+    "imageUrl": "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=800&q=80",
+    "ingredients": [
+      {
+        "amount": "700g",
+        "item": "chicken thighs",
+        "preparation": "boneless, cut into chunks",
+        "optional": false
+      },
+      {
+        "amount": "1 cup",
+        "item": "plain yogurt",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "2 tsp",
+        "item": "garam masala",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1 tsp",
+        "item": "turmeric",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "2 tsp",
+        "item": "ground cumin",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "400g",
+        "item": "crushed tomatoes",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "200ml",
+        "item": "heavy cream",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "3 tbsp",
+        "item": "butter",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1",
+        "item": "large onion",
+        "preparation": "finely chopped",
+        "optional": false
+      },
+      {
+        "amount": "4 cloves",
+        "item": "garlic",
+        "preparation": "minced",
+        "optional": false
+      },
+      {
+        "amount": "1 tbsp",
+        "item": "fresh ginger",
+        "preparation": "grated",
+        "optional": false
+      },
+      {
+        "amount": "1 tsp",
+        "item": "kashmiri chili powder",
+        "preparation": null,
+        "optional": false
+      }
+    ],
+    "steps": [
+      {
+        "instruction": "Marinate chicken in yogurt, 1 tsp garam masala, turmeric, 1 tsp cumin, salt, and chili powder. Rest for 20 minutes.",
+        "timerSeconds": 1200,
+        "timerLabel": "Marinate Chicken",
+        "tip": null
+      },
+      {
+        "instruction": "Grill or pan-fry marinated chicken over high heat in batches until charred on the outside and cooked through, about 8 minutes. Set aside.",
+        "timerSeconds": 480,
+        "timerLabel": "Cook Chicken",
+        "tip": null
+      },
+      {
+        "instruction": "Melt butter in a deep pan over medium heat. Sauté onion for 8 minutes until golden. Add garlic and ginger, cook 2 more minutes.",
+        "timerSeconds": 600,
+        "timerLabel": "Sauté Base",
+        "tip": null
+      },
+      {
+        "instruction": "Add remaining spices and cook 1 minute. Pour in crushed tomatoes and simmer for 15 minutes until sauce thickens.",
+        "timerSeconds": 900,
+        "timerLabel": "Simmer Sauce",
+        "tip": null
+      },
+      {
+        "instruction": "Blend the sauce until smooth using an immersion blender. Return to medium heat, stir in heavy cream and cooked chicken. Simmer 5 more minutes.",
+        "timerSeconds": 300,
+        "timerLabel": "Finish Sauce",
+        "tip": "Add a pinch of sugar to balance acidity."
+      },
+      {
+        "instruction": "Serve over basmati rice or with warm naan, garnished with cream and fresh cilantro.",
+        "timerSeconds": null,
+        "timerLabel": null,
+        "tip": null
+      }
+    ]
+  },
+  {
+    "catalogNumber": 6,
+    "name": "Spanish Paella Valenciana",
+    "description": "Classic Valencia rice dish cooked in a wide paella pan with chicken, rabbit, and the essential socarrat crust.",
+    "culturalContext": "Paella originates from Valencia and is Spain's most internationally recognized dish. The defining feature is the socarrat — the caramelized rice crust at the bottom of the pan — achieved by raising heat at the end of cooking.",
+    "countryCode": "ES",
+    "region": "Europe",
+    "cuisine": "Spanish",
+    "totalTimeMinutes": 55,
+    "difficulty": "MEDIUM",
+    "defaultServings": 4,
+    "imageUrl": "https://images.unsplash.com/photo-1534080564583-6be75777b70a?w=800&q=80",
+    "ingredients": [
+      {
+        "amount": "400g",
+        "item": "bomba or Arborio rice",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "400g",
+        "item": "chicken thighs",
+        "preparation": "bone-in, cut up",
+        "optional": false
+      },
+      {
+        "amount": "300g",
+        "item": "rabbit pieces",
+        "preparation": null,
+        "optional": true
+      },
+      {
+        "amount": "1 liter",
+        "item": "warm chicken stock",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "200g",
+        "item": "green beans",
+        "preparation": "trimmed",
+        "optional": false
+      },
+      {
+        "amount": "200g",
+        "item": "butter beans (garrofó)",
+        "preparation": "drained",
+        "optional": false
+      },
+      {
+        "amount": "4",
+        "item": "ripe tomatoes",
+        "preparation": "grated",
+        "optional": false
+      },
+      {
+        "amount": "1 tsp",
+        "item": "saffron threads",
+        "preparation": "steeped in 100ml warm water",
+        "optional": false
+      },
+      {
+        "amount": "1 tsp",
+        "item": "smoked paprika (pimentón)",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "4 tbsp",
+        "item": "olive oil",
+        "preparation": null,
+        "optional": false
+      }
+    ],
+    "steps": [
+      {
+        "instruction": "Heat olive oil in a large paella pan over medium-high heat. Season and brown chicken (and rabbit) on all sides for 10 minutes.",
+        "timerSeconds": 600,
+        "timerLabel": "Brown Meat",
+        "tip": null
+      },
+      {
+        "instruction": "Push meat to edges, add green beans to center, cook 3 minutes. Add grated tomatoes and paprika, cook 5 minutes until paste forms.",
+        "timerSeconds": 480,
+        "timerLabel": "Cook Sofrito",
+        "tip": null
+      },
+      {
+        "instruction": "Pour in warm stock and saffron water. Bring to a boil and taste for salt. Arrange rice evenly across the pan — do not stir again.",
+        "timerSeconds": null,
+        "timerLabel": null,
+        "tip": "The rice must cook undisturbed to form the socarrat."
+      },
+      {
+        "instruction": "Cook over medium heat for 10 minutes, then reduce to low for 8–10 more minutes until rice is nearly dry and stock is absorbed.",
+        "timerSeconds": 1080,
+        "timerLabel": "Cook Rice",
+        "tip": null
+      },
+      {
+        "instruction": "Raise heat to high for the last 2 minutes to form the socarrat crust. You will hear a gentle crackling sound. Remove from heat and rest 5 minutes under a damp cloth.",
+        "timerSeconds": 120,
+        "timerLabel": "Form Socarrat",
+        "tip": null
+      },
+      {
+        "instruction": "Serve directly from the pan. Socarrat is a sign of authentic paella — gently scrape to enjoy it.",
+        "timerSeconds": null,
+        "timerLabel": null,
+        "tip": null
+      }
+    ]
+  },
+  {
+    "catalogNumber": 7,
+    "name": "Korean Bibimbap",
+    "description": "A colorful Korean mixed rice bowl with sautéed vegetables, marinated beef, fried egg, and spicy gochujang sauce.",
+    "culturalContext": "Bibimbap, meaning \"mixed rice,\" is one of Korea's most beloved national dishes with roots in royal court cuisine. The dish is traditionally served in a dolsot (hot stone bowl) that creates a crunchy rice crust similar to paella's socarrat.",
+    "countryCode": "KR",
+    "region": "Asia",
+    "cuisine": "Korean",
+    "totalTimeMinutes": 40,
+    "difficulty": "MEDIUM",
+    "defaultServings": 2,
+    "imageUrl": "https://images.unsplash.com/photo-1553163147-622ab57be1c7?w=800&q=80",
+    "ingredients": [
+      {
+        "amount": "2 cups",
+        "item": "short-grain white rice",
+        "preparation": "cooked",
+        "optional": false
+      },
+      {
+        "amount": "200g",
+        "item": "beef bulgogi",
+        "preparation": "thinly sliced, marinated",
+        "optional": false
+      },
+      {
+        "amount": "100g",
+        "item": "spinach",
+        "preparation": "blanched and seasoned",
+        "optional": false
+      },
+      {
+        "amount": "1",
+        "item": "zucchini",
+        "preparation": "julienned and sautéed",
+        "optional": false
+      },
+      {
+        "amount": "1",
+        "item": "carrot",
+        "preparation": "julienned and sautéed",
+        "optional": false
+      },
+      {
+        "amount": "100g",
+        "item": "bean sprouts",
+        "preparation": "blanched and seasoned",
+        "optional": false
+      },
+      {
+        "amount": "4",
+        "item": "dried shiitake mushrooms",
+        "preparation": "soaked and sautéed",
+        "optional": false
+      },
+      {
+        "amount": "2",
+        "item": "eggs",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "3 tbsp",
+        "item": "gochujang (Korean chili paste)",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1 tbsp",
+        "item": "sesame oil",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1 tsp",
+        "item": "sesame seeds",
+        "preparation": null,
+        "optional": false
+      }
+    ],
+    "steps": [
+      {
+        "instruction": "Prepare each vegetable topping separately: blanch spinach 30 seconds, sauté zucchini and carrot each with a pinch of salt and garlic for 2 minutes. Season each with sesame oil and salt.",
+        "timerSeconds": null,
+        "timerLabel": null,
+        "tip": null
+      },
+      {
+        "instruction": "Cook marinated bulgogi beef in a hot skillet over high heat for 3–4 minutes until caramelized.",
+        "timerSeconds": 240,
+        "timerLabel": "Cook Bulgogi",
+        "tip": null
+      },
+      {
+        "instruction": "In the same pan over medium-low heat, fry eggs sunny-side up until whites set but yolks remain runny.",
+        "timerSeconds": 180,
+        "timerLabel": "Fry Eggs",
+        "tip": "Cover the pan briefly to set whites without flipping."
+      },
+      {
+        "instruction": "Divide hot rice into two large wide bowls. Arrange vegetable toppings in neat sections around the bowl. Place beef in the center.",
+        "timerSeconds": null,
+        "timerLabel": null,
+        "tip": null
+      },
+      {
+        "instruction": "Set the fried egg on top of the beef. Add 1–2 tbsp gochujang, a drizzle of sesame oil, and sesame seeds. Mix everything vigorously just before eating.",
+        "timerSeconds": null,
+        "timerLabel": null,
+        "tip": null
+      }
+    ]
+  },
+  {
+    "catalogNumber": 8,
+    "name": "Vietnamese Beef Pho",
+    "description": "Vietnam's national soup — a fragrant star anise and cinnamon beef broth with rice noodles and thinly sliced beef.",
+    "culturalContext": "Pho (pronounced \"fuh\") originated in northern Vietnam in the early 20th century, influenced by both Chinese and French cooking. The broth is Vietnam's great culinary achievement — a deeply aromatic infusion of charred aromatics and warm spices.",
+    "countryCode": "VN",
+    "region": "Asia",
+    "cuisine": "Vietnamese",
+    "totalTimeMinutes": 45,
+    "difficulty": "MEDIUM",
+    "defaultServings": 2,
+    "imageUrl": "https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?w=800&q=80",
+    "ingredients": [
+      {
+        "amount": "200g",
+        "item": "rice noodles (banh pho)",
+        "preparation": "soaked 30 min",
+        "optional": false
+      },
+      {
+        "amount": "1 liter",
+        "item": "beef bone broth",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "200g",
+        "item": "beef sirloin",
+        "preparation": "very thinly sliced raw",
+        "optional": false
+      },
+      {
+        "amount": "2 tbsp",
+        "item": "fish sauce",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1",
+        "item": "charred onion (halved under broiler)",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "3",
+        "item": "star anise",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1",
+        "item": "cinnamon stick",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1 tsp",
+        "item": "whole cloves",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "50g",
+        "item": "bean sprouts",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1 bunch",
+        "item": "fresh Thai basil",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "2",
+        "item": "limes",
+        "preparation": "cut into wedges",
+        "optional": false
+      },
+      {
+        "amount": "2",
+        "item": "red chillies",
+        "preparation": "sliced",
+        "optional": true
+      }
+    ],
+    "steps": [
+      {
+        "instruction": "Tie star anise, cinnamon, and cloves in a cheesecloth. Simmer broth with the spice bundle and charred onion for 20 minutes. Season with fish sauce.",
+        "timerSeconds": 1200,
+        "timerLabel": "Infuse Broth",
+        "tip": null
+      },
+      {
+        "instruction": "Cook soaked rice noodles in boiling water for 1–2 minutes until tender. Drain and divide into deep bowls.",
+        "timerSeconds": 90,
+        "timerLabel": "Cook Noodles",
+        "tip": null
+      },
+      {
+        "instruction": "Remove spice bundle from broth. Bring broth to a vigorous boil.",
+        "timerSeconds": null,
+        "timerLabel": null,
+        "tip": null
+      },
+      {
+        "instruction": "Place thin raw beef slices on top of the noodles. Pour the boiling broth immediately over the beef — the heat cooks the beef in the bowl.",
+        "timerSeconds": null,
+        "timerLabel": null,
+        "tip": "The beef should be sliced paper-thin so the broth cooks it in seconds."
+      },
+      {
+        "instruction": "Serve with a side plate of bean sprouts, Thai basil, lime wedges, and sliced chilies. Add hoisin and sriracha to taste.",
+        "timerSeconds": null,
+        "timerLabel": null,
+        "tip": null
+      }
+    ]
+  },
+  {
+    "catalogNumber": 9,
+    "name": "Moroccan Chicken Tagine",
+    "description": "A slow-cooked Moroccan stew with saffron, preserved lemon, olives, and warming ras el hanout spices.",
+    "culturalContext": "Tagine refers both to the iconic conical clay pot and the dish cooked inside it. The steam circulates inside the cone back into the food, creating incredibly tender meat. Moroccan tagines reflect the country's Berber, Arab, and Andalusian culinary heritage.",
+    "countryCode": "MA",
+    "region": "Africa",
+    "cuisine": "Moroccan",
+    "totalTimeMinutes": 75,
+    "difficulty": "MEDIUM",
+    "defaultServings": 4,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3a/Tajine-marocain-un-plat-varie-et-sain_%28cropped%29.jpg",
+    "ingredients": [
+      {
+        "amount": "1 whole",
+        "item": "chicken",
+        "preparation": "cut into 8 pieces",
+        "optional": false
+      },
+      {
+        "amount": "2",
+        "item": "large onions",
+        "preparation": "sliced",
+        "optional": false
+      },
+      {
+        "amount": "4 cloves",
+        "item": "garlic",
+        "preparation": "minced",
+        "optional": false
+      },
+      {
+        "amount": "1 tsp",
+        "item": "saffron threads",
+        "preparation": "steeped in 3 tbsp warm water",
+        "optional": false
+      },
+      {
+        "amount": "2 tsp",
+        "item": "ras el hanout spice blend",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1 tsp",
+        "item": "ground ginger",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1 tsp",
+        "item": "turmeric",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1",
+        "item": "preserved lemon",
+        "preparation": "rind only, finely chopped",
+        "optional": false
+      },
+      {
+        "amount": "100g",
+        "item": "green olives",
+        "preparation": "pitted",
+        "optional": false
+      },
+      {
+        "amount": "3 tbsp",
+        "item": "olive oil",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1 bunch",
+        "item": "fresh cilantro and parsley",
+        "preparation": null,
+        "optional": false
+      }
+    ],
+    "steps": [
+      {
+        "instruction": "Combine all spices with olive oil. Rub all over chicken pieces. Marinate for 30 minutes minimum.",
+        "timerSeconds": 1800,
+        "timerLabel": "Marinate Chicken",
+        "tip": null
+      },
+      {
+        "instruction": "In a tagine or heavy pot, heat oil over medium heat. Brown chicken on all sides for 8 minutes. Remove and set aside.",
+        "timerSeconds": 480,
+        "timerLabel": "Brown Chicken",
+        "tip": null
+      },
+      {
+        "instruction": "In same pot, sauté sliced onions until soft and golden, about 10 minutes. Add garlic and cook 2 more minutes.",
+        "timerSeconds": 720,
+        "timerLabel": "Soften Onions",
+        "tip": null
+      },
+      {
+        "instruction": "Return chicken to pot. Add saffron water and enough water or stock to reach halfway up the chicken. Bring to a boil, then reduce to a gentle simmer.",
+        "timerSeconds": 2400,
+        "timerLabel": "Slow Cook",
+        "tip": "Low and slow is the secret to tender tagine."
+      },
+      {
+        "instruction": "Add preserved lemon rind and olives in the last 10 minutes. Cook until chicken is completely tender and sauce is reduced.",
+        "timerSeconds": 600,
+        "timerLabel": "Finish Tagine",
+        "tip": null
+      },
+      {
+        "instruction": "Garnish generously with fresh cilantro and parsley. Serve with couscous or crusty Moroccan bread (khobz).",
+        "timerSeconds": null,
+        "timerLabel": null,
+        "tip": null
+      }
+    ],
+    "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Tajine-marocain-un-plat-varie-et-sain_(cropped).jpg"
+  },
+  {
+    "catalogNumber": 10,
+    "name": "Chinese Kung Pao Chicken",
+    "description": "A classic Sichuan stir-fry with tender chicken, crunchy peanuts, dried chilies, and mouth-numbing Sichuan peppercorns.",
+    "culturalContext": "Kung Pao Chicken (宫保鸡丁) is a Sichuan classic named after Ding Baozhen, a Qing dynasty official. The dish is defined by the \"mala\" (numbing-spicy) sensation from Sichuan peppercorns combined with the heat of dried chilies.",
+    "countryCode": "CN",
+    "region": "Asia",
+    "cuisine": "Chinese",
+    "totalTimeMinutes": 25,
+    "difficulty": "EASY",
+    "defaultServings": 2,
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c2/Kung-pao-shanghai.jpg/960px-Kung-pao-shanghai.jpg",
+    "ingredients": [
+      {
+        "amount": "400g",
+        "item": "chicken breast",
+        "preparation": "cut into 1cm cubes",
+        "optional": false
+      },
+      {
+        "amount": "80g",
+        "item": "roasted peanuts",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "8",
+        "item": "dried red chilies",
+        "preparation": "seeded",
+        "optional": false
+      },
+      {
+        "amount": "1 tsp",
+        "item": "Sichuan peppercorns",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "3",
+        "item": "spring onions",
+        "preparation": "cut into 1-inch pieces",
+        "optional": false
+      },
+      {
+        "amount": "3 cloves",
+        "item": "garlic",
+        "preparation": "minced",
+        "optional": false
+      },
+      {
+        "amount": "1 tsp",
+        "item": "fresh ginger",
+        "preparation": "minced",
+        "optional": false
+      },
+      {
+        "amount": "2 tbsp",
+        "item": "soy sauce",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1 tbsp",
+        "item": "Shaoxing rice wine",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1 tsp",
+        "item": "dark vinegar",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1 tsp",
+        "item": "sesame oil",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1 tsp",
+        "item": "cornstarch",
+        "preparation": null,
+        "optional": false
+      }
+    ],
+    "steps": [
+      {
+        "instruction": "Marinate chicken in 1 tbsp soy sauce, rice wine, and cornstarch for 10 minutes. Mix sauce: remaining soy sauce, vinegar, and sesame oil. Set aside.",
+        "timerSeconds": null,
+        "timerLabel": null,
+        "tip": null
+      },
+      {
+        "instruction": "Heat wok over very high heat until smoking. Add oil, then Sichuan peppercorns and dried chilies. Stir-fry 30 seconds until fragrant. Do not burn them.",
+        "timerSeconds": 30,
+        "timerLabel": "Toast Spices",
+        "tip": "This step creates the mala (numbing-spicy) base flavour."
+      },
+      {
+        "instruction": "Add chicken and stir-fry over high heat for 3–4 minutes until cooked and slightly caramelized.",
+        "timerSeconds": 240,
+        "timerLabel": "Cook Chicken",
+        "tip": null
+      },
+      {
+        "instruction": "Add garlic and ginger, toss 30 seconds. Pour in the sauce, add spring onions, toss to coat everything.",
+        "timerSeconds": 60,
+        "timerLabel": "Add Sauce",
+        "tip": null
+      },
+      {
+        "instruction": "Add roasted peanuts, toss once. Serve immediately over steamed white rice.",
+        "timerSeconds": null,
+        "timerLabel": null,
+        "tip": null
+      }
+    ],
+    "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Kung-pao-shanghai.jpg"
+  },
+  {
+    "catalogNumber": 11,
+    "name": "French Coq au Vin",
+    "description": "Rustic French braised chicken slow-cooked in Burgundy red wine with mushrooms, pearl onions, and lardons.",
+    "culturalContext": "Coq au Vin (literally \"rooster in wine\") is a Burgundian farmhouse classic that became synonymous with French country cooking after Julia Child featured it in \"Mastering the Art of French Cooking\" (1961).",
+    "countryCode": "FR",
+    "region": "Europe",
+    "cuisine": "French",
+    "totalTimeMinutes": 90,
+    "difficulty": "HARD",
+    "defaultServings": 4,
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5a/Gourmet_coq_au_vin.jpg/960px-Gourmet_coq_au_vin.jpg",
+    "ingredients": [
+      {
+        "amount": "1 whole",
+        "item": "chicken",
+        "preparation": "broken down into 8 pieces",
+        "optional": false
+      },
+      {
+        "amount": "750ml",
+        "item": "Burgundy or Pinot Noir wine",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "200g",
+        "item": "lardons or thick-cut bacon",
+        "preparation": "chopped",
+        "optional": false
+      },
+      {
+        "amount": "250g",
+        "item": "button mushrooms",
+        "preparation": "quartered",
+        "optional": false
+      },
+      {
+        "amount": "200g",
+        "item": "pearl onions",
+        "preparation": "peeled",
+        "optional": false
+      },
+      {
+        "amount": "2",
+        "item": "carrots",
+        "preparation": "roughly chopped",
+        "optional": false
+      },
+      {
+        "amount": "2 cloves",
+        "item": "garlic",
+        "preparation": "crushed",
+        "optional": false
+      },
+      {
+        "amount": "2 tbsp",
+        "item": "tomato paste",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1 tbsp",
+        "item": "flour",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1 bouquet garni",
+        "item": "(thyme, bay, parsley)",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "2 tbsp",
+        "item": "butter",
+        "preparation": null,
+        "optional": false
+      }
+    ],
+    "steps": [
+      {
+        "instruction": "Pat chicken dry, season generously. Render lardons in a Dutch oven until crispy. Remove lardons, brown chicken pieces in the fat on all sides, 10 minutes. Remove chicken.",
+        "timerSeconds": 600,
+        "timerLabel": "Brown Chicken",
+        "tip": null
+      },
+      {
+        "instruction": "Sauté pearl onions and carrots in the same pot for 5 minutes. Add garlic and tomato paste, cook 1 minute. Sprinkle flour over and cook 2 minutes.",
+        "timerSeconds": 480,
+        "timerLabel": "Build Base",
+        "tip": null
+      },
+      {
+        "instruction": "Pour in wine, scraping up all browned bits. Return chicken, lardons, and add bouquet garni. Liquid should just cover the chicken.",
+        "timerSeconds": null,
+        "timerLabel": null,
+        "tip": "Good wine = good coq au vin. Use something you'd drink."
+      },
+      {
+        "instruction": "Bring to a boil, cover tightly, and braise over low heat or in a 160°C oven for 45–50 minutes.",
+        "timerSeconds": 3000,
+        "timerLabel": "Braise",
+        "tip": null
+      },
+      {
+        "instruction": "Meanwhile, sauté mushrooms in butter over high heat until golden.",
+        "timerSeconds": 300,
+        "timerLabel": "Sauté Mushrooms",
+        "tip": null
+      },
+      {
+        "instruction": "Uncover, add mushrooms, and simmer uncovered 10 minutes to thicken the sauce. Discard bouquet garni. Serve with crusty bread or egg noodles.",
+        "timerSeconds": null,
+        "timerLabel": null,
+        "tip": null
+      }
+    ],
+    "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Gourmet_coq_au_vin.jpg"
+  },
+  {
+    "catalogNumber": 12,
+    "name": "Brazilian Feijoada",
+    "description": "Brazil's national dish — a hearty slow-simmered black bean and smoked pork stew served with rice and farofa.",
+    "culturalContext": "Feijoada has deep historical roots tied to Afro-Brazilian culture. Enslaved Africans would make a stew from the discarded pork parts given to them by plantation owners, combining them with black beans into a dish that became Brazil's most beloved.",
+    "countryCode": "BR",
+    "region": "South America",
+    "cuisine": "Brazilian",
+    "totalTimeMinutes": 120,
+    "difficulty": "MEDIUM",
+    "defaultServings": 6,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/9/90/Feijoada_%C3%A0_transmontada.jpg",
+    "ingredients": [
+      {
+        "amount": "500g",
+        "item": "dried black beans",
+        "preparation": "soaked overnight",
+        "optional": false
+      },
+      {
+        "amount": "300g",
+        "item": "chorizo or linguiça",
+        "preparation": "sliced",
+        "optional": false
+      },
+      {
+        "amount": "200g",
+        "item": "smoked ribs or bacon",
+        "preparation": "chopped",
+        "optional": false
+      },
+      {
+        "amount": "200g",
+        "item": "pork shoulder",
+        "preparation": "cut into chunks",
+        "optional": false
+      },
+      {
+        "amount": "2",
+        "item": "large onions",
+        "preparation": "diced",
+        "optional": false
+      },
+      {
+        "amount": "6 cloves",
+        "item": "garlic",
+        "preparation": "minced",
+        "optional": false
+      },
+      {
+        "amount": "2",
+        "item": "bay leaves",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1 tbsp",
+        "item": "smoked paprika",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "3 tbsp",
+        "item": "olive oil",
+        "preparation": null,
+        "optional": false
+      }
+    ],
+    "steps": [
+      {
+        "instruction": "Drain soaked beans. Cover with fresh water in a large pot and boil for 45 minutes until nearly tender. Drain and set aside.",
+        "timerSeconds": 2700,
+        "timerLabel": "Pre-cook Beans",
+        "tip": null
+      },
+      {
+        "instruction": "In the same pot, heat olive oil and brown sausage and smoked meats in batches, 5 minutes each. Set meats aside.",
+        "timerSeconds": 600,
+        "timerLabel": "Brown Meats",
+        "tip": null
+      },
+      {
+        "instruction": "Sauté onion in the same pot until golden, about 8 minutes. Add garlic, paprika, and bay leaves, cook 2 minutes.",
+        "timerSeconds": 600,
+        "timerLabel": "Soften Onion",
+        "tip": null
+      },
+      {
+        "instruction": "Return all meats and beans to the pot. Add enough water to just cover. Bring to a boil and reduce to a low simmer.",
+        "timerSeconds": 3600,
+        "timerLabel": "Slow Simmer",
+        "tip": "The longer it simmers, the deeper the flavor."
+      },
+      {
+        "instruction": "Check beans are completely tender and broth is thick and deeply flavored. Adjust salt. Serve with steamed white rice, farofa (toasted cassava flour), orange slices, and sautéed collard greens.",
+        "timerSeconds": null,
+        "timerLabel": null,
+        "tip": null
+      }
+    ],
+    "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Feijoada_%C3%A0_transmontada.jpg"
+  },
+  {
+    "catalogNumber": 13,
+    "name": "American BBQ Baby Back Ribs",
+    "description": "Slow-smoked baby back ribs with a dry rub crust, basted in sweet and tangy BBQ sauce until fall-off-the-bone tender.",
+    "culturalContext": "BBQ ribs are deeply embedded in American Southern food culture, particularly from the Carolinas, Texas, and Memphis. Each region has fierce traditions — Memphis favors dry rub, Kansas City uses thick sweet sauce, and Texas prefers smoke over sauce.",
+    "countryCode": "US",
+    "region": "North America",
+    "cuisine": "American",
+    "totalTimeMinutes": 180,
+    "difficulty": "MEDIUM",
+    "defaultServings": 4,
+    "imageUrl": "https://images.unsplash.com/photo-1544025162-d76694265947?w=800&q=80",
+    "ingredients": [
+      {
+        "amount": "2 racks",
+        "item": "baby back pork ribs",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "2 tsp",
+        "item": "smoked paprika",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "2 tsp",
+        "item": "brown sugar",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1 tsp",
+        "item": "garlic powder",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1 tsp",
+        "item": "onion powder",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1 tsp",
+        "item": "cayenne pepper",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1 tsp",
+        "item": "black pepper",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1 tsp",
+        "item": "salt",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1 cup",
+        "item": "BBQ sauce (store-bought or homemade)",
+        "preparation": null,
+        "optional": false
+      }
+    ],
+    "steps": [
+      {
+        "instruction": "Remove the membrane from the back of the ribs by loosening with a knife and pulling off. Mix dry rub spices. Pat ribs dry and coat all over with dry rub.",
+        "timerSeconds": 3600,
+        "timerLabel": "Rest with Rub",
+        "tip": "For best results, let ribs rest with rub overnight in the fridge."
+      },
+      {
+        "instruction": "Preheat oven to 135°C (275°F) or set up smoker. Wrap ribs tightly in foil.",
+        "timerSeconds": 600,
+        "timerLabel": "Preheat Oven",
+        "tip": null
+      },
+      {
+        "instruction": "Cook ribs low and slow for 2.5–3 hours until meat pulls away slightly from the bones.",
+        "timerSeconds": 9000,
+        "timerLabel": "Slow Cook",
+        "tip": null
+      },
+      {
+        "instruction": "Unwrap ribs and transfer to a grill or broiler. Brush generously with BBQ sauce and cook 5 minutes per side until caramelized.",
+        "timerSeconds": 600,
+        "timerLabel": "Glaze Ribs",
+        "tip": "Apply 2–3 coats of sauce for a glossy glaze."
+      },
+      {
+        "instruction": "Rest ribs 10 minutes before cutting between bones. Serve with coleslaw, cornbread, and extra BBQ sauce.",
+        "timerSeconds": null,
+        "timerLabel": null,
+        "tip": null
+      }
+    ]
+  },
+  {
+    "catalogNumber": 14,
+    "name": "Jamaican Jerk Chicken",
+    "description": "Fiery Jamaican grilled chicken marinated in scotch bonnet peppers, allspice, thyme, and dark spiced rum.",
+    "culturalContext": "Jerk cooking originates from the Maroons — escaped enslaved Africans who lived in Jamaica's mountains and developed a technique of rubbing wild boar with spices and slow-cooking it over pimiento wood. Scotch bonnet and allspice (pimento) are non-negotiable.",
+    "countryCode": "JM",
+    "region": "North America",
+    "cuisine": "Jamaican",
+    "totalTimeMinutes": 50,
+    "difficulty": "MEDIUM",
+    "defaultServings": 4,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4f/BBQJerk_Chicken.jpg",
+    "ingredients": [
+      {
+        "amount": "1 whole",
+        "item": "chicken",
+        "preparation": "spatchcocked and scored",
+        "optional": false
+      },
+      {
+        "amount": "3",
+        "item": "scotch bonnet peppers",
+        "preparation": "seeded for less heat",
+        "optional": false
+      },
+      {
+        "amount": "1 bunch",
+        "item": "spring onions",
+        "preparation": "roughly chopped",
+        "optional": false
+      },
+      {
+        "amount": "6 cloves",
+        "item": "garlic",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "2 tbsp",
+        "item": "allspice (pimento) berries",
+        "preparation": "ground",
+        "optional": false
+      },
+      {
+        "amount": "1 tsp",
+        "item": "cinnamon",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1 tsp",
+        "item": "dried thyme",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "2 tbsp",
+        "item": "dark rum",
+        "preparation": null,
+        "optional": true
+      },
+      {
+        "amount": "2 tbsp",
+        "item": "soy sauce",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "2 tbsp",
+        "item": "brown sugar",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "3 tbsp",
+        "item": "vegetable oil",
+        "preparation": null,
+        "optional": false
+      }
+    ],
+    "steps": [
+      {
+        "instruction": "Blend all marinade ingredients (scotch bonnets, spring onions, garlic, allspice, cinnamon, thyme, rum, soy sauce, sugar, oil) until a smooth paste. Score chicken deeply and rub marinade all over, pushing into the cuts.",
+        "timerSeconds": 14400,
+        "timerLabel": "Marinate (4h min)",
+        "tip": "Marinate overnight for the most authentic deep flavor."
+      },
+      {
+        "instruction": "Bring chicken to room temperature 30 minutes before grilling.",
+        "timerSeconds": 1800,
+        "timerLabel": "Temper Chicken",
+        "tip": null
+      },
+      {
+        "instruction": "Preheat grill to medium-high. Grill chicken bone-side down for 25 minutes with lid closed.",
+        "timerSeconds": 1500,
+        "timerLabel": "Grill Bone-Side",
+        "tip": null
+      },
+      {
+        "instruction": "Flip and grill skin-side down for 15–20 minutes until charred and cooked through (internal temp 75°C).",
+        "timerSeconds": 1200,
+        "timerLabel": "Grill Skin-Side",
+        "tip": null
+      },
+      {
+        "instruction": "Rest 5 minutes. Serve with rice and peas, festival dumplings, and coleslaw.",
+        "timerSeconds": null,
+        "timerLabel": null,
+        "tip": null
+      }
+    ],
+    "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:BBQJerk_Chicken.jpg"
+  },
+  {
+    "catalogNumber": 15,
+    "name": "Swedish Meatballs (Köttbullar)",
+    "description": "Classic Swedish meatballs in a rich cream sauce served with lingonberry jam, creamy mashed potatoes, and pickled cucumber.",
+    "culturalContext": "Swedish meatballs (köttbullar) are a centerpiece of Swedish home cooking and fika culture. Interestingly, Sweden's own government officially confirmed in 2018 that the recipe was originally brought from Turkey by King Charles XII in the 1700s.",
+    "countryCode": "SE",
+    "region": "Europe",
+    "cuisine": "Swedish",
+    "totalTimeMinutes": 45,
+    "difficulty": "EASY",
+    "defaultServings": 4,
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b9/Koettbullar_stockholm2006.jpg/960px-Koettbullar_stockholm2006.jpg",
+    "ingredients": [
+      {
+        "amount": "500g",
+        "item": "mixed ground beef and pork",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1",
+        "item": "small onion",
+        "preparation": "very finely grated",
+        "optional": false
+      },
+      {
+        "amount": "1 slice",
+        "item": "white bread",
+        "preparation": "soaked in 3 tbsp milk",
+        "optional": false
+      },
+      {
+        "amount": "1",
+        "item": "egg",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "¼ tsp",
+        "item": "allspice",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "¼ tsp",
+        "item": "nutmeg",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "300ml",
+        "item": "beef stock",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "200ml",
+        "item": "heavy cream",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1 tbsp",
+        "item": "soy sauce",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "2 tbsp",
+        "item": "butter",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1 tbsp",
+        "item": "flour",
+        "preparation": null,
+        "optional": false
+      }
+    ],
+    "steps": [
+      {
+        "instruction": "Mix ground meat with grated onion, soaked bread, egg, allspice, nutmeg, salt, and pepper until uniform. Roll into 2.5cm balls (about 25–30 meatballs). Chill 10 minutes.",
+        "timerSeconds": 600,
+        "timerLabel": "Chill Meatballs",
+        "tip": null
+      },
+      {
+        "instruction": "Melt butter in a large skillet over medium-high heat. Brown meatballs in batches for 6–8 minutes, turning to brown all sides. Set aside.",
+        "timerSeconds": 480,
+        "timerLabel": "Brown Meatballs",
+        "tip": "Do not overcrowd — brown, don't steam."
+      },
+      {
+        "instruction": "In the same skillet over medium heat, whisk flour into the remaining butter for 1 minute. Gradually add beef stock, whisking out lumps.",
+        "timerSeconds": 60,
+        "timerLabel": "Make Roux",
+        "tip": null
+      },
+      {
+        "instruction": "Stir in heavy cream and soy sauce. Simmer sauce 5 minutes until slightly thickened.",
+        "timerSeconds": 300,
+        "timerLabel": "Simmer Gravy",
+        "tip": null
+      },
+      {
+        "instruction": "Return meatballs to the skillet and simmer gently in the gravy for 5 more minutes until cooked through.",
+        "timerSeconds": 300,
+        "timerLabel": "Finish Meatballs",
+        "tip": null
+      },
+      {
+        "instruction": "Serve with creamy mashed potatoes, a spoonful of lingonberry jam, and quick-pickled cucumber. Garnish with fresh dill.",
+        "timerSeconds": null,
+        "timerLabel": null,
+        "tip": null
+      }
+    ],
+    "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Koettbullar_stockholm2006.jpg"
+  },
+  {
+    "catalogNumber": 16,
+    "name": "Filipino Chicken Adobo",
+    "description": "The national dish of the Philippines — chicken braised in vinegar, soy, garlic, and bay leaves until impossibly tender.",
+    "culturalContext": "Filipino adobo is named after the Spanish word for marinade, but the cooking method predates Spanish colonization. The acidic vinegar brine was used to preserve meat in the tropical climate. Every Filipino family has their own variation — some add coconut milk, others caramelize the chicken at the end.",
+    "countryCode": "PH",
+    "region": "Asia",
+    "cuisine": "Filipino",
+    "totalTimeMinutes": 50,
+    "difficulty": "EASY",
+    "defaultServings": 4,
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c9/Adobo_DSCF4391.jpg/960px-Adobo_DSCF4391.jpg",
+    "ingredients": [
+      {
+        "amount": "1 kg",
+        "item": "chicken thighs and drumsticks",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "120ml",
+        "item": "white cane vinegar or apple cider vinegar",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "60ml",
+        "item": "soy sauce",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1 head",
+        "item": "garlic",
+        "preparation": "peeled and crushed",
+        "optional": false
+      },
+      {
+        "amount": "3",
+        "item": "bay leaves",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1 tsp",
+        "item": "whole black peppercorns",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "2 tbsp",
+        "item": "vegetable oil",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1 tsp",
+        "item": "sugar",
+        "preparation": null,
+        "optional": true
+      }
+    ],
+    "steps": [
+      {
+        "instruction": "Combine chicken with vinegar, soy sauce, garlic, bay leaves, and peppercorns. Marinate at least 30 minutes.",
+        "timerSeconds": 1800,
+        "timerLabel": "Marinate Chicken",
+        "tip": null
+      },
+      {
+        "instruction": "Transfer everything to a pot over high heat. Bring to a boil, then reduce to a simmer, cover and cook for 20 minutes.",
+        "timerSeconds": 1200,
+        "timerLabel": "Braise Chicken",
+        "tip": null
+      },
+      {
+        "instruction": "Uncover and continue simmering for 10 minutes until sauce is reduced by half.",
+        "timerSeconds": 600,
+        "timerLabel": "Reduce Sauce",
+        "tip": "The reduced sauce should coat the back of a spoon."
+      },
+      {
+        "instruction": "Remove chicken and pat dry. Heat oil in a skillet over high heat. Fry chicken in batches until browned and caramelized, 3 minutes per side.",
+        "timerSeconds": 360,
+        "timerLabel": "Caramelize Chicken",
+        "tip": null
+      },
+      {
+        "instruction": "Return chicken to the sauce to warm through. Serve over steamed white rice, spooning sauce generously over both.",
+        "timerSeconds": null,
+        "timerLabel": null,
+        "tip": null
+      }
+    ],
+    "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Adobo_DSCF4391.jpg"
+  },
+  {
+    "catalogNumber": 17,
+    "name": "Lebanese Hummus",
+    "description": "Perfectly silky, authentic Lebanese hummus from scratch — chickpeas blended to cloud-like smoothness with tahini and lemon.",
+    "culturalContext": "Hummus (Arabic: حُمُّص) means \"chickpea\" and is a Levantine staple that crosses cultural borders across the Middle East. The best Lebanese hummus is defined by its impossibly smooth texture, achieved by peeling each chickpea and blending with ice water.",
+    "countryCode": "LB",
+    "region": "Middle East",
+    "cuisine": "Lebanese",
+    "totalTimeMinutes": 15,
+    "difficulty": "EASY",
+    "defaultServings": 6,
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bf/Lebanese_style_hummus.jpg/960px-Lebanese_style_hummus.jpg",
+    "ingredients": [
+      {
+        "amount": "400g",
+        "item": "dried chickpeas",
+        "preparation": "soaked overnight then boiled, or 2 canned (very well cooked)",
+        "optional": false
+      },
+      {
+        "amount": "100g",
+        "item": "good quality tahini",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "2",
+        "item": "lemons",
+        "preparation": "juiced",
+        "optional": false
+      },
+      {
+        "amount": "2 cloves",
+        "item": "garlic",
+        "preparation": "minced to paste",
+        "optional": false
+      },
+      {
+        "amount": "1 tsp",
+        "item": "salt",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "4 tbsp",
+        "item": "ice-cold water",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "4 tbsp",
+        "item": "extra-virgin olive oil",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "½ tsp",
+        "item": "paprika",
+        "preparation": "for serving",
+        "optional": false
+      },
+      {
+        "amount": "1 tbsp",
+        "item": "fresh parsley",
+        "preparation": "for serving",
+        "optional": false
+      }
+    ],
+    "steps": [
+      {
+        "instruction": "If using dried chickpeas: drain soaked chickpeas, boil in fresh water with ½ tsp baking soda for 45–60 minutes until very soft. Peel chickpeas while warm (optional but gives silkiest texture).",
+        "timerSeconds": 3600,
+        "timerLabel": "Cook Chickpeas",
+        "tip": null
+      },
+      {
+        "instruction": "In a food processor, blend tahini, lemon juice, garlic, and salt for 1 minute until the tahini lightens in color.",
+        "timerSeconds": null,
+        "timerLabel": null,
+        "tip": "Blending tahini with lemon before adding chickpeas creates white, fluffy texture."
+      },
+      {
+        "instruction": "Reserve a few whole chickpeas for garnish. Add the rest to the processor and blend 3–4 minutes, scraping down sides. Add ice water one tablespoon at a time until very smooth and light.",
+        "timerSeconds": 240,
+        "timerLabel": "Blend Smooth",
+        "tip": null
+      },
+      {
+        "instruction": "Taste and adjust lemon and salt. The hummus should be creamy, tangy, and savory.",
+        "timerSeconds": null,
+        "timerLabel": null,
+        "tip": null
+      },
+      {
+        "instruction": "Spread into a wide bowl, creating a shallow well in the center. Drizzle generously with olive oil, sprinkle paprika, top with reserved chickpeas and fresh parsley. Serve with warm pita bread.",
+        "timerSeconds": null,
+        "timerLabel": null,
+        "tip": null
+      }
+    ],
+    "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Lebanese_style_hummus.jpg"
+  },
+  {
+    "catalogNumber": 18,
+    "name": "Indonesian Nasi Goreng",
+    "description": "Indonesia's legendary fried rice made with sweet kecap manis, shrimp paste, and a crispy fried egg on top.",
+    "culturalContext": "Nasi goreng is considered Indonesia's national dish and has been voted one of the world's most delicious foods. The key distinction from other fried rice dishes is kecap manis (sweet soy sauce) and terasi (shrimp paste), which give it a uniquely deep, caramelized flavor.",
+    "countryCode": "ID",
+    "region": "Asia",
+    "cuisine": "Indonesian",
+    "totalTimeMinutes": 20,
+    "difficulty": "EASY",
+    "defaultServings": 2,
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c7/Nasi_Goreng_Kampung_%2811967588375%29.jpg/960px-Nasi_Goreng_Kampung_%2811967588375%29.jpg",
+    "ingredients": [
+      {
+        "amount": "2 cups",
+        "item": "day-old cooked white rice",
+        "preparation": "cold and separated",
+        "optional": false
+      },
+      {
+        "amount": "150g",
+        "item": "shrimp",
+        "preparation": "peeled and deveined",
+        "optional": false
+      },
+      {
+        "amount": "3 tbsp",
+        "item": "kecap manis (sweet soy sauce)",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1 tbsp",
+        "item": "soy sauce",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1 tsp",
+        "item": "terasi (shrimp paste)",
+        "preparation": "toasted in pan",
+        "optional": false
+      },
+      {
+        "amount": "3",
+        "item": "shallots",
+        "preparation": "finely sliced",
+        "optional": false
+      },
+      {
+        "amount": "3 cloves",
+        "item": "garlic",
+        "preparation": "minced",
+        "optional": false
+      },
+      {
+        "amount": "2",
+        "item": "red chilies",
+        "preparation": "sliced",
+        "optional": false
+      },
+      {
+        "amount": "2",
+        "item": "eggs",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "3",
+        "item": "spring onions",
+        "preparation": "sliced",
+        "optional": false
+      },
+      {
+        "amount": "3 tbsp",
+        "item": "vegetable oil",
+        "preparation": null,
+        "optional": false
+      }
+    ],
+    "steps": [
+      {
+        "instruction": "Mix kecap manis, soy sauce, and toasted shrimp paste into a sauce. Set aside.",
+        "timerSeconds": null,
+        "timerLabel": null,
+        "tip": null
+      },
+      {
+        "instruction": "Heat 2 tbsp oil in a wok over high heat. Fry shallots, garlic, and chilies for 2 minutes until fragrant.",
+        "timerSeconds": 120,
+        "timerLabel": "Fry Aromatics",
+        "tip": null
+      },
+      {
+        "instruction": "Add shrimp and cook 2 minutes until pink.",
+        "timerSeconds": 120,
+        "timerLabel": "Cook Shrimp",
+        "tip": null
+      },
+      {
+        "instruction": "Add cold rice, breaking up any clumps. Stir-fry vigorously for 3 minutes over high heat until rice is hot.",
+        "timerSeconds": 180,
+        "timerLabel": "Fry Rice",
+        "tip": "Day-old cold rice is essential — fresh rice gets mushy."
+      },
+      {
+        "instruction": "Pour sauce over rice and toss until rice is evenly coated and caramelized. Add spring onions and toss once more.",
+        "timerSeconds": null,
+        "timerLabel": null,
+        "tip": null
+      },
+      {
+        "instruction": "In a separate pan, fry eggs in remaining oil until whites are set and edges are crispy but yolks are runny. Serve rice topped with the fried egg, with prawn crackers and pickled vegetables on the side.",
+        "timerSeconds": null,
+        "timerLabel": null,
+        "tip": null
+      }
+    ],
+    "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Nasi_Goreng_Kampung_(11967588375).jpg"
+  },
+  {
+    "catalogNumber": 19,
+    "name": "German Bratwurst with Sauerkraut",
+    "description": "Juicy pork bratwurst grilled to perfection, served with tangy sauerkraut, mustard, and crusty bread.",
+    "culturalContext": "Bratwurst is a staple of German cuisine dating back to the 14th century. Every region of Germany has its own variation — Nuremberg's mini bratwursts, Thuringia's herbed version, and Cologne's long grilled variety are fiercely contested regional prides.",
+    "countryCode": "DE",
+    "region": "Europe",
+    "cuisine": "German",
+    "totalTimeMinutes": 35,
+    "difficulty": "EASY",
+    "defaultServings": 4,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b0/German_Bratw%C3%BCrste.jpg",
+    "ingredients": [
+      {
+        "amount": "8",
+        "item": "fresh bratwurst sausages",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "500g",
+        "item": "sauerkraut",
+        "preparation": "drained",
+        "optional": false
+      },
+      {
+        "amount": "1",
+        "item": "large onion",
+        "preparation": "sliced",
+        "optional": false
+      },
+      {
+        "amount": "200ml",
+        "item": "German lager or apple cider",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1 tsp",
+        "item": "caraway seeds",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1 tsp",
+        "item": "juniper berries",
+        "preparation": "crushed",
+        "optional": true
+      },
+      {
+        "amount": "2 tbsp",
+        "item": "butter",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "4",
+        "item": "crusty bread rolls (brötchen)",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "4 tbsp",
+        "item": "German mustard (senf)",
+        "preparation": null,
+        "optional": false
+      }
+    ],
+    "steps": [
+      {
+        "instruction": "Prick bratwurst skins lightly. Grill or pan-fry over medium-high heat for 12–15 minutes, turning every 3–4 minutes until deeply browned on all sides.",
+        "timerSeconds": 840,
+        "timerLabel": "Grill Bratwurst",
+        "tip": "Do not pierce fully — the juices must stay inside."
+      },
+      {
+        "instruction": "In a pot, melt butter over medium heat. Sauté onion until golden, about 7 minutes.",
+        "timerSeconds": 420,
+        "timerLabel": "Sauté Onion",
+        "tip": null
+      },
+      {
+        "instruction": "Add sauerkraut, caraway seeds, and juniper berries to the onion. Pour in beer or cider. Stir to combine.",
+        "timerSeconds": null,
+        "timerLabel": null,
+        "tip": null
+      },
+      {
+        "instruction": "Simmer sauerkraut mixture over low heat for 15 minutes until liquid is mostly absorbed and flavors meld.",
+        "timerSeconds": 900,
+        "timerLabel": "Simmer Sauerkraut",
+        "tip": null
+      },
+      {
+        "instruction": "Toast rolls briefly. Serve bratwurst in or alongside rolls with generous sauerkraut and mustard.",
+        "timerSeconds": null,
+        "timerLabel": null,
+        "tip": null
+      }
+    ],
+    "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:German_Bratw%C3%BCrste.jpg"
+  },
+  {
+    "catalogNumber": 20,
+    "name": "Greek Moussaka",
+    "description": "Classic layered Greek casserole with spiced lamb, roasted eggplant, and a golden béchamel topping.",
+    "culturalContext": "Moussaka is Greece's most internationally recognized dish, shaped by Ottoman, Arab, and Byzantine culinary traditions. The modern version with béchamel sauce was codified by French-trained Greek chef Nikolaos Tselementes in the 1920s.",
+    "countryCode": "GR",
+    "region": "Europe",
+    "cuisine": "Greek",
+    "totalTimeMinutes": 80,
+    "difficulty": "MEDIUM",
+    "defaultServings": 6,
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a8/MussakasMeMelitsanesKePatates01.JPG/960px-MussakasMeMelitsanesKePatates01.JPG",
+    "ingredients": [
+      {
+        "amount": "2",
+        "item": "large eggplants",
+        "preparation": "sliced 1cm thick",
+        "optional": false
+      },
+      {
+        "amount": "500g",
+        "item": "ground lamb or beef",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1",
+        "item": "large onion",
+        "preparation": "finely chopped",
+        "optional": false
+      },
+      {
+        "amount": "4 cloves",
+        "item": "garlic",
+        "preparation": "minced",
+        "optional": false
+      },
+      {
+        "amount": "400g",
+        "item": "crushed tomatoes",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1 tsp",
+        "item": "ground cinnamon",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1 tsp",
+        "item": "allspice",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "500ml",
+        "item": "whole milk",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "50g",
+        "item": "butter",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "50g",
+        "item": "flour",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "2",
+        "item": "egg yolks",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "100g",
+        "item": "kefalotyri or Parmesan cheese",
+        "preparation": "grated",
+        "optional": false
+      }
+    ],
+    "steps": [
+      {
+        "instruction": "Salt eggplant slices and leave 20 minutes to draw out bitterness. Rinse, pat dry, brush with olive oil, and roast at 200°C for 20 minutes until golden.",
+        "timerSeconds": 1200,
+        "timerLabel": "Roast Eggplant",
+        "tip": null
+      },
+      {
+        "instruction": "Brown lamb in a pan over high heat. Add onion and garlic, cook 5 minutes. Add tomatoes, cinnamon, allspice, salt and pepper. Simmer 15 minutes until thick.",
+        "timerSeconds": 900,
+        "timerLabel": "Cook Meat Sauce",
+        "tip": null
+      },
+      {
+        "instruction": "Make béchamel: melt butter, whisk in flour 2 minutes, gradually add warm milk whisking constantly. Cook until thick. Remove from heat, beat in egg yolks and half the cheese.",
+        "timerSeconds": 600,
+        "timerLabel": "Make Béchamel",
+        "tip": "Keep whisking constantly to prevent lumps."
+      },
+      {
+        "instruction": "Layer: half the eggplant, all the meat sauce, remaining eggplant, then pour béchamel over the top. Sprinkle remaining cheese.",
+        "timerSeconds": null,
+        "timerLabel": null,
+        "tip": null
+      },
+      {
+        "instruction": "Bake at 180°C for 35–40 minutes until béchamel is deeply golden and set. Rest 15 minutes before cutting — moussaka cuts best when slightly cooled.",
+        "timerSeconds": 2400,
+        "timerLabel": "Bake Moussaka",
+        "tip": null
+      }
+    ],
+    "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:MussakasMeMelitsanesKePatates01.JPG"
+  },
+  {
+    "catalogNumber": 21,
+    "name": "Turkish Adana Kebab",
+    "description": "Spiced ground lamb kebabs formed on skewers and grilled over charcoal, served with flatbread and sumac onions.",
+    "culturalContext": "Adana kebab originates from Turkey's Adana province and is one of the country's most celebrated grilled dishes. The lamb must be hand-minced (never machine-ground) and mixed with tail fat for authentic texture. It is named after the city and has Protected Geographical Indication status.",
+    "countryCode": "TR",
+    "region": "Asia",
+    "cuisine": "Turkish",
+    "totalTimeMinutes": 40,
+    "difficulty": "MEDIUM",
+    "defaultServings": 4,
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/55/Adana_kebab.jpg/960px-Adana_kebab.jpg",
+    "ingredients": [
+      {
+        "amount": "700g",
+        "item": "ground lamb (hand-minced with 20% fat content)",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "2 tsp",
+        "item": "red pepper flakes (pul biber)",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1 tsp",
+        "item": "ground sumac",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1 tsp",
+        "item": "ground cumin",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1",
+        "item": "small onion",
+        "preparation": "grated and squeezed dry",
+        "optional": false
+      },
+      {
+        "amount": "4 cloves",
+        "item": "garlic",
+        "preparation": "minced",
+        "optional": false
+      },
+      {
+        "amount": "2 tbsp",
+        "item": "flat-leaf parsley",
+        "preparation": "finely chopped",
+        "optional": false
+      },
+      {
+        "amount": "2",
+        "item": "large red onions",
+        "preparation": "sliced thin for salad",
+        "optional": false
+      },
+      {
+        "amount": "1 tsp",
+        "item": "sumac",
+        "preparation": "for onion salad",
+        "optional": false
+      },
+      {
+        "amount": "4",
+        "item": "lavash or pide flatbreads",
+        "preparation": null,
+        "optional": false
+      }
+    ],
+    "steps": [
+      {
+        "instruction": "Combine lamb, red pepper flakes, cumin, grated onion, garlic, and parsley. Knead firmly for 3–4 minutes until sticky and uniform. Refrigerate 30 minutes.",
+        "timerSeconds": 1800,
+        "timerLabel": "Rest Kebab Mix",
+        "tip": null
+      },
+      {
+        "instruction": "Divide meat into 8 portions. Wet hands and mold each portion tightly around a flat metal skewer, squeezing and shaping into a long oval about 20cm. Squeeze ends firmly.",
+        "timerSeconds": null,
+        "timerLabel": null,
+        "tip": "The meat must grip the skewer — if it falls off, knead more."
+      },
+      {
+        "instruction": "Grill over very high charcoal or grill heat for 8–10 minutes, turning every 2 minutes until deeply charred on the outside and juicy within.",
+        "timerSeconds": 600,
+        "timerLabel": "Grill Kebabs",
+        "tip": null
+      },
+      {
+        "instruction": "Toss sliced red onion with sumac and salt, squeeze lightly. Warm flatbread on the grill 30 seconds per side.",
+        "timerSeconds": 60,
+        "timerLabel": "Warm Bread",
+        "tip": null
+      },
+      {
+        "instruction": "Lay flatbread on plates, slide kebabs off skewers onto bread. Serve with sumac onions, grilled tomatoes, and green chilies.",
+        "timerSeconds": null,
+        "timerLabel": null,
+        "tip": null
+      }
+    ],
+    "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Adana_kebab.jpg"
+  },
+  {
+    "catalogNumber": 22,
+    "name": "Peruvian Ceviche",
+    "description": "Fresh white fish cured in lime juice with ají amarillo, red onion, cilantro, and crunchy cancha corn.",
+    "culturalContext": "Ceviche is Peru's national dish and has been consumed along the coast for over 2,000 years. The modern version using citrus acid (leche de tigre — tiger's milk) to 'cook' the fish was developed by Peruvians of Japanese descent (Nikkei cuisine), blending Japanese sashimi techniques with Andean flavors.",
+    "countryCode": "PE",
+    "region": "South America",
+    "cuisine": "Peruvian",
+    "totalTimeMinutes": 20,
+    "difficulty": "EASY",
+    "defaultServings": 4,
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/78/Cebiche_de_corvina.JPG/960px-Cebiche_de_corvina.JPG",
+    "ingredients": [
+      {
+        "amount": "600g",
+        "item": "fresh white fish (sea bass or flounder)",
+        "preparation": "cut into 2cm cubes",
+        "optional": false
+      },
+      {
+        "amount": "150ml",
+        "item": "fresh lime juice (about 10 limes)",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1",
+        "item": "ají amarillo chili paste",
+        "preparation": "1 tsp",
+        "optional": false
+      },
+      {
+        "amount": "1",
+        "item": "red onion",
+        "preparation": "thinly sliced",
+        "optional": false
+      },
+      {
+        "amount": "2 cloves",
+        "item": "garlic",
+        "preparation": "minced to paste",
+        "optional": false
+      },
+      {
+        "amount": "1 tsp",
+        "item": "fresh ginger",
+        "preparation": "grated",
+        "optional": false
+      },
+      {
+        "amount": "1 bunch",
+        "item": "fresh cilantro",
+        "preparation": "leaves only",
+        "optional": false
+      },
+      {
+        "amount": "1 tsp",
+        "item": "salt",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1 cup",
+        "item": "cancha corn (toasted dried corn)",
+        "preparation": "for serving",
+        "optional": false
+      },
+      {
+        "amount": "2",
+        "item": "sweet potatoes",
+        "preparation": "boiled and sliced, for serving",
+        "optional": false
+      }
+    ],
+    "steps": [
+      {
+        "instruction": "Make leche de tigre: blend a small amount of fish scraps with lime juice, garlic, ginger, ají amarillo, and salt for 30 seconds. Strain through a sieve. This is the curing liquid.",
+        "timerSeconds": null,
+        "timerLabel": null,
+        "tip": null
+      },
+      {
+        "instruction": "Soak sliced onion in cold salted water for 5 minutes, then drain. This removes harshness while keeping the crunch.",
+        "timerSeconds": 300,
+        "timerLabel": "Soak Onion",
+        "tip": null
+      },
+      {
+        "instruction": "Combine fish cubes with the leche de tigre. Toss to coat and cure for exactly 2–3 minutes — the acid will turn the fish opaque on the outside but keep it tender inside.",
+        "timerSeconds": 150,
+        "timerLabel": "Cure Fish",
+        "tip": "Longer curing makes the fish rubbery. 2–3 minutes is the sweet spot."
+      },
+      {
+        "instruction": "Fold in sliced onion and cilantro leaves. Taste and adjust salt and lime.",
+        "timerSeconds": null,
+        "timerLabel": null,
+        "tip": null
+      },
+      {
+        "instruction": "Serve immediately in chilled bowls alongside sliced sweet potato and cancha corn. Pour any remaining leche de tigre as a sauce.",
+        "timerSeconds": null,
+        "timerLabel": null,
+        "tip": null
+      }
+    ],
+    "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Cebiche_de_corvina.JPG"
+  },
+  {
+    "catalogNumber": 23,
+    "name": "Argentine Asado (Grilled Beef Short Ribs)",
+    "description": "Slow-grilled Argentine beef short ribs over wood coals with chimichurri herb sauce — the heart of Río de la Plata culture.",
+    "culturalContext": "Asado is more than a meal in Argentina — it is a social ritual. The asador (grill master) commands respect, and gathering around the parrilla (grill) is the cornerstone of Argentine family and social life. Only salt is used on the meat — the quality of the beef and the fire does the rest.",
+    "countryCode": "AR",
+    "region": "South America",
+    "cuisine": "Argentine",
+    "totalTimeMinutes": 120,
+    "difficulty": "MEDIUM",
+    "defaultServings": 6,
+    "imageUrl": "https://images.unsplash.com/photo-1558030006-450675393462?w=800&q=80",
+    "ingredients": [
+      {
+        "amount": "2 kg",
+        "item": "beef short ribs (asado de tira)",
+        "preparation": "bone-in",
+        "optional": false
+      },
+      {
+        "amount": "2 tsp",
+        "item": "coarse salt (sal gruesa)",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1 bunch",
+        "item": "flat-leaf parsley",
+        "preparation": "finely chopped",
+        "optional": false
+      },
+      {
+        "amount": "6 cloves",
+        "item": "garlic",
+        "preparation": "minced",
+        "optional": false
+      },
+      {
+        "amount": "1 tsp",
+        "item": "dried oregano",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1 tsp",
+        "item": "red pepper flakes",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "100ml",
+        "item": "red wine vinegar",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "150ml",
+        "item": "extra-virgin olive oil",
+        "preparation": null,
+        "optional": false
+      }
+    ],
+    "steps": [
+      {
+        "instruction": "Build a wood or charcoal fire and let it burn down to glowing embers with no flames. The grill should be 15–20cm from the heat — hold your hand above for 4–5 seconds.",
+        "timerSeconds": null,
+        "timerLabel": null,
+        "tip": "Never cook over open flames — only embers. This takes 45–60 minutes to prepare the fire correctly."
+      },
+      {
+        "instruction": "Season ribs on both sides with coarse salt only. Place bone-side down on the grill. Do not move for the first 20 minutes.",
+        "timerSeconds": 1200,
+        "timerLabel": "Grill Bone Side",
+        "tip": null
+      },
+      {
+        "instruction": "Flip and grill meat-side down for 15 minutes. Continue turning every 10–15 minutes until a deep crust forms and meat pulls away from bones.",
+        "timerSeconds": 3000,
+        "timerLabel": "Grill Meat Side",
+        "tip": null
+      },
+      {
+        "instruction": "Make chimichurri: combine parsley, garlic, oregano, chili flakes, vinegar, and olive oil. Season well. Let rest at room temperature for 30 minutes for flavors to meld.",
+        "timerSeconds": 1800,
+        "timerLabel": "Rest Chimichurri",
+        "tip": null
+      },
+      {
+        "instruction": "Rest ribs 10 minutes. Slice between bones and serve with chimichurri, crusty bread, and a simple salad.",
+        "timerSeconds": null,
+        "timerLabel": null,
+        "tip": null
+      }
+    ]
+  },
+  {
+    "catalogNumber": 24,
+    "name": "Egyptian Koshari",
+    "description": "Egypt's beloved street food — a hearty bowl of lentils, rice, and pasta topped with spiced tomato sauce and crispy fried onions.",
+    "culturalContext": "Koshari is considered Egypt's national dish and is sold from dedicated street carts (koshari carts) throughout Cairo and Alexandria. It reflects Egypt's multicultural history — the pasta from Italian influence, lentils from Pharaonic tradition, and spiced tomato sauce from Arab cuisine.",
+    "countryCode": "EG",
+    "region": "Africa",
+    "cuisine": "Egyptian",
+    "totalTimeMinutes": 50,
+    "difficulty": "MEDIUM",
+    "defaultServings": 4,
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e9/Egyptian_food_Koshary.jpg/960px-Egyptian_food_Koshary.jpg",
+    "ingredients": [
+      {
+        "amount": "200g",
+        "item": "brown lentils",
+        "preparation": "soaked 1 hour",
+        "optional": false
+      },
+      {
+        "amount": "200g",
+        "item": "short-grain rice",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "150g",
+        "item": "small elbow macaroni",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "2",
+        "item": "large onions",
+        "preparation": "very thinly sliced",
+        "optional": false
+      },
+      {
+        "amount": "400g",
+        "item": "crushed tomatoes",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "4 cloves",
+        "item": "garlic",
+        "preparation": "minced",
+        "optional": false
+      },
+      {
+        "amount": "1 tsp",
+        "item": "ground cumin",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1 tsp",
+        "item": "ground coriander",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "½ tsp",
+        "item": "cayenne pepper",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "3 tbsp",
+        "item": "white vinegar",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "4 tbsp",
+        "item": "vegetable oil",
+        "preparation": null,
+        "optional": false
+      }
+    ],
+    "steps": [
+      {
+        "instruction": "Deep-fry sliced onions in oil at 160°C, stirring often, for 20–25 minutes until dark golden and crispy. Drain on paper towels — they will crisp further as they cool.",
+        "timerSeconds": 1500,
+        "timerLabel": "Fry Onions",
+        "tip": "Patience is key — undercooked onions taste bitter."
+      },
+      {
+        "instruction": "Boil lentils in salted water for 15–20 minutes until tender but not mushy. Drain and set aside.",
+        "timerSeconds": 1200,
+        "timerLabel": "Cook Lentils",
+        "tip": null
+      },
+      {
+        "instruction": "Cook rice in 400ml salted water, bring to boil then cover and simmer 15 minutes. Cook macaroni separately until al dente.",
+        "timerSeconds": 900,
+        "timerLabel": "Cook Rice & Pasta",
+        "tip": null
+      },
+      {
+        "instruction": "Make dakka (tomato sauce): fry garlic in oil 1 minute. Add crushed tomatoes, cumin, coriander, cayenne, and vinegar. Simmer 15 minutes until thick.",
+        "timerSeconds": 900,
+        "timerLabel": "Make Tomato Sauce",
+        "tip": null
+      },
+      {
+        "instruction": "Layer in bowls: rice and lentils mixed at the bottom, macaroni on top, tomato sauce over that, and finish with a generous pile of crispy onions. Serve with extra sauce and vinegar-chili sauce on the side.",
+        "timerSeconds": null,
+        "timerLabel": null,
+        "tip": null
+      }
+    ],
+    "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Egyptian_food_Koshary.jpg"
+  },
+  {
+    "catalogNumber": 25,
+    "name": "Colombian Bandeja Paisa",
+    "description": "Colombia's monumental platter from the Antioquia region — beans, chicharrón, chorizo, ground beef, egg, avocado, and arepas.",
+    "culturalContext": "Bandeja Paisa originates from Antioquia and is Colombia's most iconic regional dish, traditionally eaten by peasants and workers who needed a filling, energizing meal. The platter represents the abundance and generosity of Colombian culture — no guest leaves the table hungry.",
+    "countryCode": "CO",
+    "region": "South America",
+    "cuisine": "Colombian",
+    "totalTimeMinutes": 90,
+    "difficulty": "HARD",
+    "defaultServings": 2,
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/30/Bandeja_paisa%2C_plato_Colombiano.jpg/960px-Bandeja_paisa%2C_plato_Colombiano.jpg",
+    "ingredients": [
+      {
+        "amount": "400g",
+        "item": "dried red beans (frijoles)",
+        "preparation": "soaked overnight",
+        "optional": false
+      },
+      {
+        "amount": "200g",
+        "item": "pork belly (chicharrón)",
+        "preparation": "skin-on, cut into pieces",
+        "optional": false
+      },
+      {
+        "amount": "2",
+        "item": "Colombian chorizo sausages",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "200g",
+        "item": "ground beef (carne molida)",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "2",
+        "item": "eggs",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "2 cups",
+        "item": "cooked white rice",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "2",
+        "item": "arepas (corn cakes), pre-made",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1",
+        "item": "ripe avocado",
+        "preparation": "sliced",
+        "optional": false
+      },
+      {
+        "amount": "2 tbsp",
+        "item": "hogao sauce (tomato and onion sauce)",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1",
+        "item": "plantain",
+        "preparation": "ripe, sliced and fried",
+        "optional": false
+      }
+    ],
+    "steps": [
+      {
+        "instruction": "Cook soaked beans with salt and a garlic clove in enough water to cover by 5cm. Boil 45–60 minutes until completely tender and creamy.",
+        "timerSeconds": 3600,
+        "timerLabel": "Cook Beans",
+        "tip": null
+      },
+      {
+        "instruction": "Score pork belly skin deeply. Season with salt. Cook in a dry pan over medium heat for 20–25 minutes until skin blisters and becomes crispy (chicharrón).",
+        "timerSeconds": 1500,
+        "timerLabel": "Fry Chicharrón",
+        "tip": null
+      },
+      {
+        "instruction": "Grill chorizo until charred and cooked through, about 8 minutes. Brown ground beef with garlic, cumin, and tomato, 5 minutes.",
+        "timerSeconds": 600,
+        "timerLabel": "Cook Meats",
+        "tip": null
+      },
+      {
+        "instruction": "Fry eggs sunny-side up. Fry plantain slices in a little oil until golden. Warm arepas on a dry pan.",
+        "timerSeconds": 300,
+        "timerLabel": "Finish Components",
+        "tip": null
+      },
+      {
+        "instruction": "Arrange everything on a large oval plate (bandeja): beans, rice, ground beef, chicharrón, chorizo, fried egg, arepa, avocado slices, and fried plantain. Add hogao sauce over the beans.",
+        "timerSeconds": null,
+        "timerLabel": null,
+        "tip": null
+      }
+    ],
+    "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Bandeja_paisa,_plato_Colombiano.jpg"
+  },
+  {
+    "catalogNumber": 26,
+    "name": "Australian Meat Pie",
+    "description": "Australia's iconic hand-held meat pie with a flaky pastry shell, rich beef and gravy filling, topped with tomato sauce.",
+    "culturalContext": "The Australian meat pie is arguably the country's most beloved food. Sold at every bakery, petrol station, and sports stadium, it is consumed over 260 million times a year in Australia. The classic pie-floater (served upside down in pea soup) is a South Australian delicacy at night markets.",
+    "countryCode": "AU",
+    "region": "Oceania",
+    "cuisine": "Australian",
+    "totalTimeMinutes": 70,
+    "difficulty": "MEDIUM",
+    "defaultServings": 4,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b2/Meat_pie.jpg",
+    "ingredients": [
+      {
+        "amount": "500g",
+        "item": "ground beef (mince)",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1",
+        "item": "large onion",
+        "preparation": "finely diced",
+        "optional": false
+      },
+      {
+        "amount": "2 tbsp",
+        "item": "tomato paste",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "2 tbsp",
+        "item": "Worcestershire sauce",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "250ml",
+        "item": "beef stock",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "2 tbsp",
+        "item": "flour",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1 tsp",
+        "item": "mixed herbs",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "2 sheets",
+        "item": "shortcrust pastry",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1 sheet",
+        "item": "puff pastry",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1",
+        "item": "egg",
+        "preparation": "beaten, for glaze",
+        "optional": false
+      },
+      {
+        "amount": "tomato sauce (ketchup)",
+        "item": "for serving",
+        "preparation": null,
+        "optional": false
+      }
+    ],
+    "steps": [
+      {
+        "instruction": "Fry onion in oil over medium heat for 5 minutes. Add beef mince and cook until browned, breaking up lumps, 7 minutes.",
+        "timerSeconds": 720,
+        "timerLabel": "Brown Meat",
+        "tip": null
+      },
+      {
+        "instruction": "Stir in flour and cook 1 minute. Add tomato paste, Worcestershire, stock, and herbs. Stir well. Simmer uncovered for 20 minutes until thick and rich. Cool completely.",
+        "timerSeconds": 1200,
+        "timerLabel": "Simmer Filling",
+        "tip": "Filling must be completely cool before going into pastry or it will make the base soggy."
+      },
+      {
+        "instruction": "Preheat oven to 200°C. Line 4 pie tins with shortcrust pastry, pressing into edges. Blind bake 8 minutes.",
+        "timerSeconds": 480,
+        "timerLabel": "Blind Bake Shells",
+        "tip": null
+      },
+      {
+        "instruction": "Fill shells with cold beef mixture. Top with puff pastry, pressing edges to seal. Cut a small steam vent. Brush with egg wash.",
+        "timerSeconds": null,
+        "timerLabel": null,
+        "tip": null
+      },
+      {
+        "instruction": "Bake 25–30 minutes until puff pastry is deeply golden. Rest 5 minutes. Serve with tomato sauce (ketchup) on top.",
+        "timerSeconds": 1800,
+        "timerLabel": "Bake Pies",
+        "tip": null
+      }
+    ],
+    "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Meat_pie.jpg"
+  },
+  {
+    "catalogNumber": 27,
+    "name": "Portuguese Bacalhau à Brás",
+    "description": "Portugal's classic salted cod dish — shredded bacalhau scrambled with crispy matchstick potatoes and eggs.",
+    "culturalContext": "Portugal has over 365 recipes for bacalhau (salted cod) — one for every day of the year. Bacalhau à Brás is named after the Bairro Alto neighborhood of Lisbon and is considered one of the most beloved versions. Portugal's relationship with cod dates back 500 years to fishing expeditions off Newfoundland.",
+    "countryCode": "PT",
+    "region": "Europe",
+    "cuisine": "Portuguese",
+    "totalTimeMinutes": 45,
+    "difficulty": "MEDIUM",
+    "defaultServings": 4,
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/39/Bacalhau_a_Bras.jpg/960px-Bacalhau_a_Bras.jpg",
+    "ingredients": [
+      {
+        "amount": "500g",
+        "item": "salted cod (bacalhau)",
+        "preparation": "soaked 24h with 3 water changes, shredded",
+        "optional": false
+      },
+      {
+        "amount": "4",
+        "item": "large potatoes",
+        "preparation": "julienned into thin matchsticks",
+        "optional": false
+      },
+      {
+        "amount": "2",
+        "item": "large onions",
+        "preparation": "thinly sliced",
+        "optional": false
+      },
+      {
+        "amount": "4 cloves",
+        "item": "garlic",
+        "preparation": "minced",
+        "optional": false
+      },
+      {
+        "amount": "6",
+        "item": "eggs",
+        "preparation": "lightly beaten",
+        "optional": false
+      },
+      {
+        "amount": "100ml",
+        "item": "olive oil",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1 handful",
+        "item": "black olives",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1 handful",
+        "item": "fresh parsley",
+        "preparation": "chopped",
+        "optional": false
+      }
+    ],
+    "steps": [
+      {
+        "instruction": "Deep-fry julienned potato matchsticks at 170°C for 4–5 minutes until golden and crispy. Drain and salt lightly. Set aside.",
+        "timerSeconds": 300,
+        "timerLabel": "Fry Potato Sticks",
+        "tip": "Dry the potato sticks thoroughly before frying to prevent splattering."
+      },
+      {
+        "instruction": "Heat olive oil in a large pan over medium heat. Sauté onions until soft and golden, 10 minutes. Add garlic, cook 2 minutes.",
+        "timerSeconds": 720,
+        "timerLabel": "Sauté Onion",
+        "tip": null
+      },
+      {
+        "instruction": "Add shredded soaked bacalhau to the pan. Stir and cook 3–4 minutes, allowing the cod to absorb the olive oil and onion flavors.",
+        "timerSeconds": 240,
+        "timerLabel": "Cook Bacalhau",
+        "tip": null
+      },
+      {
+        "instruction": "Reduce heat to low. Add half the crispy potato sticks, then pour in beaten eggs. Stir gently and continuously — the eggs should be soft and creamy, not fully scrambled.",
+        "timerSeconds": null,
+        "timerLabel": null,
+        "tip": "Remove from heat while eggs still look slightly underdone — residual heat finishes cooking."
+      },
+      {
+        "instruction": "Fold in remaining potato sticks for crunch contrast. Transfer to a platter, scatter black olives and fresh parsley over the top. Serve immediately.",
+        "timerSeconds": null,
+        "timerLabel": null,
+        "tip": null
+      }
+    ],
+    "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Bacalhau_a_Bras.jpg"
+  },
+  {
+    "catalogNumber": 28,
+    "name": "Nigerian Jollof Rice",
+    "description": "West Africa's most celebrated rice dish — cooked in a richly spiced tomato and pepper base until deeply smoky and caramelized.",
+    "culturalContext": "Jollof rice is the subject of a friendly culinary rivalry between Nigeria, Ghana, and Senegal, each claiming superiority. Nigerian Jollof is famous for its 'party jollof' flavor — the slight smokiness (party smoke) that comes from cooking over high heat at the bottom of the pot.",
+    "countryCode": "NG",
+    "region": "Africa",
+    "cuisine": "Nigerian",
+    "totalTimeMinutes": 60,
+    "difficulty": "MEDIUM",
+    "defaultServings": 6,
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/Jollof_Rice_with_Stew.jpg/960px-Jollof_Rice_with_Stew.jpg",
+    "ingredients": [
+      {
+        "amount": "3 cups",
+        "item": "long-grain parboiled rice",
+        "preparation": "rinsed",
+        "optional": false
+      },
+      {
+        "amount": "400g",
+        "item": "ripe tomatoes",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "200g",
+        "item": "red bell peppers",
+        "preparation": "roughly chopped",
+        "optional": false
+      },
+      {
+        "amount": "3",
+        "item": "scotch bonnet chilies",
+        "preparation": "adjust to heat preference",
+        "optional": false
+      },
+      {
+        "amount": "2",
+        "item": "large onions",
+        "preparation": "one halved for blending, one sliced",
+        "optional": false
+      },
+      {
+        "amount": "4 tbsp",
+        "item": "tomato paste",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "500ml",
+        "item": "chicken or vegetable stock",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "3 tbsp",
+        "item": "vegetable oil",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "2 tsp",
+        "item": "curry powder",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1 tsp",
+        "item": "thyme",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "2",
+        "item": "bay leaves",
+        "preparation": null,
+        "optional": false
+      }
+    ],
+    "steps": [
+      {
+        "instruction": "Blend tomatoes, red bell pepper, scotch bonnets, and halved onion together into a smooth purée. You should have about 600ml of blended pepper.",
+        "timerSeconds": null,
+        "timerLabel": null,
+        "tip": null
+      },
+      {
+        "instruction": "In a large heavy pot, heat oil over medium-high heat. Fry tomato paste for 3 minutes until darkened. Pour in blended pepper mixture. Cook on high heat, stirring often, for 20–25 minutes until oil rises to the top and pepper turns deep red.",
+        "timerSeconds": 1500,
+        "timerLabel": "Cook Pepper Base",
+        "tip": "This step is critical — under-cooked pepper base makes the rice taste sour."
+      },
+      {
+        "instruction": "Add sliced onion, curry powder, thyme, bay leaves, and salt. Stir and cook 2 more minutes.",
+        "timerSeconds": 120,
+        "timerLabel": "Add Seasonings",
+        "tip": null
+      },
+      {
+        "instruction": "Pour in stock and bring to a boil. Add washed rice, stir once, reduce heat to low. Cover tightly with foil then the lid.",
+        "timerSeconds": 1800,
+        "timerLabel": "Cook Rice",
+        "tip": "The foil creates a steam seal — do not lift lid for the first 20 minutes."
+      },
+      {
+        "instruction": "After 20 minutes, check rice. If water remains, re-cover and cook 10 more minutes. For 'party smoke' flavor, uncover the last 3 minutes on medium-high heat until you hear a gentle crackling from the bottom.",
+        "timerSeconds": null,
+        "timerLabel": null,
+        "tip": null
+      }
+    ],
+    "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Jollof_Rice_with_Stew.jpg"
+  },
+  {
+    "catalogNumber": 29,
+    "name": "New Zealand Hāngi",
+    "description": "Traditional Māori earth oven feast — lamb, chicken, kumara, and vegetables slow-cooked underground with heated stones for 3–4 hours.",
+    "culturalContext": "The hāngi is one of the most important cooking traditions of the Māori people of New Zealand. Food is placed in baskets over heated volcanic stones in a pit and covered with soil, creating a slow steam-smoke that gives the food its distinctive smoky-earthy flavor. It is a communal celebration meal for gatherings (hui) and festivals.",
+    "countryCode": "NZ",
+    "region": "Oceania",
+    "cuisine": "Māori",
+    "totalTimeMinutes": 240,
+    "difficulty": "HARD",
+    "defaultServings": 8,
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e8/Hangi_prepare.jpg/960px-Hangi_prepare.jpg",
+    "ingredients": [
+      {
+        "amount": "1.5 kg",
+        "item": "bone-in lamb shoulder or leg pieces",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1 whole",
+        "item": "chicken",
+        "preparation": "cut into pieces",
+        "optional": false
+      },
+      {
+        "amount": "4",
+        "item": "kumara (sweet potatoes)",
+        "preparation": "halved",
+        "optional": false
+      },
+      {
+        "amount": "4",
+        "item": "potatoes",
+        "preparation": "halved",
+        "optional": false
+      },
+      {
+        "amount": "1 medium",
+        "item": "pumpkin",
+        "preparation": "cut into large chunks",
+        "optional": false
+      },
+      {
+        "amount": "2 tsp",
+        "item": "salt",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "1 tsp",
+        "item": "black pepper",
+        "preparation": null,
+        "optional": false
+      },
+      {
+        "amount": "fresh herbs (thyme, rosemary)",
+        "item": "for stuffing",
+        "preparation": null,
+        "optional": false
+      }
+    ],
+    "steps": [
+      {
+        "instruction": "Dig a pit approximately 60cm deep and 1m wide. Line with clean volcanic rocks or river stones. Build a large fire on top of the stones and burn for 2–3 hours until stones glow red-hot.",
+        "timerSeconds": 10800,
+        "timerLabel": "Heat the Stones",
+        "tip": null
+      },
+      {
+        "instruction": "Season all meats generously with salt and pepper, tuck herbs inside the chicken cavity. Place all ingredients in wire baskets lined with damp cloth.",
+        "timerSeconds": null,
+        "timerLabel": null,
+        "tip": null
+      },
+      {
+        "instruction": "Carefully remove ash and coals. Lower the meat baskets onto the hot stones first, then place vegetables on top.",
+        "timerSeconds": null,
+        "timerLabel": null,
+        "tip": "Move quickly — the stone heat diminishes rapidly."
+      },
+      {
+        "instruction": "Cover completely with wet sacks or hessian cloth, then a layer of fresh grass or ferns, then seal with soil around the edges. Let steam for 3–4 hours without opening.",
+        "timerSeconds": 10800,
+        "timerLabel": "Underground Cook",
+        "tip": null
+      },
+      {
+        "instruction": "Uncover from the edges inward. The meat should be fall-off-the-bone tender with a light smoky flavor. Serve with kawakawa (pepper) and hangi bread.",
+        "timerSeconds": null,
+        "timerLabel": null,
+        "tip": null
+      }
+    ],
+    "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Hangi_prepare.jpg"
+  }
+]

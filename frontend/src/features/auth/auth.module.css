@@ -1,0 +1,140 @@
+.layout {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  min-height: calc(100dvh - var(--topbar-h));
+}
+
+.visual {
+  position: relative;
+  overflow: hidden;
+  background: var(--c-forest-900);
+  color: var(--c-cream-50);
+  display: flex;
+  align-items: flex-end;
+  padding: var(--sp-12);
+}
+
+.visual img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.85;
+}
+
+.visual::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--hero-overlay);
+}
+
+.visualCopy {
+  position: relative;
+  z-index: 1;
+  max-width: 34ch;
+}
+
+.visualCopy h2 {
+  font-size: var(--fs-3xl);
+  margin: var(--sp-3) 0;
+}
+
+.visualCopy p {
+  color: rgb(255 253 248 / 0.8);
+}
+
+.panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-10) var(--page-gutter);
+}
+
+.form {
+  width: min(100%, 420px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+  animation: page-in var(--dur-slow) var(--ease-out) both;
+}
+
+.title {
+  font-size: var(--fs-3xl);
+}
+
+.subtitle {
+  color: var(--text-muted);
+  margin-top: var(--sp-2);
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  color: var(--text-subtle);
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.google {
+  display: flex;
+  justify-content: center;
+  min-height: 44px;
+}
+
+.switch {
+  text-align: center;
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+}
+
+.twoCol {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--sp-4);
+}
+
+.strength {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 4px;
+  margin-top: calc(var(--sp-2) * -1);
+}
+
+.strength span {
+  height: 4px;
+  border-radius: 2px;
+  background: var(--border);
+  transition: background var(--dur-base) var(--ease-out);
+}
+
+.strength span[data-on="true"] {
+  background: var(--herb);
+}
+
+@media (max-width: 899px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .visual {
+    display: none;
+  }
+}
+
+@media (max-width: 479px) {
+  .twoCol {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

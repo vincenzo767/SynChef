@@ -1,141 +1,165 @@
 package edu.cit.batawang.synchef.service;
 
-import edu.cit.batawang.synchef.dto.*;
-import edu.cit.batawang.synchef.model.*;
-import edu.cit.batawang.synchef.repository.*;
+import edu.cit.batawang.synchef.dto.AdminStatsResponse;
+import edu.cit.batawang.synchef.dto.AdminUserResponse;
+import edu.cit.batawang.synchef.dto.AnalyticsResponse;
+import edu.cit.batawang.synchef.dto.ModerationCommentResponse;
+import edu.cit.batawang.synchef.exception.ApiException;
+import edu.cit.batawang.synchef.model.SynCookComment;
+import edu.cit.batawang.synchef.model.User;
+import edu.cit.batawang.synchef.repository.CookingSessionRepository;
+import edu.cit.batawang.synchef.repository.RecipeReportRepository;
+import edu.cit.batawang.synchef.repository.RecipeRepository;
+import edu.cit.batawang.synchef.repository.SynCookCommentRepository;
+import edu.cit.batawang.synchef.repository.UserRepository;
+import edu.cit.batawang.synchef.security.SessionService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Instant;
 import java.time.LocalDate;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
+/**
+ * Administrator use cases. Every endpoint calling this service is restricted to ROLE_ADMIN by
+ * SecurityConfig; additional guard rails prevent an admin from locking themselves out or
+ * removing the last administrator.
+ */
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class AdminService {
 
+    private static final int TREND_DAYS = 30;
+
     private final UserRepository userRepository;
-    private final SynCookRecipeRepository synCookRecipeRepository;
     private final RecipeReportRepository reportRepository;
     private final SynCookCommentRepository commentRepository;
     private final RecipeRepository recipeRepository;
-    private final SimpMessagingTemplate messagingTemplate;
-
-    // ── Stats ──────────────────────────────────────────────────────────────
+    private final CookingSessionRepository cookingSessionRepository;
+    private final AdminStatsService stats;
+    private final SessionService sessionService;
+    private final UserAccountService userAccountService;
 
     public AdminStatsResponse computeStats() {
-        AdminStatsResponse s = new AdminStatsResponse();
-        s.setTotalUsers(userRepository.count());
-        s.setActiveUsers(userRepository.countByActive(true));
-        s.setBannedUsers(userRepository.countByActive(false));
-        s.setTotalSynCookRecipes(synCookRecipeRepository.count());
-        s.setPublicRecipes(synCookRecipeRepository.countByPrivacy("PUBLIC"));
-        s.setPendingReports(reportRepository.countByStatus("PENDING"));
-        s.setTotalReports(reportRepository.count());
-        s.setTotalComments(commentRepository.count());
-        return s;
+        return stats.computeStats();
     }
 
+    /** Kept for callers that broadcast after a change. */
     public void broadcastStats() {
-        messagingTemplate.convertAndSend("/topic/admin/stats", computeStats());
+        stats.broadcastStats();
     }
-
-    // ── User management ────────────────────────────────────────────────────
 
     @Transactional(readOnly = true)
     public List<AdminUserResponse> getAllUsers() {
         return userRepository.findAll().stream()
-                .map(this::toUserResponse)
+                .map(UserMapper::toAdmin)
                 .sorted(Comparator.comparing(AdminUserResponse::getCreatedAt,
                         Comparator.nullsLast(Comparator.reverseOrder())))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Transactional
-    public AdminUserResponse toggleUserStatus(Long userId) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("User not found"));
-        user.setActive(!Boolean.TRUE.equals(user.getActive()));
-        user = userRepository.save(user);
-        broadcastStats();
-        log.info("User {} active toggled to {}", userId, user.getActive());
-        return toUserResponse(user);
-    }
-
-    @Transactional
-    public AdminUserResponse changeUserRole(Long userId, String role) {
-        if (!"USER".equals(role) && !"ADMIN".equals(role)) {
-            throw new IllegalArgumentException("Role must be USER or ADMIN");
+    public AdminUserResponse toggleUserStatus(Long actingAdminId, Long userId) {
+        if (actingAdminId.equals(userId)) {
+            throw ApiException.badRequest("You can't suspend your own account");
         }
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+        User user = requireUser(userId);
+        boolean activate = !Boolean.TRUE.equals(user.getActive());
+        if (!activate && user.isAdmin() && countActiveAdmins() <= 1) {
+            throw ApiException.badRequest("The last active administrator can't be suspended");
+        }
+        user.setActive(activate);
+        user = userRepository.save(user);
+        if (!activate) {
+            sessionService.revokeAll(userId); // suspension takes effect immediately
+        }
+        stats.broadcastStats();
+        log.info("Admin {} set user {} active={}", actingAdminId, userId, activate);
+        return UserMapper.toAdmin(user);
+    }
+
+    @Transactional
+    public AdminUserResponse changeUserRole(Long actingAdminId, Long userId, String role) {
+        if (!"USER".equals(role) && !"ADMIN".equals(role)) {
+            throw ApiException.badRequest("Role must be USER or ADMIN");
+        }
+        if (actingAdminId.equals(userId)) {
+            throw ApiException.badRequest("You can't change your own role");
+        }
+        User user = requireUser(userId);
+        if (user.isAdmin() && "USER".equals(role) && countActiveAdmins() <= 1) {
+            throw ApiException.badRequest("At least one administrator must remain");
+        }
         user.setRole(role);
         user = userRepository.save(user);
-        broadcastStats();
-        log.info("User {} role set to {}", userId, role);
-        return toUserResponse(user);
+        stats.broadcastStats();
+        log.info("Admin {} set user {} role={}", actingAdminId, userId, role);
+        return UserMapper.toAdmin(user);
     }
 
     @Transactional
-    public void deleteUser(Long userId) {
-        if (!userRepository.existsById(userId)) {
-            throw new IllegalArgumentException("User not found");
+    public void deleteUser(Long actingAdminId, Long userId) {
+        if (actingAdminId.equals(userId)) {
+            throw ApiException.badRequest("Delete your own account from Settings instead");
         }
-        userRepository.deleteById(userId);
-        broadcastStats();
-        log.info("User {} deleted by admin", userId);
+        User user = requireUser(userId);
+        if (user.isAdmin() && countActiveAdmins() <= 1) {
+            throw ApiException.badRequest("The last administrator can't be deleted");
+        }
+        userAccountService.deleteAccountData(user);
+        stats.broadcastStats();
+        log.info("Admin {} deleted user {}", actingAdminId, userId);
     }
-
-    // ── Comment moderation ────────────────────────────────────────────────
 
     @Transactional(readOnly = true)
     public List<ModerationCommentResponse> getAllComments() {
         return commentRepository.findAllWithRecipeOrderByCreatedAtDesc().stream()
                 .map(this::toCommentResponse)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Transactional
     public void deleteComment(Long commentId) {
         if (!commentRepository.existsById(commentId)) {
-            throw new IllegalArgumentException("Comment not found");
+            throw ApiException.notFound("Comment not found");
         }
         commentRepository.deleteById(commentId);
-        broadcastStats();
-        log.info("Comment {} deleted by admin", commentId);
+        stats.broadcastStats();
     }
-
-    // ── Analytics ─────────────────────────────────────────────────────────
 
     @Transactional(readOnly = true)
     public AnalyticsResponse getAnalytics() {
+        LocalDate from = LocalDate.now().minusDays(TREND_DAYS - 1L);
+        LocalDateTime since = from.atStartOfDay();
+
         AnalyticsResponse a = new AnalyticsResponse();
-        a.setOverview(computeStats());
+        a.setOverview(stats.computeStats());
         a.setPlatformRecipes(recipeRepository.count());
-        a.setUserRegistrationsLast30Days(buildUserTrend());
-        a.setReportsLast30Days(buildReportsTrend());
+        a.setUserRegistrationsLast30Days(trend(from, userRepository.findCreatedAtSince(since).stream()
+                .map(LocalDateTime::toLocalDate).toList()));
+        a.setReportsLast30Days(trend(from, reportRepository.findReportDatesSince(since).stream()
+                .map(LocalDateTime::toLocalDate).toList()));
+        Instant sinceInstant = since.atZone(ZoneId.systemDefault()).toInstant();
+        a.setCookingSessionsLast30Days(trend(from, cookingSessionRepository.findStartedAtSince(sinceInstant).stream()
+                .map(i -> i.atZone(ZoneId.systemDefault()).toLocalDate()).toList()));
         return a;
     }
 
-    // ── Mappers ───────────────────────────────────────────────────────────
+    private long countActiveAdmins() {
+        return userRepository.findAllByRole("ADMIN").stream().filter(u -> Boolean.TRUE.equals(u.getActive())).count();
+    }
 
-    private AdminUserResponse toUserResponse(User u) {
-        AdminUserResponse r = new AdminUserResponse();
-        r.setId(u.getId());
-        r.setEmail(u.getEmail());
-        r.setUsername(u.getUsername());
-        r.setFullName(u.getFullName());
-        r.setRole(u.getRole() != null ? u.getRole() : "USER");
-        r.setActive(Boolean.TRUE.equals(u.getActive()));
-        r.setCountryCode(u.getCountryCode());
-        r.setCountryName(u.getCountryName());
-        r.setProfileImageUrl(u.getProfileImageUrl());
-        r.setCreatedAt(u.getCreatedAt());
-        return r;
+    private User requireUser(Long userId) {
+        return userRepository.findById(userId).orElseThrow(() -> ApiException.notFound("User not found"));
     }
 
     private ModerationCommentResponse toCommentResponse(SynCookComment c) {
@@ -150,50 +174,20 @@ public class AdminService {
         return r;
     }
 
-    // ── Trend helpers ─────────────────────────────────────────────────────
-
-    private List<Map<String, Object>> buildUserTrend() {
-        List<User> users = userRepository.findAll();
-        LocalDate cutoff = LocalDate.now().minusDays(29);
-        Map<LocalDate, Long> counts = initDayMap(cutoff);
-        for (User u : users) {
-            if (u.getCreatedAt() != null) {
-                LocalDate day = u.getCreatedAt().toLocalDate();
-                if (!day.isBefore(cutoff) && !day.isAfter(LocalDate.now())) {
-                    counts.merge(day, 1L, Long::sum);
-                }
+    private List<Map<String, Object>> trend(LocalDate from, List<LocalDate> days) {
+        Map<LocalDate, Long> counts = new TreeMap<>();
+        for (int i = 0; i < TREND_DAYS; i++) counts.put(from.plusDays(i), 0L);
+        LocalDate today = LocalDate.now();
+        for (LocalDate day : days) {
+            if (day != null && !day.isBefore(from) && !day.isAfter(today)) {
+                counts.merge(day, 1L, Long::sum);
             }
         }
-        return toList(counts);
-    }
-
-    private List<Map<String, Object>> buildReportsTrend() {
-        List<RecipeReport> reports = reportRepository.findAll();
-        LocalDate cutoff = LocalDate.now().minusDays(29);
-        Map<LocalDate, Long> counts = initDayMap(cutoff);
-        for (RecipeReport rp : reports) {
-            if (rp.getReportDate() != null) {
-                LocalDate day = rp.getReportDate().toLocalDate();
-                if (!day.isBefore(cutoff) && !day.isAfter(LocalDate.now())) {
-                    counts.merge(day, 1L, Long::sum);
-                }
-            }
-        }
-        return toList(counts);
-    }
-
-    private Map<LocalDate, Long> initDayMap(LocalDate from) {
-        Map<LocalDate, Long> m = new TreeMap<>();
-        for (int i = 0; i < 30; i++) m.put(from.plusDays(i), 0L);
-        return m;
-    }
-
-    private List<Map<String, Object>> toList(Map<LocalDate, Long> counts) {
         return counts.entrySet().stream().map(e -> {
             Map<String, Object> m = new LinkedHashMap<>();
             m.put("date", e.getKey().toString());
             m.put("count", e.getValue());
             return m;
-        }).collect(Collectors.toList());
+        }).toList();
     }
 }

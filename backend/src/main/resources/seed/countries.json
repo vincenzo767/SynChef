@@ -1,0 +1,1766 @@
+[
+  {
+    "code": "AF",
+    "name": "Afghanistan",
+    "continent": "ASIA",
+    "flagEmoji": "🇦🇫",
+    "latitude": 33,
+    "longitude": 65,
+    "description": null
+  },
+  {
+    "code": "AL",
+    "name": "Albania",
+    "continent": "EUROPE",
+    "flagEmoji": "🇦🇱",
+    "latitude": 41,
+    "longitude": 20,
+    "description": null
+  },
+  {
+    "code": "DZ",
+    "name": "Algeria",
+    "continent": "AFRICA",
+    "flagEmoji": "🇩🇿",
+    "latitude": 28,
+    "longitude": 3,
+    "description": null
+  },
+  {
+    "code": "AD",
+    "name": "Andorra",
+    "continent": "EUROPE",
+    "flagEmoji": "🇦🇩",
+    "latitude": 42.5,
+    "longitude": 1.5,
+    "description": null
+  },
+  {
+    "code": "AO",
+    "name": "Angola",
+    "continent": "AFRICA",
+    "flagEmoji": "🇦🇴",
+    "latitude": -12.5,
+    "longitude": 18.5,
+    "description": null
+  },
+  {
+    "code": "AG",
+    "name": "Antigua and Barbuda",
+    "continent": "NORTH_AMERICA",
+    "flagEmoji": "🇦🇬",
+    "latitude": 17.05,
+    "longitude": -61.8,
+    "description": null
+  },
+  {
+    "code": "AR",
+    "name": "Argentina",
+    "continent": "SOUTH_AMERICA",
+    "flagEmoji": "🇦🇷",
+    "latitude": -38.4161,
+    "longitude": -63.6167,
+    "description": "Grilled meats and wine culture"
+  },
+  {
+    "code": "AM",
+    "name": "Armenia",
+    "continent": "ASIA",
+    "flagEmoji": "🇦🇲",
+    "latitude": 40,
+    "longitude": 45,
+    "description": null
+  },
+  {
+    "code": "AW",
+    "name": "Aruba",
+    "continent": "NORTH_AMERICA",
+    "flagEmoji": "🇦🇼",
+    "latitude": 12.5,
+    "longitude": -69.96666666,
+    "description": null
+  },
+  {
+    "code": "AU",
+    "name": "Australia",
+    "continent": "OCEANIA",
+    "flagEmoji": "🇦🇺",
+    "latitude": -25.2744,
+    "longitude": 133.7751,
+    "description": "Modern and indigenous fusion"
+  },
+  {
+    "code": "AT",
+    "name": "Austria",
+    "continent": "EUROPE",
+    "flagEmoji": "🇦🇹",
+    "latitude": 47.33333333,
+    "longitude": 13.33333333,
+    "description": null
+  },
+  {
+    "code": "AZ",
+    "name": "Azerbaijan",
+    "continent": "ASIA",
+    "flagEmoji": "🇦🇿",
+    "latitude": 40.5,
+    "longitude": 47.5,
+    "description": null
+  },
+  {
+    "code": "BS",
+    "name": "Bahamas",
+    "continent": "NORTH_AMERICA",
+    "flagEmoji": "🇧🇸",
+    "latitude": 24.25,
+    "longitude": -76,
+    "description": null
+  },
+  {
+    "code": "BH",
+    "name": "Bahrain",
+    "continent": "ASIA",
+    "flagEmoji": "🇧🇭",
+    "latitude": 26,
+    "longitude": 50.55,
+    "description": null
+  },
+  {
+    "code": "BD",
+    "name": "Bangladesh",
+    "continent": "ASIA",
+    "flagEmoji": "🇧🇩",
+    "latitude": 24,
+    "longitude": 90,
+    "description": null
+  },
+  {
+    "code": "BB",
+    "name": "Barbados",
+    "continent": "NORTH_AMERICA",
+    "flagEmoji": "🇧🇧",
+    "latitude": 13.16666666,
+    "longitude": -59.53333333,
+    "description": null
+  },
+  {
+    "code": "BY",
+    "name": "Belarus",
+    "continent": "EUROPE",
+    "flagEmoji": "🇧🇾",
+    "latitude": 53,
+    "longitude": 28,
+    "description": null
+  },
+  {
+    "code": "BE",
+    "name": "Belgium",
+    "continent": "EUROPE",
+    "flagEmoji": "🇧🇪",
+    "latitude": 50.83333333,
+    "longitude": 4,
+    "description": null
+  },
+  {
+    "code": "BZ",
+    "name": "Belize",
+    "continent": "NORTH_AMERICA",
+    "flagEmoji": "🇧🇿",
+    "latitude": 17.25,
+    "longitude": -88.75,
+    "description": null
+  },
+  {
+    "code": "BJ",
+    "name": "Benin",
+    "continent": "AFRICA",
+    "flagEmoji": "🇧🇯",
+    "latitude": 9.5,
+    "longitude": 2.25,
+    "description": null
+  },
+  {
+    "code": "BT",
+    "name": "Bhutan",
+    "continent": "ASIA",
+    "flagEmoji": "🇧🇹",
+    "latitude": 27.5,
+    "longitude": 90.5,
+    "description": null
+  },
+  {
+    "code": "BO",
+    "name": "Bolivia",
+    "continent": "SOUTH_AMERICA",
+    "flagEmoji": "🇧🇴",
+    "latitude": -17,
+    "longitude": -65,
+    "description": null
+  },
+  {
+    "code": "BA",
+    "name": "Bosnia and Herzegovina",
+    "continent": "EUROPE",
+    "flagEmoji": "🇧🇦",
+    "latitude": 44,
+    "longitude": 18,
+    "description": null
+  },
+  {
+    "code": "BW",
+    "name": "Botswana",
+    "continent": "AFRICA",
+    "flagEmoji": "🇧🇼",
+    "latitude": -22,
+    "longitude": 24,
+    "description": null
+  },
+  {
+    "code": "BR",
+    "name": "Brazil",
+    "continent": "SOUTH_AMERICA",
+    "flagEmoji": "🇧🇷",
+    "latitude": -14.235,
+    "longitude": -51.9253,
+    "description": "Tropical and bold flavors"
+  },
+  {
+    "code": "BN",
+    "name": "Brunei",
+    "continent": "ASIA",
+    "flagEmoji": "🇧🇳",
+    "latitude": 4.5,
+    "longitude": 114.66666666,
+    "description": null
+  },
+  {
+    "code": "BG",
+    "name": "Bulgaria",
+    "continent": "EUROPE",
+    "flagEmoji": "🇧🇬",
+    "latitude": 43,
+    "longitude": 25,
+    "description": null
+  },
+  {
+    "code": "BF",
+    "name": "Burkina Faso",
+    "continent": "AFRICA",
+    "flagEmoji": "🇧🇫",
+    "latitude": 13,
+    "longitude": -2,
+    "description": null
+  },
+  {
+    "code": "BI",
+    "name": "Burundi",
+    "continent": "AFRICA",
+    "flagEmoji": "🇧🇮",
+    "latitude": -3.5,
+    "longitude": 30,
+    "description": null
+  },
+  {
+    "code": "KH",
+    "name": "Cambodia",
+    "continent": "ASIA",
+    "flagEmoji": "🇰🇭",
+    "latitude": 13,
+    "longitude": 105,
+    "description": null
+  },
+  {
+    "code": "CM",
+    "name": "Cameroon",
+    "continent": "AFRICA",
+    "flagEmoji": "🇨🇲",
+    "latitude": 6,
+    "longitude": 12,
+    "description": null
+  },
+  {
+    "code": "CA",
+    "name": "Canada",
+    "continent": "NORTH_AMERICA",
+    "flagEmoji": "🇨🇦",
+    "latitude": 56.1304,
+    "longitude": -106.3468,
+    "description": "Fresh and local ingredients"
+  },
+  {
+    "code": "CV",
+    "name": "Cape Verde",
+    "continent": "AFRICA",
+    "flagEmoji": "🇨🇻",
+    "latitude": 16,
+    "longitude": -24,
+    "description": null
+  },
+  {
+    "code": "KY",
+    "name": "Cayman Islands",
+    "continent": "NORTH_AMERICA",
+    "flagEmoji": "🇰🇾",
+    "latitude": 19.5,
+    "longitude": -80.5,
+    "description": null
+  },
+  {
+    "code": "CF",
+    "name": "Central African Republic",
+    "continent": "AFRICA",
+    "flagEmoji": "🇨🇫",
+    "latitude": 7,
+    "longitude": 21,
+    "description": null
+  },
+  {
+    "code": "TD",
+    "name": "Chad",
+    "continent": "AFRICA",
+    "flagEmoji": "🇹🇩",
+    "latitude": 15,
+    "longitude": 19,
+    "description": null
+  },
+  {
+    "code": "CL",
+    "name": "Chile",
+    "continent": "SOUTH_AMERICA",
+    "flagEmoji": "🇨🇱",
+    "latitude": -30,
+    "longitude": -71,
+    "description": null
+  },
+  {
+    "code": "CN",
+    "name": "China",
+    "continent": "ASIA",
+    "flagEmoji": "🇨🇳",
+    "latitude": 35.8617,
+    "longitude": 104.1954,
+    "description": "Ancient and diverse culinary traditions"
+  },
+  {
+    "code": "CO",
+    "name": "Colombia",
+    "continent": "SOUTH_AMERICA",
+    "flagEmoji": "🇨🇴",
+    "latitude": 4.5709,
+    "longitude": -74.2973,
+    "description": "Rich coffee and tropical fruits"
+  },
+  {
+    "code": "KM",
+    "name": "Comoros",
+    "continent": "AFRICA",
+    "flagEmoji": "🇰🇲",
+    "latitude": -12.16666666,
+    "longitude": 44.25,
+    "description": null
+  },
+  {
+    "code": "CG",
+    "name": "Congo",
+    "continent": "AFRICA",
+    "flagEmoji": "🇨🇬",
+    "latitude": -1,
+    "longitude": 15,
+    "description": null
+  },
+  {
+    "code": "CR",
+    "name": "Costa Rica",
+    "continent": "NORTH_AMERICA",
+    "flagEmoji": "🇨🇷",
+    "latitude": 10,
+    "longitude": -84,
+    "description": null
+  },
+  {
+    "code": "HR",
+    "name": "Croatia",
+    "continent": "EUROPE",
+    "flagEmoji": "🇭🇷",
+    "latitude": 45.16666666,
+    "longitude": 15.5,
+    "description": null
+  },
+  {
+    "code": "CU",
+    "name": "Cuba",
+    "continent": "NORTH_AMERICA",
+    "flagEmoji": "🇨🇺",
+    "latitude": 21.5,
+    "longitude": -80,
+    "description": null
+  },
+  {
+    "code": "CY",
+    "name": "Cyprus",
+    "continent": "EUROPE",
+    "flagEmoji": "🇨🇾",
+    "latitude": 35,
+    "longitude": 33,
+    "description": null
+  },
+  {
+    "code": "CZ",
+    "name": "Czechia",
+    "continent": "EUROPE",
+    "flagEmoji": "🇨🇿",
+    "latitude": 49.75,
+    "longitude": 15.5,
+    "description": null
+  },
+  {
+    "code": "DK",
+    "name": "Denmark",
+    "continent": "EUROPE",
+    "flagEmoji": "🇩🇰",
+    "latitude": 56,
+    "longitude": 10,
+    "description": null
+  },
+  {
+    "code": "DJ",
+    "name": "Djibouti",
+    "continent": "AFRICA",
+    "flagEmoji": "🇩🇯",
+    "latitude": 11.5,
+    "longitude": 43,
+    "description": null
+  },
+  {
+    "code": "DM",
+    "name": "Dominica",
+    "continent": "NORTH_AMERICA",
+    "flagEmoji": "🇩🇲",
+    "latitude": 15.41666666,
+    "longitude": -61.33333333,
+    "description": null
+  },
+  {
+    "code": "DO",
+    "name": "Dominican Republic",
+    "continent": "NORTH_AMERICA",
+    "flagEmoji": "🇩🇴",
+    "latitude": 19,
+    "longitude": -70.66666666,
+    "description": null
+  },
+  {
+    "code": "CD",
+    "name": "DR Congo",
+    "continent": "AFRICA",
+    "flagEmoji": "🇨🇩",
+    "latitude": 0,
+    "longitude": 25,
+    "description": null
+  },
+  {
+    "code": "EC",
+    "name": "Ecuador",
+    "continent": "SOUTH_AMERICA",
+    "flagEmoji": "🇪🇨",
+    "latitude": -2,
+    "longitude": -77.5,
+    "description": null
+  },
+  {
+    "code": "EG",
+    "name": "Egypt",
+    "continent": "AFRICA",
+    "flagEmoji": "🇪🇬",
+    "latitude": 26.8206,
+    "longitude": 30.8025,
+    "description": "Ancient culinary traditions"
+  },
+  {
+    "code": "SV",
+    "name": "El Salvador",
+    "continent": "NORTH_AMERICA",
+    "flagEmoji": "🇸🇻",
+    "latitude": 13.83333333,
+    "longitude": -88.91666666,
+    "description": null
+  },
+  {
+    "code": "GQ",
+    "name": "Equatorial Guinea",
+    "continent": "AFRICA",
+    "flagEmoji": "🇬🇶",
+    "latitude": 2,
+    "longitude": 10,
+    "description": null
+  },
+  {
+    "code": "ER",
+    "name": "Eritrea",
+    "continent": "AFRICA",
+    "flagEmoji": "🇪🇷",
+    "latitude": 15,
+    "longitude": 39,
+    "description": null
+  },
+  {
+    "code": "EE",
+    "name": "Estonia",
+    "continent": "EUROPE",
+    "flagEmoji": "🇪🇪",
+    "latitude": 59,
+    "longitude": 26,
+    "description": null
+  },
+  {
+    "code": "SZ",
+    "name": "Eswatini",
+    "continent": "AFRICA",
+    "flagEmoji": "🇸🇿",
+    "latitude": -26.5,
+    "longitude": 31.5,
+    "description": null
+  },
+  {
+    "code": "ET",
+    "name": "Ethiopia",
+    "continent": "AFRICA",
+    "flagEmoji": "🇪🇹",
+    "latitude": 9.145,
+    "longitude": 40.4897,
+    "description": "Unique spice blends"
+  },
+  {
+    "code": "FJ",
+    "name": "Fiji",
+    "continent": "OCEANIA",
+    "flagEmoji": "🇫🇯",
+    "latitude": -18,
+    "longitude": 175,
+    "description": null
+  },
+  {
+    "code": "FI",
+    "name": "Finland",
+    "continent": "EUROPE",
+    "flagEmoji": "🇫🇮",
+    "latitude": 64,
+    "longitude": 26,
+    "description": null
+  },
+  {
+    "code": "FR",
+    "name": "France",
+    "continent": "EUROPE",
+    "flagEmoji": "🇫🇷",
+    "latitude": 46.2276,
+    "longitude": 2.2137,
+    "description": "Culinary capital of the world"
+  },
+  {
+    "code": "GA",
+    "name": "Gabon",
+    "continent": "AFRICA",
+    "flagEmoji": "🇬🇦",
+    "latitude": -1,
+    "longitude": 11.75,
+    "description": null
+  },
+  {
+    "code": "GM",
+    "name": "Gambia",
+    "continent": "AFRICA",
+    "flagEmoji": "🇬🇲",
+    "latitude": 13.46666666,
+    "longitude": -16.56666666,
+    "description": null
+  },
+  {
+    "code": "GE",
+    "name": "Georgia",
+    "continent": "ASIA",
+    "flagEmoji": "🇬🇪",
+    "latitude": 42,
+    "longitude": 43.5,
+    "description": null
+  },
+  {
+    "code": "DE",
+    "name": "Germany",
+    "continent": "EUROPE",
+    "flagEmoji": "🇩🇪",
+    "latitude": 51.1657,
+    "longitude": 10.4515,
+    "description": "Hearty and rich flavors"
+  },
+  {
+    "code": "GH",
+    "name": "Ghana",
+    "continent": "AFRICA",
+    "flagEmoji": "🇬🇭",
+    "latitude": 8,
+    "longitude": -2,
+    "description": null
+  },
+  {
+    "code": "GR",
+    "name": "Greece",
+    "continent": "EUROPE",
+    "flagEmoji": "🇬🇷",
+    "latitude": 39.0742,
+    "longitude": 21.8243,
+    "description": "Ancient Mediterranean tradition"
+  },
+  {
+    "code": "GD",
+    "name": "Grenada",
+    "continent": "NORTH_AMERICA",
+    "flagEmoji": "🇬🇩",
+    "latitude": 12.11666666,
+    "longitude": -61.66666666,
+    "description": null
+  },
+  {
+    "code": "GT",
+    "name": "Guatemala",
+    "continent": "NORTH_AMERICA",
+    "flagEmoji": "🇬🇹",
+    "latitude": 15.5,
+    "longitude": -90.25,
+    "description": null
+  },
+  {
+    "code": "GN",
+    "name": "Guinea",
+    "continent": "AFRICA",
+    "flagEmoji": "🇬🇳",
+    "latitude": 11,
+    "longitude": -10,
+    "description": null
+  },
+  {
+    "code": "GW",
+    "name": "Guinea-Bissau",
+    "continent": "AFRICA",
+    "flagEmoji": "🇬🇼",
+    "latitude": 12,
+    "longitude": -15,
+    "description": null
+  },
+  {
+    "code": "GY",
+    "name": "Guyana",
+    "continent": "SOUTH_AMERICA",
+    "flagEmoji": "🇬🇾",
+    "latitude": 5,
+    "longitude": -59,
+    "description": null
+  },
+  {
+    "code": "HT",
+    "name": "Haiti",
+    "continent": "NORTH_AMERICA",
+    "flagEmoji": "🇭🇹",
+    "latitude": 19,
+    "longitude": -72.41666666,
+    "description": null
+  },
+  {
+    "code": "HN",
+    "name": "Honduras",
+    "continent": "NORTH_AMERICA",
+    "flagEmoji": "🇭🇳",
+    "latitude": 15,
+    "longitude": -86.5,
+    "description": null
+  },
+  {
+    "code": "HU",
+    "name": "Hungary",
+    "continent": "EUROPE",
+    "flagEmoji": "🇭🇺",
+    "latitude": 47,
+    "longitude": 20,
+    "description": null
+  },
+  {
+    "code": "IS",
+    "name": "Iceland",
+    "continent": "EUROPE",
+    "flagEmoji": "🇮🇸",
+    "latitude": 65,
+    "longitude": -18,
+    "description": null
+  },
+  {
+    "code": "IN",
+    "name": "India",
+    "continent": "ASIA",
+    "flagEmoji": "🇮🇳",
+    "latitude": 20.5937,
+    "longitude": 78.9629,
+    "description": "Land of diverse spices"
+  },
+  {
+    "code": "ID",
+    "name": "Indonesia",
+    "continent": "ASIA",
+    "flagEmoji": "🇮🇩",
+    "latitude": -0.7893,
+    "longitude": 113.9213,
+    "description": "Archipelago of bold flavors"
+  },
+  {
+    "code": "IR",
+    "name": "Iran",
+    "continent": "ASIA",
+    "flagEmoji": "🇮🇷",
+    "latitude": 32,
+    "longitude": 53,
+    "description": null
+  },
+  {
+    "code": "IQ",
+    "name": "Iraq",
+    "continent": "ASIA",
+    "flagEmoji": "🇮🇶",
+    "latitude": 33,
+    "longitude": 44,
+    "description": null
+  },
+  {
+    "code": "IE",
+    "name": "Ireland",
+    "continent": "EUROPE",
+    "flagEmoji": "🇮🇪",
+    "latitude": 53,
+    "longitude": -8,
+    "description": null
+  },
+  {
+    "code": "IL",
+    "name": "Israel",
+    "continent": "ASIA",
+    "flagEmoji": "🇮🇱",
+    "latitude": 31.47,
+    "longitude": 35.13,
+    "description": null
+  },
+  {
+    "code": "IT",
+    "name": "Italy",
+    "continent": "EUROPE",
+    "flagEmoji": "🇮🇹",
+    "latitude": 41.8719,
+    "longitude": 12.5674,
+    "description": "Pasta and pizza paradise"
+  },
+  {
+    "code": "CI",
+    "name": "Ivory Coast",
+    "continent": "AFRICA",
+    "flagEmoji": "🇨🇮",
+    "latitude": 8,
+    "longitude": -5,
+    "description": null
+  },
+  {
+    "code": "JM",
+    "name": "Jamaica",
+    "continent": "NORTH_AMERICA",
+    "flagEmoji": "🇯🇲",
+    "latitude": 18.1096,
+    "longitude": -77.2975,
+    "description": "Caribbean island spices"
+  },
+  {
+    "code": "JP",
+    "name": "Japan",
+    "continent": "ASIA",
+    "flagEmoji": "🇯🇵",
+    "latitude": 36.2048,
+    "longitude": 138.2529,
+    "description": "Island nation with unique cuisine"
+  },
+  {
+    "code": "JO",
+    "name": "Jordan",
+    "continent": "ASIA",
+    "flagEmoji": "🇯🇴",
+    "latitude": 31,
+    "longitude": 36,
+    "description": null
+  },
+  {
+    "code": "KZ",
+    "name": "Kazakhstan",
+    "continent": "ASIA",
+    "flagEmoji": "🇰🇿",
+    "latitude": 48,
+    "longitude": 68,
+    "description": null
+  },
+  {
+    "code": "KE",
+    "name": "Kenya",
+    "continent": "AFRICA",
+    "flagEmoji": "🇰🇪",
+    "latitude": 1,
+    "longitude": 38,
+    "description": null
+  },
+  {
+    "code": "KI",
+    "name": "Kiribati",
+    "continent": "OCEANIA",
+    "flagEmoji": "🇰🇮",
+    "latitude": 1.41666666,
+    "longitude": 173,
+    "description": null
+  },
+  {
+    "code": "KW",
+    "name": "Kuwait",
+    "continent": "ASIA",
+    "flagEmoji": "🇰🇼",
+    "latitude": 29.5,
+    "longitude": 45.75,
+    "description": null
+  },
+  {
+    "code": "KG",
+    "name": "Kyrgyzstan",
+    "continent": "ASIA",
+    "flagEmoji": "🇰🇬",
+    "latitude": 41,
+    "longitude": 75,
+    "description": null
+  },
+  {
+    "code": "LA",
+    "name": "Laos",
+    "continent": "ASIA",
+    "flagEmoji": "🇱🇦",
+    "latitude": 18,
+    "longitude": 105,
+    "description": null
+  },
+  {
+    "code": "LV",
+    "name": "Latvia",
+    "continent": "EUROPE",
+    "flagEmoji": "🇱🇻",
+    "latitude": 57,
+    "longitude": 25,
+    "description": null
+  },
+  {
+    "code": "LB",
+    "name": "Lebanon",
+    "continent": "ASIA",
+    "flagEmoji": "🇱🇧",
+    "latitude": 33.8547,
+    "longitude": 35.8623,
+    "description": "Heart of Middle Eastern cooking"
+  },
+  {
+    "code": "LS",
+    "name": "Lesotho",
+    "continent": "AFRICA",
+    "flagEmoji": "🇱🇸",
+    "latitude": -29.5,
+    "longitude": 28.5,
+    "description": null
+  },
+  {
+    "code": "LR",
+    "name": "Liberia",
+    "continent": "AFRICA",
+    "flagEmoji": "🇱🇷",
+    "latitude": 6.5,
+    "longitude": -9.5,
+    "description": null
+  },
+  {
+    "code": "LY",
+    "name": "Libya",
+    "continent": "AFRICA",
+    "flagEmoji": "🇱🇾",
+    "latitude": 25,
+    "longitude": 17,
+    "description": null
+  },
+  {
+    "code": "LI",
+    "name": "Liechtenstein",
+    "continent": "EUROPE",
+    "flagEmoji": "🇱🇮",
+    "latitude": 47.26666666,
+    "longitude": 9.53333333,
+    "description": null
+  },
+  {
+    "code": "LT",
+    "name": "Lithuania",
+    "continent": "EUROPE",
+    "flagEmoji": "🇱🇹",
+    "latitude": 56,
+    "longitude": 24,
+    "description": null
+  },
+  {
+    "code": "LU",
+    "name": "Luxembourg",
+    "continent": "EUROPE",
+    "flagEmoji": "🇱🇺",
+    "latitude": 49.75,
+    "longitude": 6.16666666,
+    "description": null
+  },
+  {
+    "code": "MG",
+    "name": "Madagascar",
+    "continent": "AFRICA",
+    "flagEmoji": "🇲🇬",
+    "latitude": -20,
+    "longitude": 47,
+    "description": null
+  },
+  {
+    "code": "MW",
+    "name": "Malawi",
+    "continent": "AFRICA",
+    "flagEmoji": "🇲🇼",
+    "latitude": -13.5,
+    "longitude": 34,
+    "description": null
+  },
+  {
+    "code": "MY",
+    "name": "Malaysia",
+    "continent": "ASIA",
+    "flagEmoji": "🇲🇾",
+    "latitude": 2.5,
+    "longitude": 112.5,
+    "description": null
+  },
+  {
+    "code": "MV",
+    "name": "Maldives",
+    "continent": "ASIA",
+    "flagEmoji": "🇲🇻",
+    "latitude": 3.25,
+    "longitude": 73,
+    "description": null
+  },
+  {
+    "code": "ML",
+    "name": "Mali",
+    "continent": "AFRICA",
+    "flagEmoji": "🇲🇱",
+    "latitude": 17,
+    "longitude": -4,
+    "description": null
+  },
+  {
+    "code": "MT",
+    "name": "Malta",
+    "continent": "EUROPE",
+    "flagEmoji": "🇲🇹",
+    "latitude": 35.83333333,
+    "longitude": 14.58333333,
+    "description": null
+  },
+  {
+    "code": "MH",
+    "name": "Marshall Islands",
+    "continent": "OCEANIA",
+    "flagEmoji": "🇲🇭",
+    "latitude": 9,
+    "longitude": 168,
+    "description": null
+  },
+  {
+    "code": "MR",
+    "name": "Mauritania",
+    "continent": "AFRICA",
+    "flagEmoji": "🇲🇷",
+    "latitude": 20,
+    "longitude": -12,
+    "description": null
+  },
+  {
+    "code": "MU",
+    "name": "Mauritius",
+    "continent": "AFRICA",
+    "flagEmoji": "🇲🇺",
+    "latitude": -20.28333333,
+    "longitude": 57.55,
+    "description": null
+  },
+  {
+    "code": "MX",
+    "name": "Mexico",
+    "continent": "NORTH_AMERICA",
+    "flagEmoji": "🇲🇽",
+    "latitude": 23.6345,
+    "longitude": -102.5528,
+    "description": "Vibrant and complex flavors"
+  },
+  {
+    "code": "FM",
+    "name": "Micronesia",
+    "continent": "OCEANIA",
+    "flagEmoji": "🇫🇲",
+    "latitude": 6.91666666,
+    "longitude": 158.25,
+    "description": null
+  },
+  {
+    "code": "MD",
+    "name": "Moldova",
+    "continent": "EUROPE",
+    "flagEmoji": "🇲🇩",
+    "latitude": 47,
+    "longitude": 29,
+    "description": null
+  },
+  {
+    "code": "MC",
+    "name": "Monaco",
+    "continent": "EUROPE",
+    "flagEmoji": "🇲🇨",
+    "latitude": 43.73333333,
+    "longitude": 7.4,
+    "description": null
+  },
+  {
+    "code": "MN",
+    "name": "Mongolia",
+    "continent": "ASIA",
+    "flagEmoji": "🇲🇳",
+    "latitude": 46,
+    "longitude": 105,
+    "description": null
+  },
+  {
+    "code": "ME",
+    "name": "Montenegro",
+    "continent": "EUROPE",
+    "flagEmoji": "🇲🇪",
+    "latitude": 42.5,
+    "longitude": 19.3,
+    "description": null
+  },
+  {
+    "code": "MA",
+    "name": "Morocco",
+    "continent": "AFRICA",
+    "flagEmoji": "🇲🇦",
+    "latitude": 31.7917,
+    "longitude": -7.0926,
+    "description": "Spiced tagines and couscous"
+  },
+  {
+    "code": "MZ",
+    "name": "Mozambique",
+    "continent": "AFRICA",
+    "flagEmoji": "🇲🇿",
+    "latitude": -18.25,
+    "longitude": 35,
+    "description": null
+  },
+  {
+    "code": "MM",
+    "name": "Myanmar",
+    "continent": "ASIA",
+    "flagEmoji": "🇲🇲",
+    "latitude": 22,
+    "longitude": 98,
+    "description": null
+  },
+  {
+    "code": "NA",
+    "name": "Namibia",
+    "continent": "AFRICA",
+    "flagEmoji": "🇳🇦",
+    "latitude": -22,
+    "longitude": 17,
+    "description": null
+  },
+  {
+    "code": "NR",
+    "name": "Nauru",
+    "continent": "OCEANIA",
+    "flagEmoji": "🇳🇷",
+    "latitude": -0.53333333,
+    "longitude": 166.91666666,
+    "description": null
+  },
+  {
+    "code": "NP",
+    "name": "Nepal",
+    "continent": "ASIA",
+    "flagEmoji": "🇳🇵",
+    "latitude": 28,
+    "longitude": 84,
+    "description": null
+  },
+  {
+    "code": "NL",
+    "name": "Netherlands",
+    "continent": "EUROPE",
+    "flagEmoji": "🇳🇱",
+    "latitude": 52.5,
+    "longitude": 5.75,
+    "description": null
+  },
+  {
+    "code": "NZ",
+    "name": "New Zealand",
+    "continent": "OCEANIA",
+    "flagEmoji": "🇳🇿",
+    "latitude": -40.9006,
+    "longitude": 174.886,
+    "description": "Pacific seafood and meats"
+  },
+  {
+    "code": "NI",
+    "name": "Nicaragua",
+    "continent": "NORTH_AMERICA",
+    "flagEmoji": "🇳🇮",
+    "latitude": 13,
+    "longitude": -85,
+    "description": null
+  },
+  {
+    "code": "NE",
+    "name": "Niger",
+    "continent": "AFRICA",
+    "flagEmoji": "🇳🇪",
+    "latitude": 16,
+    "longitude": 8,
+    "description": null
+  },
+  {
+    "code": "NG",
+    "name": "Nigeria",
+    "continent": "AFRICA",
+    "flagEmoji": "🇳🇬",
+    "latitude": 9.082,
+    "longitude": 8.6753,
+    "description": "West African bold flavors"
+  },
+  {
+    "code": "KP",
+    "name": "North Korea",
+    "continent": "ASIA",
+    "flagEmoji": "🇰🇵",
+    "latitude": 40,
+    "longitude": 127,
+    "description": null
+  },
+  {
+    "code": "MK",
+    "name": "North Macedonia",
+    "continent": "EUROPE",
+    "flagEmoji": "🇲🇰",
+    "latitude": 41.83333333,
+    "longitude": 22,
+    "description": null
+  },
+  {
+    "code": "NO",
+    "name": "Norway",
+    "continent": "EUROPE",
+    "flagEmoji": "🇳🇴",
+    "latitude": 62,
+    "longitude": 10,
+    "description": null
+  },
+  {
+    "code": "OM",
+    "name": "Oman",
+    "continent": "ASIA",
+    "flagEmoji": "🇴🇲",
+    "latitude": 21,
+    "longitude": 57,
+    "description": null
+  },
+  {
+    "code": "PK",
+    "name": "Pakistan",
+    "continent": "ASIA",
+    "flagEmoji": "🇵🇰",
+    "latitude": 30,
+    "longitude": 70,
+    "description": null
+  },
+  {
+    "code": "PW",
+    "name": "Palau",
+    "continent": "OCEANIA",
+    "flagEmoji": "🇵🇼",
+    "latitude": 7.5,
+    "longitude": 134.5,
+    "description": null
+  },
+  {
+    "code": "PA",
+    "name": "Panama",
+    "continent": "NORTH_AMERICA",
+    "flagEmoji": "🇵🇦",
+    "latitude": 9,
+    "longitude": -80,
+    "description": null
+  },
+  {
+    "code": "PG",
+    "name": "Papua New Guinea",
+    "continent": "OCEANIA",
+    "flagEmoji": "🇵🇬",
+    "latitude": -6,
+    "longitude": 147,
+    "description": null
+  },
+  {
+    "code": "PY",
+    "name": "Paraguay",
+    "continent": "SOUTH_AMERICA",
+    "flagEmoji": "🇵🇾",
+    "latitude": -23,
+    "longitude": -58,
+    "description": null
+  },
+  {
+    "code": "PE",
+    "name": "Peru",
+    "continent": "SOUTH_AMERICA",
+    "flagEmoji": "🇵🇪",
+    "latitude": -9.19,
+    "longitude": -75.0152,
+    "description": "Ancient Andean cuisine"
+  },
+  {
+    "code": "PH",
+    "name": "Philippines",
+    "continent": "ASIA",
+    "flagEmoji": "🇵🇭",
+    "latitude": 12.8797,
+    "longitude": 121.774,
+    "description": "Tropical Southeast Asian cuisine"
+  },
+  {
+    "code": "PL",
+    "name": "Poland",
+    "continent": "EUROPE",
+    "flagEmoji": "🇵🇱",
+    "latitude": 52,
+    "longitude": 20,
+    "description": null
+  },
+  {
+    "code": "PT",
+    "name": "Portugal",
+    "continent": "EUROPE",
+    "flagEmoji": "🇵🇹",
+    "latitude": 39.3999,
+    "longitude": -8.2245,
+    "description": "Seafood and pastry traditions"
+  },
+  {
+    "code": "QA",
+    "name": "Qatar",
+    "continent": "ASIA",
+    "flagEmoji": "🇶🇦",
+    "latitude": 25.5,
+    "longitude": 51.25,
+    "description": null
+  },
+  {
+    "code": "RO",
+    "name": "Romania",
+    "continent": "EUROPE",
+    "flagEmoji": "🇷🇴",
+    "latitude": 46,
+    "longitude": 25,
+    "description": null
+  },
+  {
+    "code": "RU",
+    "name": "Russia",
+    "continent": "EUROPE",
+    "flagEmoji": "🇷🇺",
+    "latitude": 60,
+    "longitude": 100,
+    "description": null
+  },
+  {
+    "code": "RW",
+    "name": "Rwanda",
+    "continent": "AFRICA",
+    "flagEmoji": "🇷🇼",
+    "latitude": -2,
+    "longitude": 30,
+    "description": null
+  },
+  {
+    "code": "KN",
+    "name": "Saint Kitts and Nevis",
+    "continent": "NORTH_AMERICA",
+    "flagEmoji": "🇰🇳",
+    "latitude": 17.33333333,
+    "longitude": -62.75,
+    "description": null
+  },
+  {
+    "code": "LC",
+    "name": "Saint Lucia",
+    "continent": "NORTH_AMERICA",
+    "flagEmoji": "🇱🇨",
+    "latitude": 13.88333333,
+    "longitude": -60.96666666,
+    "description": null
+  },
+  {
+    "code": "VC",
+    "name": "Saint Vincent and the Grenadines",
+    "continent": "NORTH_AMERICA",
+    "flagEmoji": "🇻🇨",
+    "latitude": 13.25,
+    "longitude": -61.2,
+    "description": null
+  },
+  {
+    "code": "WS",
+    "name": "Samoa",
+    "continent": "OCEANIA",
+    "flagEmoji": "🇼🇸",
+    "latitude": -13.58333333,
+    "longitude": -172.33333333,
+    "description": null
+  },
+  {
+    "code": "SM",
+    "name": "San Marino",
+    "continent": "EUROPE",
+    "flagEmoji": "🇸🇲",
+    "latitude": 43.76666666,
+    "longitude": 12.41666666,
+    "description": null
+  },
+  {
+    "code": "ST",
+    "name": "São Tomé and Príncipe",
+    "continent": "AFRICA",
+    "flagEmoji": "🇸🇹",
+    "latitude": 1,
+    "longitude": 7,
+    "description": null
+  },
+  {
+    "code": "SA",
+    "name": "Saudi Arabia",
+    "continent": "ASIA",
+    "flagEmoji": "🇸🇦",
+    "latitude": 25,
+    "longitude": 45,
+    "description": null
+  },
+  {
+    "code": "SN",
+    "name": "Senegal",
+    "continent": "AFRICA",
+    "flagEmoji": "🇸🇳",
+    "latitude": 14,
+    "longitude": -14,
+    "description": null
+  },
+  {
+    "code": "RS",
+    "name": "Serbia",
+    "continent": "EUROPE",
+    "flagEmoji": "🇷🇸",
+    "latitude": 44,
+    "longitude": 21,
+    "description": null
+  },
+  {
+    "code": "SC",
+    "name": "Seychelles",
+    "continent": "AFRICA",
+    "flagEmoji": "🇸🇨",
+    "latitude": -4.58333333,
+    "longitude": 55.66666666,
+    "description": null
+  },
+  {
+    "code": "SL",
+    "name": "Sierra Leone",
+    "continent": "AFRICA",
+    "flagEmoji": "🇸🇱",
+    "latitude": 8.5,
+    "longitude": -11.5,
+    "description": null
+  },
+  {
+    "code": "SG",
+    "name": "Singapore",
+    "continent": "ASIA",
+    "flagEmoji": "🇸🇬",
+    "latitude": 1.36666666,
+    "longitude": 103.8,
+    "description": null
+  },
+  {
+    "code": "SK",
+    "name": "Slovakia",
+    "continent": "EUROPE",
+    "flagEmoji": "🇸🇰",
+    "latitude": 48.66666666,
+    "longitude": 19.5,
+    "description": null
+  },
+  {
+    "code": "SI",
+    "name": "Slovenia",
+    "continent": "EUROPE",
+    "flagEmoji": "🇸🇮",
+    "latitude": 46.11666666,
+    "longitude": 14.81666666,
+    "description": null
+  },
+  {
+    "code": "SB",
+    "name": "Solomon Islands",
+    "continent": "OCEANIA",
+    "flagEmoji": "🇸🇧",
+    "latitude": -8,
+    "longitude": 159,
+    "description": null
+  },
+  {
+    "code": "SO",
+    "name": "Somalia",
+    "continent": "AFRICA",
+    "flagEmoji": "🇸🇴",
+    "latitude": 10,
+    "longitude": 49,
+    "description": null
+  },
+  {
+    "code": "ZA",
+    "name": "South Africa",
+    "continent": "AFRICA",
+    "flagEmoji": "🇿🇦",
+    "latitude": -30.5595,
+    "longitude": 22.9375,
+    "description": "Fusion of cultures"
+  },
+  {
+    "code": "KR",
+    "name": "South Korea",
+    "continent": "ASIA",
+    "flagEmoji": "🇰🇷",
+    "latitude": 35.9078,
+    "longitude": 127.7669,
+    "description": "Vibrant modern cuisine"
+  },
+  {
+    "code": "SS",
+    "name": "South Sudan",
+    "continent": "AFRICA",
+    "flagEmoji": "🇸🇸",
+    "latitude": 7,
+    "longitude": 30,
+    "description": null
+  },
+  {
+    "code": "ES",
+    "name": "Spain",
+    "continent": "EUROPE",
+    "flagEmoji": "🇪🇸",
+    "latitude": 40.4637,
+    "longitude": -3.7492,
+    "description": "Mediterranean flavors"
+  },
+  {
+    "code": "LK",
+    "name": "Sri Lanka",
+    "continent": "ASIA",
+    "flagEmoji": "🇱🇰",
+    "latitude": 7,
+    "longitude": 81,
+    "description": null
+  },
+  {
+    "code": "SD",
+    "name": "Sudan",
+    "continent": "AFRICA",
+    "flagEmoji": "🇸🇩",
+    "latitude": 15,
+    "longitude": 30,
+    "description": null
+  },
+  {
+    "code": "SR",
+    "name": "Suriname",
+    "continent": "SOUTH_AMERICA",
+    "flagEmoji": "🇸🇷",
+    "latitude": 4,
+    "longitude": -56,
+    "description": null
+  },
+  {
+    "code": "SE",
+    "name": "Sweden",
+    "continent": "EUROPE",
+    "flagEmoji": "🇸🇪",
+    "latitude": 60.1282,
+    "longitude": 18.6435,
+    "description": "Nordic culinary heritage"
+  },
+  {
+    "code": "CH",
+    "name": "Switzerland",
+    "continent": "EUROPE",
+    "flagEmoji": "🇨🇭",
+    "latitude": 47,
+    "longitude": 8,
+    "description": null
+  },
+  {
+    "code": "SY",
+    "name": "Syria",
+    "continent": "ASIA",
+    "flagEmoji": "🇸🇾",
+    "latitude": 35,
+    "longitude": 38,
+    "description": null
+  },
+  {
+    "code": "TJ",
+    "name": "Tajikistan",
+    "continent": "ASIA",
+    "flagEmoji": "🇹🇯",
+    "latitude": 39,
+    "longitude": 71,
+    "description": null
+  },
+  {
+    "code": "TZ",
+    "name": "Tanzania",
+    "continent": "AFRICA",
+    "flagEmoji": "🇹🇿",
+    "latitude": -6,
+    "longitude": 35,
+    "description": null
+  },
+  {
+    "code": "TH",
+    "name": "Thailand",
+    "continent": "ASIA",
+    "flagEmoji": "🇹🇭",
+    "latitude": 15.87,
+    "longitude": 100.9925,
+    "description": "Southeast Asian spice hub"
+  },
+  {
+    "code": "TL",
+    "name": "Timor-Leste",
+    "continent": "ASIA",
+    "flagEmoji": "🇹🇱",
+    "latitude": -8.83333333,
+    "longitude": 125.91666666,
+    "description": null
+  },
+  {
+    "code": "TG",
+    "name": "Togo",
+    "continent": "AFRICA",
+    "flagEmoji": "🇹🇬",
+    "latitude": 8,
+    "longitude": 1.16666666,
+    "description": null
+  },
+  {
+    "code": "TO",
+    "name": "Tonga",
+    "continent": "OCEANIA",
+    "flagEmoji": "🇹🇴",
+    "latitude": -20,
+    "longitude": -175,
+    "description": null
+  },
+  {
+    "code": "TT",
+    "name": "Trinidad and Tobago",
+    "continent": "NORTH_AMERICA",
+    "flagEmoji": "🇹🇹",
+    "latitude": 11,
+    "longitude": -61,
+    "description": null
+  },
+  {
+    "code": "TN",
+    "name": "Tunisia",
+    "continent": "AFRICA",
+    "flagEmoji": "🇹🇳",
+    "latitude": 34,
+    "longitude": 9,
+    "description": null
+  },
+  {
+    "code": "TR",
+    "name": "Turkey",
+    "continent": "ASIA",
+    "flagEmoji": "🇹🇷",
+    "latitude": 38.9637,
+    "longitude": 35.2433,
+    "description": "Bridge between East and West"
+  },
+  {
+    "code": "TM",
+    "name": "Turkmenistan",
+    "continent": "ASIA",
+    "flagEmoji": "🇹🇲",
+    "latitude": 40,
+    "longitude": 60,
+    "description": null
+  },
+  {
+    "code": "TV",
+    "name": "Tuvalu",
+    "continent": "OCEANIA",
+    "flagEmoji": "🇹🇻",
+    "latitude": -8,
+    "longitude": 178,
+    "description": null
+  },
+  {
+    "code": "UG",
+    "name": "Uganda",
+    "continent": "AFRICA",
+    "flagEmoji": "🇺🇬",
+    "latitude": 1,
+    "longitude": 32,
+    "description": null
+  },
+  {
+    "code": "UA",
+    "name": "Ukraine",
+    "continent": "EUROPE",
+    "flagEmoji": "🇺🇦",
+    "latitude": 49,
+    "longitude": 32,
+    "description": null
+  },
+  {
+    "code": "AE",
+    "name": "United Arab Emirates",
+    "continent": "ASIA",
+    "flagEmoji": "🇦🇪",
+    "latitude": 24,
+    "longitude": 54,
+    "description": null
+  },
+  {
+    "code": "GB",
+    "name": "United Kingdom",
+    "continent": "EUROPE",
+    "flagEmoji": "🇬🇧",
+    "latitude": 54,
+    "longitude": -2,
+    "description": null
+  },
+  {
+    "code": "US",
+    "name": "United States",
+    "continent": "NORTH_AMERICA",
+    "flagEmoji": "🇺🇸",
+    "latitude": 37.0902,
+    "longitude": -95.7129,
+    "description": "Diverse regional cuisines"
+  },
+  {
+    "code": "UY",
+    "name": "Uruguay",
+    "continent": "SOUTH_AMERICA",
+    "flagEmoji": "🇺🇾",
+    "latitude": -33,
+    "longitude": -56,
+    "description": null
+  },
+  {
+    "code": "UZ",
+    "name": "Uzbekistan",
+    "continent": "ASIA",
+    "flagEmoji": "🇺🇿",
+    "latitude": 41,
+    "longitude": 64,
+    "description": null
+  },
+  {
+    "code": "VU",
+    "name": "Vanuatu",
+    "continent": "OCEANIA",
+    "flagEmoji": "🇻🇺",
+    "latitude": -16,
+    "longitude": 167,
+    "description": null
+  },
+  {
+    "code": "VA",
+    "name": "Vatican City",
+    "continent": "EUROPE",
+    "flagEmoji": "🇻🇦",
+    "latitude": 41.9,
+    "longitude": 12.45,
+    "description": null
+  },
+  {
+    "code": "VE",
+    "name": "Venezuela",
+    "continent": "SOUTH_AMERICA",
+    "flagEmoji": "🇻🇪",
+    "latitude": 8,
+    "longitude": -66,
+    "description": null
+  },
+  {
+    "code": "VN",
+    "name": "Vietnam",
+    "continent": "ASIA",
+    "flagEmoji": "🇻🇳",
+    "latitude": 14.0583,
+    "longitude": 108.2772,
+    "description": "Fresh and balanced flavors"
+  },
+  {
+    "code": "YE",
+    "name": "Yemen",
+    "continent": "ASIA",
+    "flagEmoji": "🇾🇪",
+    "latitude": 15,
+    "longitude": 48,
+    "description": null
+  },
+  {
+    "code": "ZM",
+    "name": "Zambia",
+    "continent": "AFRICA",
+    "flagEmoji": "🇿🇲",
+    "latitude": -15,
+    "longitude": 30,
+    "description": null
+  },
+  {
+    "code": "ZW",
+    "name": "Zimbabwe",
+    "continent": "AFRICA",
+    "flagEmoji": "🇿🇼",
+    "latitude": -20,
+    "longitude": 30,
+    "description": null
+  }
+]

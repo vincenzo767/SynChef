@@ -1,71 +1,82 @@
 package edu.cit.batawang.synchef.controller;
 
-import edu.cit.batawang.synchef.dto.AuthResponse;
-import edu.cit.batawang.synchef.dto.GoogleLoginRequest;
-import edu.cit.batawang.synchef.dto.LoginRequest;
-import edu.cit.batawang.synchef.dto.RegisterRequest;
+import edu.cit.batawang.synchef.dto.AuthDtos.GoogleLoginRequest;
+import edu.cit.batawang.synchef.dto.AuthDtos.LoginRequest;
+import edu.cit.batawang.synchef.dto.AuthDtos.RegisterRequest;
+import edu.cit.batawang.synchef.dto.AuthDtos.SessionResponse;
+import edu.cit.batawang.synchef.dto.AuthDtos.UserProfileResponse;
+import edu.cit.batawang.synchef.security.CurrentUser;
+import edu.cit.batawang.synchef.security.RateLimiter;
+import edu.cit.batawang.synchef.security.SessionService;
 import edu.cit.batawang.synchef.service.AuthService;
+import edu.cit.batawang.synchef.service.UserAccountService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.Map;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
- * REST controller for authentication and user management
+ * Authentication endpoints. Successful sign-in sets an HttpOnly, SameSite session cookie; no token
+ * is ever returned in a response body. All POSTs require the CSRF header (see SecurityConfig).
  */
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
-@CrossOrigin(originPatterns = {"http://localhost:*", "http://127.0.0.1:*"})
 public class AuthController {
-    private static final String MESSAGE_KEY = "message";
-    
+
     private final AuthService authService;
-    
-    /**
-     * Register a new user
-     * POST /api/auth/register
-     */
-    @PostMapping("/register")
-    public ResponseEntity<Object> register(@RequestBody RegisterRequest request) {
-        try {
-            AuthResponse response = authService.register(request);
-            return ResponseEntity.status(HttpStatus.CREATED).body(response);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(Map.of(MESSAGE_KEY, e.getMessage()));
-        }
-    }
-    
-    /**
-     * Login user with email/username and password
-     * POST /api/auth/login
-     */
-    @PostMapping("/login")
-    public ResponseEntity<Object> login(@RequestBody LoginRequest request) {
-        try {
-            AuthResponse response = authService.login(request);
-            return ResponseEntity.ok(response);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body(Map.of(MESSAGE_KEY, e.getMessage()));
-        }
+    private final SessionService sessionService;
+    private final UserAccountService accountService;
+    private final RateLimiter rateLimiter;
+    private final CurrentUser currentUser;
+
+    /** Boot probe for the SPA; also issues the XSRF-TOKEN cookie. Always 200. */
+    @GetMapping("/session")
+    public SessionResponse session() {
+        UserProfileResponse profile = currentUser.principal().map(p -> accountService.profile(p.id())).orElse(null);
+        return new SessionResponse(profile != null, profile, authService.isGoogleEnabled(), authService.googleClientId());
     }
 
-    /**
-     * Login user with Google ID token
-     * POST /api/auth/google
-     */
-    @PostMapping("/google")
-    public ResponseEntity<Object> googleLogin(@RequestBody GoogleLoginRequest request) {
-        try {
-            AuthResponse response = authService.loginWithGoogle(request);
-            return ResponseEntity.ok(response);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body(Map.of(MESSAGE_KEY, e.getMessage()));
-        }
+    @PostMapping("/register")
+    public ResponseEntity<UserProfileResponse> register(@Valid @RequestBody RegisterRequest request,
+                                                        HttpServletRequest http) {
+        rateLimiter.checkAuthAttempt(http.getRemoteAddr(), "register");
+        return signedIn(authService.register(request), http, HttpStatus.CREATED);
     }
-    
+
+    @PostMapping("/login")
+    public ResponseEntity<UserProfileResponse> login(@Valid @RequestBody LoginRequest request, HttpServletRequest http) {
+        rateLimiter.checkAuthAttempt(http.getRemoteAddr(), request.emailOrUsername());
+        return signedIn(authService.login(request), http, HttpStatus.OK);
+    }
+
+    @PostMapping("/google")
+    public ResponseEntity<UserProfileResponse> google(@Valid @RequestBody GoogleLoginRequest request,
+                                                      HttpServletRequest http) {
+        rateLimiter.checkAuthAttempt(http.getRemoteAddr(), "google");
+        return signedIn(authService.loginWithGoogle(request), http, HttpStatus.OK);
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<Void> logout() {
+        currentUser.principal().ifPresent(p -> sessionService.revoke(p.sessionId()));
+        return ResponseEntity.noContent()
+                .header(HttpHeaders.SET_COOKIE, sessionService.clearedSessionCookie().toString())
+                .build();
+    }
+
+    private ResponseEntity<UserProfileResponse> signedIn(AuthService.AuthResult result, HttpServletRequest http,
+                                                         HttpStatus status) {
+        SessionService.IssuedSession issued = sessionService.create(result.userId(), http.getHeader(HttpHeaders.USER_AGENT));
+        return ResponseEntity.status(status)
+                .header(HttpHeaders.SET_COOKIE, sessionService.sessionCookie(issued.rawToken()).toString())
+                .body(result.profile());
+    }
 }

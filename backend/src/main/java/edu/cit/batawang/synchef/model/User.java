@@ -86,4 +86,22 @@ public class User {
 
     @Column(name = "role", length = 20, nullable = false)
     private String role = "USER"; // USER or ADMIN
+
+    /** LIGHT, DARK or SYSTEM. Nullable for rows created before this column existed (treated as SYSTEM). */
+    @Column(name = "theme_preference", length = 10)
+    private String themePreference;
+
+    /** Whether the user receives in-app notifications for comments on their SynCook dishes. */
+    @Column(name = "notify_on_comments")
+    private Boolean notifyOnComments = true;
+
+    public boolean isAdmin() {
+        return "ADMIN".equals(role);
+    }
+
+    public String displayName() {
+        if (fullName != null && !fullName.isBlank()) return fullName.trim();
+        if (username != null && !username.isBlank()) return username.trim();
+        return "Chef";
+    }
 }

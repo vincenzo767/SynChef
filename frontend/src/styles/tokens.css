@@ -1,0 +1,211 @@
+/*
+ * SynChef design tokens — the single source of colour, type, spacing, radius, elevation and motion.
+ * Components must reference these variables instead of hard-coded values.
+ *
+ * Palette: deep culinary green (brand), fresh herb green, warm cream & soft ivory surfaces,
+ * charcoal text, saffron gold (from the logo) as accent and terracotta as warm earth tone.
+ */
+:root {
+  color-scheme: light;
+
+  /* Brand */
+  --c-forest-900: #0f2a1f;
+  --c-forest-800: #16362a;
+  --c-forest-700: #1f4d36;
+  --c-forest-600: #2a6346;
+  --c-herb-500: #5e8c4a;
+  --c-herb-300: #a7c79a;
+  --c-herb-100: #e5efdd;
+  --c-saffron-600: #8a6a24;
+  --c-saffron-500: #c9a24b;
+  --c-saffron-200: #f1e2bb;
+  --c-terracotta-600: #a4502f;
+  --c-terracotta-100: #f6e2d8;
+  --c-cream-50: #fffdf8;
+  --c-cream-100: #fbf8f1;
+  --c-cream-200: #f6f1e7;
+  --c-cream-300: #ece5d6;
+  --c-charcoal-900: #1d2420;
+  --c-charcoal-700: #3a433e;
+  --c-charcoal-500: #5c6660;
+
+  /* Semantic — light */
+  --bg: var(--c-cream-200);
+  --bg-elevated: var(--c-cream-100);
+  --surface: var(--c-cream-50);
+  --surface-muted: #f3eee3;
+  --surface-sunken: var(--c-cream-300);
+  --border: #e2dacb;
+  --border-strong: #cfc4ae;
+  --text: var(--c-charcoal-900);
+  --text-muted: var(--c-charcoal-500);
+  --text-subtle: #7b847e;
+  --text-on-brand: var(--c-cream-50);
+
+  --brand: var(--c-forest-700);
+  --brand-hover: var(--c-forest-800);
+  --brand-soft: var(--c-herb-100);
+  --brand-text: var(--c-forest-700);
+  --herb: var(--c-herb-500);
+  --accent: var(--c-saffron-500);
+  --accent-text: var(--c-saffron-600);
+  --accent-soft: var(--c-saffron-200);
+  --earth: var(--c-terracotta-600);
+  --earth-soft: var(--c-terracotta-100);
+
+  --success: #2e7d4f;
+  --success-soft: #def0e3;
+  --warning: #9a6512;
+  --warning-soft: #f8ead0;
+  --danger: #b3261e;
+  --danger-soft: #f9e1de;
+  --info: #2f6690;
+  --info-soft: #dde9f3;
+
+  --focus-ring: 0 0 0 3px color-mix(in srgb, var(--accent) 55%, transparent);
+  --overlay: rgb(15 20 17 / 0.55);
+  --hero-overlay: linear-gradient(180deg, rgb(12 26 19 / 0.35) 0%, rgb(12 26 19 / 0.82) 70%, rgb(12 26 19 / 0.95) 100%);
+
+  /* Typography */
+  --font-display: "Fraunces", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.875rem;
+  --fs-md: 1rem;
+  --fs-lg: 1.125rem;
+  --fs-xl: 1.375rem;
+  --fs-2xl: clamp(1.5rem, 1.2rem + 1vw, 1.875rem);
+  --fs-3xl: clamp(1.875rem, 1.4rem + 1.8vw, 2.5rem);
+  --fs-display: clamp(2.25rem, 1.4rem + 3.6vw, 4rem);
+  --lh-tight: 1.15;
+  --lh-snug: 1.35;
+  --lh-normal: 1.6;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* Spacing (4px scale) */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.25rem;
+  --sp-6: 1.5rem;
+  --sp-8: 2rem;
+  --sp-10: 2.5rem;
+  --sp-12: 3rem;
+  --sp-16: 4rem;
+  --page-gutter: clamp(1rem, 0.5rem + 2vw, 2rem);
+  --content-max: 1200px;
+
+  /* Shape & elevation */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 26px;
+  --radius-pill: 999px;
+  --shadow-xs: 0 1px 2px rgb(29 36 32 / 0.06);
+  --shadow-sm: 0 2px 8px rgb(29 36 32 / 0.07), 0 1px 2px rgb(29 36 32 / 0.05);
+  --shadow-md: 0 10px 30px -12px rgb(29 36 32 / 0.25), 0 2px 6px rgb(29 36 32 / 0.06);
+  --shadow-lg: 0 24px 60px -20px rgb(15 42 31 / 0.4);
+
+  /* Sizing */
+  --control-h: 44px;
+  --control-h-sm: 36px;
+  --topbar-h: 64px;
+  --bottomnav-h: 64px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 140ms;
+  --dur-base: 220ms;
+  --dur-slow: 380ms;
+
+  /* Layers */
+  --z-sticky: 20;
+  --z-nav: 40;
+  --z-popover: 60;
+  --z-modal: 80;
+  --z-toast: 100;
+}
+
+/* Breakpoints (documented for reference; CSS custom properties can't be used in media queries):
+   sm 480px · md 768px · lg 1024px · xl 1280px */
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #0f1411;
+    --bg-elevated: #131a16;
+    --surface: #171f1b;
+    --surface-muted: #1d2621;
+    --surface-sunken: #0c100e;
+    --border: #2a352f;
+    --border-strong: #3a4740;
+    --text: #eef0e8;
+    --text-muted: #a3ada6;
+    --text-subtle: #7f8a83;
+    --brand: #8fc19f;
+    --brand-hover: #a6d1b3;
+    --brand-soft: #1f3328;
+    --brand-text: #9fd0ad;
+    --text-on-brand: #0f1411;
+    --herb: #93bf7a;
+    --accent: #d9b45e;
+    --accent-text: #e2c27a;
+    --accent-soft: #3a3020;
+    --earth: #e0896a;
+    --earth-soft: #3a241c;
+    --success: #6fcf97;
+    --success-soft: #183427;
+    --warning: #e6b35a;
+    --warning-soft: #3a2c14;
+    --danger: #f08a80;
+    --danger-soft: #3d1c19;
+    --info: #8cbde3;
+    --info-soft: #172a3a;
+    --overlay: rgb(0 0 0 / 0.65);
+    --shadow-sm: 0 2px 8px rgb(0 0 0 / 0.35);
+    --shadow-md: 0 12px 30px -12px rgb(0 0 0 / 0.6);
+    --shadow-lg: 0 24px 60px -20px rgb(0 0 0 / 0.7);
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0f1411;
+  --bg-elevated: #131a16;
+  --surface: #171f1b;
+  --surface-muted: #1d2621;
+  --surface-sunken: #0c100e;
+  --border: #2a352f;
+  --border-strong: #3a4740;
+  --text: #eef0e8;
+  --text-muted: #a3ada6;
+  --text-subtle: #7f8a83;
+  --brand: #8fc19f;
+  --brand-hover: #a6d1b3;
+  --brand-soft: #1f3328;
+  --brand-text: #9fd0ad;
+  --text-on-brand: #0f1411;
+  --herb: #93bf7a;
+  --accent: #d9b45e;
+  --accent-text: #e2c27a;
+  --accent-soft: #3a3020;
+  --earth: #e0896a;
+  --earth-soft: #3a241c;
+  --success: #6fcf97;
+  --success-soft: #183427;
+  --warning: #e6b35a;
+  --warning-soft: #3a2c14;
+  --danger: #f08a80;
+  --danger-soft: #3d1c19;
+  --info: #8cbde3;
+  --info-soft: #172a3a;
+  --overlay: rgb(0 0 0 / 0.65);
+  --shadow-sm: 0 2px 8px rgb(0 0 0 / 0.35);
+  --shadow-md: 0 12px 30px -12px rgb(0 0 0 / 0.6);
+  --shadow-lg: 0 24px 60px -20px rgb(0 0 0 / 0.7);
+}

@@ -41,4 +41,8 @@ public interface AppNotificationRepository extends JpaRepository<AppNotification
         where coalesce(n.recipientId, n.recipientLegacyId) = :recipientId and n.type = :type
     """)
     long countByRecipientIdAndType(@Param("recipientId") Long recipientId, @Param("type") String type);
+
+    @org.springframework.data.jpa.repository.Modifying
+    @Query("DELETE FROM AppNotification n WHERE n.recipientId = :userId OR n.recipientLegacyId = :userId")
+    void deleteByRecipient(@Param("userId") Long userId);
 }

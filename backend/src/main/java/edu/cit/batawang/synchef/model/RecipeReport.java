@@ -54,8 +54,16 @@ public class RecipeReport {
     @Column(name = "report_type", nullable = false, length = 50)
     private String reportType;
 
+    /** PENDING → FILED (owner notified) → APPEALED (owner responded) → RESOLVED | DISMISSED. */
     @Column(name = "status", length = 20, nullable = false)
     private String status = "PENDING";
+
+    /** Owner's response to a filed notice. */
+    @Column(name = "appeal_message", length = 1000)
+    private String appealMessage;
+
+    @Column(name = "resolved_at")
+    private LocalDateTime resolvedAt;
 
     @CreationTimestamp
     @Column(name = "report_date", nullable = false, updatable = false)

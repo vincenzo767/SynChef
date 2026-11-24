@@ -4,19 +4,20 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.json.gson.GsonFactory;
-import edu.cit.batawang.synchef.dto.AuthResponse;
-import edu.cit.batawang.synchef.dto.GoogleLoginRequest;
-import edu.cit.batawang.synchef.dto.LoginRequest;
-import edu.cit.batawang.synchef.dto.RegisterRequest;
+import edu.cit.batawang.synchef.dto.AuthDtos.GoogleLoginRequest;
+import edu.cit.batawang.synchef.dto.AuthDtos.LoginRequest;
+import edu.cit.batawang.synchef.dto.AuthDtos.RegisterRequest;
+import edu.cit.batawang.synchef.dto.AuthDtos.UserProfileResponse;
+import edu.cit.batawang.synchef.exception.ApiException;
 import edu.cit.batawang.synchef.model.User;
 import edu.cit.batawang.synchef.repository.UserRepository;
-import edu.cit.batawang.synchef.security.JwtTokenProvider;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -25,281 +26,212 @@ import java.util.Locale;
 import java.util.Optional;
 
 /**
- * Service for user authentication and registration
+ * Credential verification and account creation. Session issuance happens in the controller.
+ * Login failures return one generic message to avoid revealing which accounts exist.
  */
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class AuthService {
-    
+
+    /** Result of a successful sign-in, materialized inside the transaction. */
+    public record AuthResult(Long userId, UserProfileResponse profile) {
+    }
+
+    static final String INVALID_CREDENTIALS = "Incorrect email/username or password";
+
     private final UserRepository userRepository;
-    private final JwtTokenProvider tokenProvider;
     private final NotificationService notificationService;
-    private final AdminService adminService;
-    private static final PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
+    private final AdminStatsService adminStats;
+    private final PasswordEncoder passwordEncoder;
 
     @Value("${app.google.client-id:}")
     private String googleClientId;
-    
-    /**
-     * Register a new user
-     */
-    public AuthResponse register(RegisterRequest request) {
-        String email = normalize(request.getEmail());
-        String username = normalize(request.getUsername());
-        String fullName = normalize(request.getFullName());
 
-        if (isBlank(email) || isBlank(username) || isBlank(fullName)) {
-            throw new IllegalArgumentException("Email, username, and full name are required");
+    /** Real BCrypt hash compared against when the account does not exist, to keep response times uniform. */
+    private String dummyHash;
+
+    @PostConstruct
+    void initDummyHash() {
+        dummyHash = passwordEncoder.encode("synchef-timing-equalizer");
+    }
+
+    public boolean isGoogleEnabled() {
+        return googleClientId != null && !googleClientId.isBlank();
+    }
+
+    public String googleClientId() {
+        return isGoogleEnabled() ? googleClientId : null;
+    }
+
+    @Transactional
+    public AuthResult register(RegisterRequest request) {
+        String email = request.email().trim().toLowerCase(Locale.ROOT);
+        String username = request.username().trim();
+        String fullName = request.fullName().trim();
+
+        if (!request.password().equals(request.confirmPassword())) {
+            throw ApiException.badRequest("Passwords do not match");
+        }
+        if (userRepository.existsByEmailIgnoreCase(email)) {
+            throw ApiException.conflict("An account with this email already exists");
+        }
+        if (userRepository.existsByUsernameIgnoreCase(username)) {
+            throw ApiException.conflict("This username is already taken");
         }
 
-        if (isBlank(request.getPassword()) || isBlank(request.getConfirmPassword())) {
-            throw new IllegalArgumentException("Password and confirm password are required");
-        }
-
-        // Validate password match
-        if (!request.getPassword().equals(request.getConfirmPassword())) {
-            throw new IllegalArgumentException("Passwords do not match");
-        }
-        
-        // Check if email already exists
-        if (userRepository.findByEmail(email).isPresent()) {
-            throw new IllegalArgumentException("Email already registered");
-        }
-        
-        // Check if username already exists
-        if (userRepository.findByUsername(username).isPresent()) {
-            throw new IllegalArgumentException("Username already taken");
-        }
-        
-        // Create new user
         User user = new User();
         user.setEmail(email);
         user.setUsername(username);
-        user.setPassword(PASSWORD_ENCODER.encode(request.getPassword()));
+        user.setPassword(passwordEncoder.encode(request.password()));
         user.setFullName(fullName);
         user.setEmailVerified(false);
         user.setActive(true);
-        if (!isBlank(request.getCountryCode())) {
-            user.setCountryCode(request.getCountryCode().toUpperCase().trim());
+        user.setRole("USER");
+        if (notBlank(request.countryCode())) {
+            user.setCountryCode(request.countryCode().trim().toUpperCase(Locale.ROOT));
         }
-        if (!isBlank(request.getCountryName())) {
-            user.setCountryName(request.getCountryName().trim());
+        if (notBlank(request.countryName())) {
+            user.setCountryName(request.countryName().trim());
         }
-        
+
         user = userRepository.save(user);
         notificationService.createWelcomeNotifications(user);
-        adminService.broadcastStats();
-
-        log.info("User registered: {}", user.getEmail());
-
-        return buildAuthResponse(user);
+        adminStats.broadcastStats();
+        log.info("User registered: id={}", user.getId());
+        return result(user);
     }
-    
-    /**
-     * Login user with email/username and password
-     */
-    public AuthResponse login(LoginRequest request) {
-        String emailOrUsername = normalize(request.getEmailOrUsername());
-        if (isBlank(emailOrUsername) || isBlank(request.getPassword())) {
-            throw new IllegalArgumentException("Email/username and password are required");
+
+    @Transactional(readOnly = true)
+    public AuthResult login(LoginRequest request) {
+        String identifier = request.emailOrUsername().trim();
+        Optional<User> found = userRepository.findByEmail(identifier)
+                .or(() -> userRepository.findByEmail(identifier.toLowerCase(Locale.ROOT)))
+                .or(() -> userRepository.findByUsername(identifier));
+
+        if (found.isEmpty() || found.get().getPassword() == null || found.get().getPassword().isBlank()) {
+            passwordEncoder.matches(request.password(), dummyHash);
+            if (found.isPresent()) {
+                // Account exists but was created with Google — give a helpful, non-sensitive hint.
+                throw ApiException.unauthorized("This account uses Google sign-in. Continue with Google instead.");
+            }
+            throw ApiException.unauthorized(INVALID_CREDENTIALS);
         }
 
-        // Find user by email or username
-        Optional<User> userOpt = userRepository.findByEmail(emailOrUsername)
-                .or(() -> userRepository.findByUsername(emailOrUsername));
-        
-        if (userOpt.isEmpty()) {
-            throw new IllegalArgumentException("Invalid email or username");
+        User user = found.get();
+        if (!passwordEncoder.matches(request.password(), user.getPassword())) {
+            throw ApiException.unauthorized(INVALID_CREDENTIALS);
         }
-        
-        User user = userOpt.get();
-        
-        if (isBlank(user.getPassword())) {
-            throw new IllegalArgumentException("Password login is unavailable for this account.");
-        }
-
-        // Support both legacy plain-text and BCrypt-hashed passwords
-        boolean passwordMatches = PASSWORD_ENCODER.matches(request.getPassword(), user.getPassword())
-                || user.getPassword().equals(request.getPassword());
-
-        if (!passwordMatches) {
-            throw new IllegalArgumentException("Invalid password");
-        }
-
-        // Upgrade legacy plain-text password to BCrypt after successful login
-        if (user.getPassword().equals(request.getPassword())) {
-            user.setPassword(PASSWORD_ENCODER.encode(request.getPassword()));
-            userRepository.save(user);
-        }
-        
         if (!Boolean.TRUE.equals(user.getActive())) {
-            throw new IllegalArgumentException("Account is inactive");
+            throw ApiException.forbidden("This account has been suspended. Contact support for help.");
         }
-        
-        log.info("User logged in: {}", user.getEmail());
-        
-        return buildAuthResponse(user);
+        log.info("User logged in: id={}", user.getId());
+        return result(user);
     }
 
-    /**
-     * Login or register user with Google Sign-In ID token.
-     */
-    public AuthResponse loginWithGoogle(GoogleLoginRequest request) {
-        GoogleIdToken.Payload payload = verifyGoogleToken(request);
-        String email = normalize(payload.getEmail());
-        if (isBlank(email)) {
-            throw new IllegalArgumentException("Google account does not provide an email");
+    @Transactional
+    public AuthResult loginWithGoogle(GoogleLoginRequest request) {
+        GoogleIdToken.Payload payload = verifyGoogleToken(request.idToken());
+        String email = payload.getEmail() == null ? null : payload.getEmail().trim().toLowerCase(Locale.ROOT);
+        if (!notBlank(email)) {
+            throw ApiException.unauthorized("Google account does not provide an email");
         }
         if (!Boolean.TRUE.equals(payload.getEmailVerified())) {
-            throw new IllegalArgumentException("Google email is not verified");
+            throw ApiException.unauthorized("Google email is not verified");
         }
 
         String fullName = extractGoogleName(payload, email);
-        String profileImageUrl = normalize((String) payload.get("picture"));
+        String picture = (String) payload.get("picture");
 
         Optional<User> existing = userRepository.findByEmail(email);
-        User user;
-        if (existing.isPresent()) {
-            user = updateExistingGoogleUser(existing.get(), fullName, profileImageUrl);
-        } else {
-            user = createGoogleUser(email, fullName, profileImageUrl);
+        User user = existing.isPresent()
+                ? updateExistingGoogleUser(existing.get(), fullName, picture)
+                : createGoogleUser(email, fullName, picture);
+        log.info("User logged in with Google: id={}", user.getId());
+        return result(user);
+    }
+
+    private GoogleIdToken.Payload verifyGoogleToken(String idToken) {
+        if (!isGoogleEnabled()) {
+            throw ApiException.badRequest("Google sign-in is not configured on the server");
         }
-
-        log.info("User logged in with Google: {}", user.getEmail());
-        return buildAuthResponse(user);
-    }
-    
-    /**
-     * Build AuthResponse from User entity
-     */
-    private AuthResponse buildAuthResponse(User user) {
-        String token = tokenProvider.generateToken(user);
-
-        AuthResponse response = new AuthResponse();
-        response.setToken(token);
-        response.setType("Bearer");
-        response.setId(user.getId());
-        response.setEmail(user.getEmail());
-        response.setUsername(user.getUsername());
-        response.setFullName(user.getFullName());
-        response.setProfileImageUrl(user.getProfileImageUrl());
-        response.setEmailVerified(user.getEmailVerified());
-        response.setCountryCode(user.getCountryCode());
-        response.setCountryName(user.getCountryName());
-        response.setFavoriteRecipeIds(
-            user.getFavoriteRecipeIds() != null ? user.getFavoriteRecipeIds() : new java.util.ArrayList<>()
-        );
-        response.setCreatedAt(user.getCreatedAt());
-        response.setRole(user.getRole() != null ? user.getRole() : "USER");
-
-        return response;
-    }
-    
-    private String normalize(String value) {
-        return value == null ? null : value.trim();
-    }
-
-    private boolean isBlank(String value) {
-        return value == null || value.trim().isEmpty();
-    }
-
-    private GoogleIdToken.Payload verifyGoogleToken(GoogleLoginRequest request) {
-        if (isBlank(googleClientId)) {
-            throw new IllegalArgumentException("Google login is not configured on the server");
-        }
-
-        if (request == null || isBlank(request.getIdToken())) {
-            throw new IllegalArgumentException("Google token is required");
-        }
-
         try {
             GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(
-                    GoogleNetHttpTransport.newTrustedTransport(),
-                        GsonFactory.getDefaultInstance()
-            )
+                    GoogleNetHttpTransport.newTrustedTransport(), GsonFactory.getDefaultInstance())
                     .setAudience(Collections.singletonList(googleClientId))
                     .build();
-
-            GoogleIdToken idToken = verifier.verify(request.getIdToken());
-            if (idToken == null) {
-                throw new IllegalArgumentException("Invalid Google token");
+            GoogleIdToken token = verifier.verify(idToken);
+            if (token == null) {
+                throw ApiException.unauthorized("Invalid Google token");
             }
-
-            return idToken.getPayload();
-        } catch (GeneralSecurityException | IOException e) {
-            log.error("Failed to verify Google ID token", e);
-            throw new IllegalArgumentException("Unable to validate Google token");
+            return token.getPayload();
+        } catch (GeneralSecurityException | IOException | IllegalArgumentException e) {
+            log.warn("Google ID token verification failed: {}", e.getClass().getSimpleName());
+            throw ApiException.unauthorized("Unable to validate Google sign-in");
         }
     }
 
-    private String generateUniqueUsername(String email, String fullName) {
-        String source = !isBlank(fullName) ? fullName : email.substring(0, email.indexOf('@'));
-        String base = source
-                .toLowerCase(Locale.ROOT)
-                .replaceAll("[^a-z0-9]+", "_")
-            .replaceAll("(^_+)|(_+$)", "");
-
-        if (isBlank(base)) {
-            base = "user";
-        }
-
-        String candidate = base;
-        int suffix = 1;
-        while (userRepository.findByUsername(candidate).isPresent()) {
-            candidate = base + suffix;
-            suffix++;
-        }
-
-        return candidate;
-    }
-
-    private User updateExistingGoogleUser(User user, String fullName, String profileImageUrl) {
+    private User updateExistingGoogleUser(User user, String fullName, String picture) {
         if (!Boolean.TRUE.equals(user.getActive())) {
-            throw new IllegalArgumentException("Account is inactive");
+            throw ApiException.forbidden("This account has been suspended. Contact support for help.");
         }
-
         boolean changed = false;
         if (!Boolean.TRUE.equals(user.getEmailVerified())) {
             user.setEmailVerified(true);
             changed = true;
         }
-
-        if (!isBlank(fullName) && isBlank(user.getFullName())) {
+        if (notBlank(fullName) && !notBlank(user.getFullName())) {
             user.setFullName(fullName);
             changed = true;
         }
-
-        if (!isBlank(profileImageUrl) && isBlank(user.getProfileImageUrl())) {
-            user.setProfileImageUrl(profileImageUrl);
+        if (notBlank(picture) && !notBlank(user.getProfileImageUrl()) && picture.startsWith("https://")) {
+            user.setProfileImageUrl(picture);
             changed = true;
         }
-
         return changed ? userRepository.save(user) : user;
     }
 
-    private User createGoogleUser(String email, String fullName, String profileImageUrl) {
+    private User createGoogleUser(String email, String fullName, String picture) {
         User user = new User();
         user.setEmail(email);
         user.setUsername(generateUniqueUsername(email, fullName));
         user.setPassword(null);
         user.setFullName(fullName);
-        user.setProfileImageUrl(profileImageUrl);
+        user.setProfileImageUrl(notBlank(picture) && picture.startsWith("https://") ? picture : null);
         user.setEmailVerified(true);
         user.setActive(true);
-
+        user.setRole("USER");
         user = userRepository.save(user);
         notificationService.createWelcomeNotifications(user);
-        adminService.broadcastStats();
+        adminStats.broadcastStats();
         return user;
     }
 
-    private String extractGoogleName(GoogleIdToken.Payload payload, String email) {
-        String fullName = normalize((String) payload.get("name"));
-        if (!isBlank(fullName)) {
-            return fullName;
+    private String generateUniqueUsername(String email, String fullName) {
+        String source = notBlank(fullName) ? fullName : email.substring(0, email.indexOf('@'));
+        String base = source.toLowerCase(Locale.ROOT)
+                .replaceAll("[^a-z0-9]+", "_")
+                .replaceAll("(^_+)|(_+$)", "");
+        if (base.length() < 3) base = "chef_" + base;
+        if (base.length() > 24) base = base.substring(0, 24);
+        String candidate = base;
+        int suffix = 1;
+        while (userRepository.existsByUsernameIgnoreCase(candidate)) {
+            candidate = base + suffix++;
         }
-        return email.substring(0, email.indexOf('@'));
+        return candidate;
     }
 
+    private String extractGoogleName(GoogleIdToken.Payload payload, String email) {
+        String name = (String) payload.get("name");
+        return notBlank(name) ? name.trim() : email.substring(0, email.indexOf('@'));
+    }
+
+    private static AuthResult result(User user) {
+        return new AuthResult(user.getId(), UserMapper.toProfile(user));
+    }
+
+    private static boolean notBlank(String value) {
+        return value != null && !value.isBlank();
+    }
 }

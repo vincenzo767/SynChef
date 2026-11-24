@@ -15,6 +15,8 @@ public class ScaledIngredientDTO {
     private BigDecimal originalQuantity;
     private BigDecimal scaledQuantity;
     private String unit;
+    /** Human-readable scaled amount, e.g. "1.5 tbsp" or the original text when not numeric. */
+    private String displayAmount;
     private String preparation;
     private Boolean isOptional;
     private String notes;

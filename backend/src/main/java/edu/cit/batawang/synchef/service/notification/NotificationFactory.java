@@ -10,6 +10,8 @@ public class NotificationFactory {
     public static final String TYPE_COMMENT        = "SYNCOOK_COMMENT";
     public static final String TYPE_ADMIN_REPORT   = "ADMIN_REPORT";   // admin receives when user reports
     public static final String TYPE_REPORT_FILED   = "REPORT_FILED";   // owner receives when admin files notice
+    public static final String TYPE_REPORT_APPEAL  = "REPORT_APPEAL";  // admin receives when owner appeals
+    public static final String TYPE_REPORT_CLOSED  = "REPORT_CLOSED";  // owner receives when report is closed
 
     public AppNotification createSystemWelcome(Long recipientId, String title, String message) {
         return AppNotification.builder()
@@ -72,12 +74,46 @@ public class NotificationFactory {
         Long recipeId,
         String reason
     ) {
-        String msg = "Admin filed a notice on your recipe. Reason: " + reason
-                   + ". Please review within 7 days or the recipe may be removed.";
+        String msg = "Filed: " + reason
+                   + ". Please review your dish and edit it, or submit an appeal if you believe this is a mistake.";
         return AppNotification.builder()
             .recipientId(ownerRecipientId)
             .type(TYPE_REPORT_FILED)
             .title(cap(recipeTitle, 175))
+            .message(cap(msg, 590))
+            .referenceRecipeId(recipeId)
+            .isRead(false)
+            .isSystem(true)
+            .build();
+    }
+
+    /** Sent to each admin when the owner appeals a notice. */
+    public AppNotification createAppeal(Long adminRecipientId, Long ownerId, String ownerName,
+                                        String recipeTitle, Long recipeId) {
+        String msg = (ownerName == null ? "A chef" : ownerName) + " appealed the notice on \""
+                + cap(recipeTitle, 120) + "\".";
+        return AppNotification.builder()
+            .recipientId(adminRecipientId)
+            .senderId(ownerId)
+            .senderName(ownerName)
+            .type(TYPE_REPORT_APPEAL)
+            .title("Report Appeal")
+            .message(cap(msg, 590))
+            .referenceRecipeId(recipeId)
+            .isRead(false)
+            .isSystem(false)
+            .build();
+    }
+
+    /** Sent to the owner when a report on their dish is closed. */
+    public AppNotification createReportOutcome(Long ownerRecipientId, String recipeTitle, Long recipeId, String status) {
+        String msg = "RESOLVED".equals(status)
+                ? "The report on \"" + cap(recipeTitle, 120) + "\" was reviewed and resolved. Thank you for your cooperation."
+                : "The report on \"" + cap(recipeTitle, 120) + "\" was reviewed and dismissed. No action is needed.";
+        return AppNotification.builder()
+            .recipientId(ownerRecipientId)
+            .type(TYPE_REPORT_CLOSED)
+            .title("Report closed")
             .message(cap(msg, 590))
             .referenceRecipeId(recipeId)
             .isRead(false)
